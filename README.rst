@@ -31,12 +31,12 @@ External Dependencies
 
 Latex engine for latex rendering of equations.
 
-ISSUES
+Issues
 ======
 
 See GitHub Issues.
 
-LIMITATIONS
+Limitations
 ===========
 
 None documented.
