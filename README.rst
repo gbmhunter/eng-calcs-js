@@ -49,4 +49,5 @@ Load .php files in browser.
 Changelog
 =========
 
+- v1.0.0.1 	-> (2013/06/06) Fixed two README section titles from having all capitals.
 - v1.0.0.0 	-> (2013/06/06) Initial commit.
