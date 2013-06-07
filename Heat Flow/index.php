@@ -7,7 +7,7 @@ $P_D$ = dissipated power (Watts)<br />
 $\Delta T$ = temperature drop (degrees Celcius)<br />
 	$R_{\theta}$ = thermal resistance (degrees Celcius/Watt)</p>
 <form name="hfc">
-<table style="margin-left: auto; margin-right: auto;" border="4">
+<table id="mainTable" style="margin-left: auto; margin-right: auto;" border="4">
 <tbody>
 <tr>
 <td><strong>Variables:</strong></td>
@@ -17,27 +17,36 @@ $\Delta T$ = temperature drop (degrees Celcius)<br />
 <td><strong>Variable Diagram:</strong></td>
 </tr>
 <tr>
-<td style="text-align: center;">$P_D$</td>
-<td><input id="tbVar1" type="text" size="16" /></td>
-<td>
-<select id="cbVar1">
-<option value="0.001">mW</option>
-<option selected="selected" value="1.0">W</option>
-<option value="1000.0">kW</option>
-</select>
-</td>
-<td style="text-align: center;"><input id="rbVar1" type="radio" name="input" /></td>
-<td rowspan="4">[singlepic id=1147 w=300 h=150 float=right]</td>
+	<td style="text-align: center;">$P_D$</td>
+	<td><input id="tbVar1" type="text" size="16" /></td>
+	<td>
+	<select id="cbVar1">
+	<option value="0.001">mW</option>
+	<option selected="selected" value="1.0">W</option>
+	<option value="1000.0">kW</option>
+	</select>
+	</td>
+	<td style="text-align: center;"><input id="rbVar1" type="radio" name="input" /></td>
+	<td rowspan="4">[singlepic id=1147 w=300 h=150 float=right]</td>
 </tr>
 <tr>
-<td style="text-align: center;">$\Delta T$</td>
-<td><input id="tbVar2" type="text" size="16" /></td>
-<td>
-<select id="cbVar2">
-<option selected="selected" value="1">°C</option>
-</select>
-</td>
-<td style="text-align: center;"><input id="rbVar2" type="radio" name="input" /></td>
+	<td colspan="2" style="text-align: center;">Num. Thermal Components</td>
+	<td>
+		<input id="addOne" type="button" value="+"></td>
+	</td>
+	<td>
+		<input id="removeOne" type="button" value="-"></td>
+	</td>
+</tr>
+<tr>
+	<td style="text-align: center;">$\Delta T$</td>
+	<td><input id="tbVar2" type="text" size="16" /></td>
+	<td>
+	<select id="cbVar2">
+	<option selected="selected" value="1">°C</option>
+	</select>
+	</td>
+	<td style="text-align: center;"><input id="rbVar2" type="radio" name="input" /></td>
 </tr>
 <tr>
 <td style="text-align: center;">$R_{\theta}$</td>
@@ -60,11 +69,13 @@ $\Delta T$ = temperature drop (degrees Celcius)<br />
 </tbody>
 </table>
 </form>
-<p><script type="text/javascript" src="https://www.google.com/jsapi"></script><br />
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript">
 var j = jQuery.noConflict();
-	// Get the right form
+// Get the right form
 var calcForm = document.forms.hfc
+// Array for holding thermal components
+var thermalCompA = new Array();
 // Start-up function
 j(document).ready(
 function StartUp()
@@ -129,6 +140,24 @@ function StartUp()
 			Calculate();
 		},
 		false);
+	// Add/remove thermal components
+	document.getElementById('addOne').addEventListener(
+		'click',
+		function(){
+			AddRow();
+		},
+		false);
+	document.getElementById('removeOne').addEventListener(
+		'click',
+		function(){
+			RemoveRow();
+		},
+		false);
+	// Add first thermal component row to array
+	thermalCompA[0] = document.getElementById('mainTable').rows[4];
+	calcForm.style.position= 'relative'; 
+	calcForm.style.left = '0px'; 
+	//moveRight();
 }
 );
 // Works for both forms
@@ -194,5 +223,25 @@ function ClearValues()
    // When clearing values from the first form, the second form has to be recalculated
    // since it is dependant
    Calculate();
+   AddRow();
+}
+// Animation stuff
+function moveRight(){
+   calcForm.style.left = parseInt(calcForm.style.left) + 10 + 'px';
+   animate = setTimeout(moveRight,20); // call moveRight in 20msec
+}
+// Adds new row to the main table (and fills with cells)
+function AddRow()
+{
+	var newRow = document.getElementById('mainTable').insertRow(mainTable.rows.length-1);
+	for(var i = 0; i <  mainTable.rows[0].cells.length; i++)
+	{
+		newRow.insertCell(i);
+	}
+}
+// Adds new row to the main table (and fills with cells)
+function RemoveRow()
+{
+	document.getElementById('mainTable').deleteRow(mainTable.rows.length-2);
 }
 </script></p>
