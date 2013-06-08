@@ -234,12 +234,18 @@ function moveRight(){
 // Adds new row to the main table (and fills with cells)
 function AddRow()
 {
-	var newRow = document.getElementById('mainTable').insertRow(FIRST_THERMAL_ROW + numThermComp);
+	var mainTable = document.getElementById('mainTable');
+	//var newRow = document.getElementById('mainTable').insertRow(FIRST_THERMAL_ROW + numThermComp);
+	mainTable.insertBefore(
+		mainTable.rows[0].cloneNode(true),
+		mainTable.rows[2]);
+	/*
 	for(var i = 0; i <  mainTable.rows[0].cells.length; i++)
 	{
 		var newCell = newRow.insertCell(i);
 		newCell.innerHtml = "ab";
 	}
+	*/
 	// Increment counter
 	numThermComp++;
 }

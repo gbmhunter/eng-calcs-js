@@ -4,8 +4,8 @@ Engineering Calculators Written In Javascript
 
 - Author: gbmhunter <gbmhunter@gmail.com> (http://www.cladlab.com)
 - Created: 2013/06/06
-- Last Modified: 2013/06/08
-- Version: v1.0.2.0
+- Last Modified: 2013/06/09
+- Version: v1.0.3.0
 - Company: CladLabs
 - Project: Free Code Libraries	.
 - Language: HTML/JS
@@ -52,6 +52,7 @@ Changelog
 ======== ========== ===================================================================================================
 Version  Date       Comment
 ======== ========== ===================================================================================================
+v1.0.3.0 2013/06/09 Heat flow table meant to be adding copied row into middle of table, but throwing DOM exception.
 v1.0.2.0 2013/06/08 Re-arranged table so adding new rows makes more sense. Fixed version number.
 v1.0.1.1 2013/06/08 Changelog now in table format.
 v1.0.1.0 2013/06/08 Heat flow calc can now add more rows.
