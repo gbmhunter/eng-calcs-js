@@ -30,35 +30,34 @@ $\Delta T$ = temperature drop (degrees Celcius)<br />
 	<td rowspan="4">[singlepic id=1147 w=300 h=150 float=right]</td>
 </tr>
 <tr>
-	<td colspan="2" style="text-align: center;">Num. Thermal Components</td>
-	<td>
-		<input id="addOne" type="button" value="+"></td>
-	</td>
-	<td>
-		<input id="removeOne" type="button" value="-"></td>
+	<td colspan="2" style="text-align: center;">Num. Thermal Components
+
+		<input id="addOne" type="button" value="+">
+
+		<input id="removeOne" type="button" value="-">
 	</td>
 </tr>
 <tr>
-	<td style="text-align: center;">$\Delta T$</td>
+<tr>
+	<td>$\Delta T$</td>
+	<td style="text-align: center;"><input id="rbVar2" type="radio" name="input" /></td>
+	<td style="text-align: center;">$R_{\theta}$</td>
+	<td style="text-align: center;"><input id="rbVar3" type="radio" name="input" /></td>
+<tr>
 	<td><input id="tbVar2" type="text" size="16" /></td>
 	<td>
-	<select id="cbVar2">
-	<option selected="selected" value="1">°C</option>
-	</select>
+		<select id="cbVar2">
+			<option selected="selected" value="1">°C</option>
+		</select>
 	</td>
-	<td style="text-align: center;"><input id="rbVar2" type="radio" name="input" /></td>
-</tr>
-<tr>
-<td style="text-align: center;">$R_{\theta}$</td>
-<td><input id="tbVar3" type="text" size="16" /></td>
-<td>
-<select id="cbVar3">
-<option value="0.001">mO</option>
-<option selected="selected" value="1.0">O</option>
-<option value="1000.0">kO</option>
-</select>
-</td>
-<td style="text-align: center;"><input id="rbVar3" type="radio" name="input" /></td>
+	<td><input id="tbVar3" type="text" size="16" /></td>
+	<td>
+		<select id="cbVar3">
+			<option value="0.001">mO</option>
+			<option selected="selected" value="1.0">O</option>
+			<option value="1000.0">kO</option>
+		</select>
+	</td>
 </tr>
 <tr>
 <td></td>
@@ -76,6 +75,8 @@ var j = jQuery.noConflict();
 var calcForm = document.forms.hfc
 // Array for holding thermal components
 var thermalCompA = new Array();
+var FIRST_THERMAL_ROW = 5;
+var numThermComp = 1;
 // Start-up function
 j(document).ready(
 function StartUp()
@@ -233,15 +234,24 @@ function moveRight(){
 // Adds new row to the main table (and fills with cells)
 function AddRow()
 {
-	var newRow = document.getElementById('mainTable').insertRow(mainTable.rows.length-1);
+	var newRow = document.getElementById('mainTable').insertRow(FIRST_THERMAL_ROW + numThermComp);
 	for(var i = 0; i <  mainTable.rows[0].cells.length; i++)
 	{
-		newRow.insertCell(i);
+		var newCell = newRow.insertCell(i);
+		newCell.innerHtml = "ab";
 	}
+	// Increment counter
+	numThermComp++;
 }
 // Adds new row to the main table (and fills with cells)
 function RemoveRow()
 {
-	document.getElementById('mainTable').deleteRow(mainTable.rows.length-2);
+	// Only allow remove if there is more than one row left
+	if(numThermComp > 1)
+	{
+		document.getElementById('mainTable').deleteRow(FIRST_THERMAL_ROW + numThermComp - 1);
+		// Decrement counter
+		numThermComp--;
+	}
 }
 </script></p>
