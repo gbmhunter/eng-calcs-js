@@ -236,9 +236,16 @@ function AddRow()
 {
 	var mainTable = document.getElementById('mainTable');
 	//var newRow = document.getElementById('mainTable').insertRow(FIRST_THERMAL_ROW + numThermComp);
-	mainTable.insertBefore(
-		mainTable.rows[0].cloneNode(true),
-		mainTable.rows[2]);
+	var tBody = mainTable.children[0];
+	
+	tBody.insertBefore(
+		mainTable.rows[FIRST_THERMAL_ROW + numThermComp - 1].cloneNode(true),
+		mainTable.rows[FIRST_THERMAL_ROW + numThermComp]);
+	
+	
+	//mainTable.insertRow(2);
+	//console.log(mainTable.rows[0].cloneNode(true));
+	//mainTable.appendChild(mainTable.rows[1].cloneNode(true));
 	/*
 	for(var i = 0; i <  mainTable.rows[0].cells.length; i++)
 	{
