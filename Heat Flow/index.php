@@ -8,64 +8,72 @@ $\Delta T$ = temperature drop (degrees Celcius)<br />
 	$R_{\theta}$ = thermal resistance (degrees Celcius/Watt)</p>
 <form name="hfc">
 <table id="mainTable" style="margin-left: auto; margin-right: auto;" border="4">
-<tbody>
-<tr>
-<td><strong>Variables:</strong></td>
-<td><strong>Values:</strong></td>
-<td><strong>Units:</strong></td>
-<td><strong>Calculate What?</strong></td>
-<td><strong>Variable Diagram:</strong></td>
-</tr>
-<tr>
-	<td style="text-align: center;">$P_D$</td>
-	<td><input id="tbVar1" type="text" size="16" /></td>
-	<td>
-	<select id="cbVar1">
-	<option value="0.001">mW</option>
-	<option selected="selected" value="1.0">W</option>
-	<option value="1000.0">kW</option>
-	</select>
-	</td>
-	<td style="text-align: center;"><input id="rbVar1" type="radio" name="input" /></td>
-	<td rowspan="4">[singlepic id=1147 w=300 h=150 float=right]</td>
-</tr>
-<tr>
-	<td colspan="2" style="text-align: center;">Num. Thermal Components
-
-		<input id="addOne" type="button" value="+">
-
-		<input id="removeOne" type="button" value="-">
-	</td>
-</tr>
-<tr>
-<tr>
-	<td>$\Delta T$</td>
-	<td style="text-align: center;"><input id="rbVar2" type="radio" name="input" /></td>
-	<td style="text-align: center;">$R_{\theta}$</td>
-	<td style="text-align: center;"><input id="rbVar3" type="radio" name="input" /></td>
-<tr>
-	<td><input id="tbVar2" type="text" size="16" /></td>
-	<td>
-		<select id="cbVar2">
-			<option selected="selected" value="1">°C</option>
-		</select>
-	</td>
-	<td><input id="tbVar3" type="text" size="16" /></td>
-	<td>
-		<select id="cbVar3">
-			<option value="0.001">mO</option>
-			<option selected="selected" value="1.0">O</option>
-			<option value="1000.0">kO</option>
-		</select>
-	</td>
-</tr>
-<tr>
-<td></td>
-<td style="text-align: center;"><input onclick="ClearValues()" type="button" value="Clear Values" /></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
+	<tbody>
+		<tr>
+			<td id="td1"><strong>Variables:</strong></td>
+			<td><strong>Values:</strong></td>
+			<td><strong>Units:</strong></td>
+			<td><strong>Calculate What?</strong></td>
+			<td><strong>Variable Diagram:</strong></td>
+		</tr>
+		<tr>
+			<td style="text-align: center;">$P_D$</td>
+			<td>
+				<input id="tbVar1" type="text" size="16" />
+			</td>
+			<td>
+				<select id="cbVar1">
+					<option value="0.001">mW</option>
+					<option selected="selected" value="1.0">W</option>
+					<option value="1000.0">kW</option>
+				</select>
+			</td>
+			<td style="text-align: center;">
+				<input id="rbVar1" type="radio" name="input" />
+			</td>
+			<td rowspan="4">[singlepic id=1147 w=300 h=150 float=right]</td>
+		</tr>
+		<tr>
+			<td colspan="2" style="text-align: center;">Num. Thermal Components
+				<input id="addOne" type="button" value="+" />
+				<input id="removeOne" type="button" value="-" />
+			</td>
+		</tr>
+		<tr>
+			<td>$\Delta T$</td>
+			<td style="text-align: center;">
+				<input id="rbVar2" type="radio" name="input" />
+			</td>
+			<td style="text-align: center;">$R_{\theta}$</td>
+			<td style="text-align: center;">
+				<input id="rbVar3" type="radio" name="input" />
+			</td>
+		</tr>
+		<tr>
+			<td><input id="tbVar2" type="text" size="16" /></td>
+			<td>
+				<select id="cbVar2">
+					<option selected="selected" value="1">°C</option>
+				</select>
+			</td>
+			<td><input id="tbVar3" type="text" size="16" /></td>
+			<td>
+				<select id="cbVar3">
+					<option value="0.001">mO</option>
+					<option selected="selected" value="1.0">O</option>
+					<option value="1000.0">kO</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td style="text-align: center;">
+				<input onclick="ClearValues()" type="button" value="Clear Values" />
+			</td>
+			<td></td>
+			<td></td>
+		</tr>
+	</tbody>
 </table>
 </form>
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
@@ -74,8 +82,9 @@ var j = jQuery.noConflict();
 // Get the right form
 var calcForm = document.forms.hfc
 // Array for holding thermal components
-var thermalCompA = new Array();
-var FIRST_THERMAL_ROW = 5;
+var thermCompA = new Array();
+// Count from 0
+var FIRST_THERMAL_ROW = 4;
 var numThermComp = 1;
 // Start-up function
 j(document).ready(
@@ -155,7 +164,7 @@ function StartUp()
 		},
 		false);
 	// Add first thermal component row to array
-	thermalCompA[0] = document.getElementById('mainTable').rows[4];
+	thermCompA[0] = document.getElementById('mainTable').rows[FIRST_THERMAL_ROW - 1];
 	calcForm.style.position= 'relative'; 
 	calcForm.style.left = '0px'; 
 	//moveRight();
@@ -236,29 +245,43 @@ function AddRow()
 {
 	var mainTable = document.getElementById('mainTable');
 	//var newRow = document.getElementById('mainTable').insertRow(FIRST_THERMAL_ROW + numThermComp);
+	
+	// Get tbody (parent of rows), so that we can insert rows using insertBefore().
 	var tBody = mainTable.children[0];
 	
-	tBody.insertBefore(
-		mainTable.rows[FIRST_THERMAL_ROW + numThermComp - 1].cloneNode(true),
-		mainTable.rows[FIRST_THERMAL_ROW + numThermComp]);
-	
-	
-	//mainTable.insertRow(2);
-	//console.log(mainTable.rows[0].cloneNode(true));
-	//mainTable.appendChild(mainTable.rows[1].cloneNode(true));
-	/*
-	for(var i = 0; i <  mainTable.rows[0].cells.length; i++)
-	{
-		var newCell = newRow.insertCell(i);
-		newCell.innerHtml = "ab";
-	}
-	*/
 	// Increment counter
 	numThermComp++;
+	
+	// Create new row, and save in array
+	thermCompA[numThermComp - 1] = mainTable.rows[FIRST_THERMAL_ROW + numThermComp - 2].cloneNode(true);
+	thermCompA[numThermComp - 1].cells[1].innerHTML = "";
+	thermCompA[numThermComp - 1].cells[3].innerHTML = "";
+	
+	// Insert row into table
+	tBody.insertBefore(
+		thermCompA[numThermComp - 1],
+		mainTable.rows[FIRST_THERMAL_ROW + numThermComp - 1]);
+		
+	if(numThermComp == 2)
+	{
+		var totalRow = mainTable.insertRow(FIRST_THERMAL_ROW + numThermComp);
+		var cell1 = totalRow.insertCell(0);
+		var cell2 = totalRow.insertCell(1);
+		var newText  = document.createTextNode('Totals')
+		cell2.appendChild(newText);
+		var cell3 = totalRow.insertCell(2);
+	}
+	
 }
 // Adds new row to the main table (and fills with cells)
 function RemoveRow()
 {
+	// Remove the TOTAL row if going from 2 to 1 row
+	if(numThermComp == 2)
+	{
+		mainTable.deleteRow(FIRST_THERMAL_ROW + numThermComp);
+	}
+
 	// Only allow remove if there is more than one row left
 	if(numThermComp > 1)
 	{
