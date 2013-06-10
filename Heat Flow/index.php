@@ -83,6 +83,10 @@ var j = jQuery.noConflict();
 var calcForm = document.forms.hfc
 // Array for holding thermal components
 var thermCompA = new Array();
+// Array of thermal resistance cells
+var thermResA = new Array();
+// Array of temp change cells
+var tempChangeA = new Array();
 // Count from 0
 var FIRST_THERMAL_ROW = 4;
 var numThermComp = 1;
@@ -127,26 +131,26 @@ function StartUp()
 	document.getElementById('rbVar1').addEventListener('click',
 		function(){ 
 			DisableInput(document.getElementById('tbVar1')); 
-			EnableInput(document.getElementById('tbVar2')); 
-			EnableInput(document.getElementById('tbVar3')); 
+			EnableInputs(thermResA); 
+			EnableInputs(tempChangeA); 
 			Calculate();
 		},
 		false);
 	document.getElementById('rbVar2').addEventListener(
 		'click',
 		function(){
-			DisableInput(document.getElementById('tbVar2')); 
+			DisableInputs(thermResA); 
 			EnableInput(document.getElementById('tbVar1')); 
-			EnableInput(document.getElementById('tbVar3')); 
+			EnableInputs(tempChangeA); 
 			Calculate();
 		},
 		false);
 	document.getElementById('rbVar3').addEventListener(
 		'click',
 		function(){
-			DisableInput(document.getElementById('tbVar3')); 
+			DisableInputs(tempChangeA); 
 			EnableInput(document.getElementById('tbVar1')); 
-			EnableInput(document.getElementById('tbVar2')); 
+			EnableInputs(thermResA); 
 			Calculate();
 		},
 		false);
@@ -164,23 +168,54 @@ function StartUp()
 		},
 		false);
 	// Add first thermal component row to array
-	thermCompA[0] = document.getElementById('mainTable').rows[FIRST_THERMAL_ROW - 1];
+	thermCompA[0] = document.getElementById('mainTable').rows[FIRST_THERMAL_ROW];
+	// Add thermal resistance cell to array
+	thermResA[0] = document.getElementById('mainTable').rows[FIRST_THERMAL_ROW].cells[0];
+	tempChangeA[0] = document.getElementById('mainTable').rows[FIRST_THERMAL_ROW].cells[2];
+	
 	calcForm.style.position= 'relative'; 
 	calcForm.style.left = '0px'; 
 	//moveRight();
 }
 );
+
+function EnableInput(object)
+{
+	object.disabled = false;    
+	ColourActInput(object); 
+}
+
+// Expects an array
+function EnableInputs(object)
+{
+	console.log('Enabling inputs...');
+	for(var x = 0; x < object.length; x++)
+	{
+		object[x].childNodes[0].disabled = false;    
+		ColourActInput(object[x].childNodes[0]); 
+	}
+}
+
 // Works for both forms
 function DisableInput(object)
 {
 	object.disabled = true;    
 	ColourDisInput(object); 
 }
-function EnableInput(object)
+
+// Expects an array
+function DisableInputs(object)
 {
-	object.disabled = false;    
-	ColourActInput(object); 
+	console.log('Disabling inputs...');
+	for(var x = 0; x < object.length; x++)
+	{
+		object[x].childNodes[0].disabled = true;    
+		ColourDisInput(object[x].childNodes[0]); 
+	}
 }
+
+
+
 function StartUp()
 {
    // LprccColourDisInput(document.getElementById("iqTextBox"));
@@ -197,26 +232,95 @@ function ColourActInput(input)
 } 
 function Calculate()    
 {
+	console.log('Calculating...');
    // PART 1
 	// P = T/R   
    var power = parseFloat(calcForm.tbVar1.value)*parseFloat(calcForm.cbVar1.value);
-   var temp = parseFloat(calcForm.tbVar2.value)*parseFloat(calcForm.cbVar2.value);
-   var res = parseFloat(calcForm.tbVar3.value)*parseFloat(calcForm.cbVar3.value);
+   //var res = parseFloat(calcForm.tbVar2.value)*parseFloat(calcForm.cbVar2.value);
+   //var temp = parseFloat(calcForm.tbVar3.value)*parseFloat(calcForm.cbVar3.value);
+ 
    // power
-   if(calcForm.tbVar1.disabled == true)     
+   if(calcForm.rbVar1.checked == true)     
    {
-	   calcForm.tbVar1.value = (temp/res)/calcForm.cbVar1.value;      
+		console.log('Var 1 selected.');
+		
+		// Calc res and temp totals
+		
+		var thermResTotal = 0.0;
+		for(var x = 0; x < thermResA.length; x++)
+		{
+			console.log(thermResA[x].childNodes[0]);
+			thermResTotal += parseFloat(thermResA[x].childNodes[0].value);
+		}
+		
+		// Only displays total if more than 1 thermal component
+		if(numThermComp >= 2)
+		{
+			document.getElementById('tbThermResTotal').innerHTML = thermResTotal;
+		}
+		console.log('Therm res total = ' + thermResTotal);
+		
+		var tempChangeTotal = 0.0;
+		for(var x = 0; x < tempChangeA.length; x++)
+		{
+			console.log(tempChangeA[x].childNodes[0]);
+			tempChangeTotal += parseFloat(tempChangeA[x].childNodes[0].value);
+		}
+		
+		// Only displays total if more than 1 thermal component
+		if(numThermComp >= 2)
+		{
+			document.getElementById('tbTempChangeTotal').innerHTML = tempChangeTotal;
+		}
+		console.log('Temp change total = ' + tempChangeTotal);
+		
+		// Calculate power
+		calcForm.tbVar1.value = (tempChangeTotal/thermResTotal)/calcForm.cbVar1.value;      
    }
-   // temp
-   if(calcForm.tbVar2.disabled == true)       
-   {          
-	   calcForm.tbVar2.value = (power*res)/calcForm.cbVar2.value;       
-   }      
-   // res 
-   if(calcForm.tbVar3.disabled == true)       
-   {         
-	   calcForm.tbVar3.value = (temp/power)/calcForm.cbVar3.value;      
-   }    
+    // temp
+    if(calcForm.rbVar2.checked == true)       
+	{    
+		console.log('Var 2 selected.');
+		
+		var tempChangeTotal = 0.0;
+		for(var x = 0; x < tempChangeA.length; x++)
+		{
+			tempChangeTotal += parseFloat(tempChangeA[x].childNodes[0].value);
+		}
+		
+		// Only displays total if more than 1 thermal component
+		if(numThermComp >= 2)
+		{
+			document.getElementById('tbTempChangeTotal').innerHTML = tempChangeTotal;
+		}
+		console.log('Temp change total = ' + tempChangeTotal);
+		
+		document.getElementById('tbThermResTotal').innerHTML = (tempChangeTotal/power)/calcForm.cbVar2.value;     
+    } 
+	
+    // res 
+    if(calcForm.rbVar3.checked == true)       
+    {   
+		console.log('Var 3 selected.');
+		
+		// Calc res total
+		
+		var thermResTotal = 0.0;
+		for(var x = 0; x < thermResA.length; x++)
+		{
+			console.log(thermResA[x].childNodes[0]);
+			thermResTotal += parseFloat(thermResA[x].childNodes[0].value);
+		}
+		
+		// Only displays total if more than 1 thermal component
+		if(numThermComp >= 2)
+		{
+			document.getElementById('tbThermResTotal').innerHTML = thermResTotal;
+		}
+		console.log('Therm res total = ' + thermResTotal);
+		
+		document.getElementById('tbTempChangeTotal').innerHTML = (power*thermResTotal)/calcForm.cbVar3.value;      
+    }    
 }
 // Clears values from the first form
 function ClearValues()
@@ -257,6 +361,10 @@ function AddRow()
 	thermCompA[numThermComp - 1].cells[1].innerHTML = "";
 	thermCompA[numThermComp - 1].cells[3].innerHTML = "";
 	
+	// Add thermal resistance cell to array
+	thermResA[numThermComp - 1] = thermCompA[numThermComp - 1].cells[0];
+	tempChangeA[numThermComp - 1] = thermCompA[numThermComp - 1].cells[2];
+	
 	// Insert row into table
 	tBody.insertBefore(
 		thermCompA[numThermComp - 1],
@@ -266,10 +374,12 @@ function AddRow()
 	{
 		var totalRow = mainTable.insertRow(FIRST_THERMAL_ROW + numThermComp);
 		var cell1 = totalRow.insertCell(0);
+		cell1.id = 'tbThermResTotal';
 		var cell2 = totalRow.insertCell(1);
 		var newText  = document.createTextNode('Totals')
 		cell2.appendChild(newText);
 		var cell3 = totalRow.insertCell(2);
+		cell3.id = 'tbTempChangeTotal';
 	}
 	
 }

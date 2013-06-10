@@ -4,8 +4,8 @@ Engineering Calculators Written In Javascript
 
 - Author: gbmhunter <gbmhunter@gmail.com> (http://www.cladlab.com)
 - Created: 2013/06/06
-- Last Modified: 2013/06/10
-- Version: v1.0.5.0
+- Last Modified: 2013/06/11
+- Version: v1.0.6.0
 - Company: CladLabs
 - Project: Free Code Libraries	.
 - Language: HTML/JS
@@ -52,6 +52,7 @@ Changelog
 ======== ========== ===================================================================================================
 Version  Date       Comment
 ======== ========== ===================================================================================================
+v1.0.6.0 2013/06/11	Heat flow table calculating totals correctly for all three variables.
 v1.0.5.0 2013/06/10 Heat flow table adding TOTAL row with 2 or more thermal components.
 v1.0.4.0 2013/06/09 Heat flow table copying row correctly using insertBefore().
 v1.0.3.0 2013/06/09 Heat flow table meant to be adding copied row into middle of table, but throwing DOM exception.
