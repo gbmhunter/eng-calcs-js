@@ -34,7 +34,7 @@ $\Delta T$ = temperature drop (degrees Celcius)<br />
 			<td rowspan="4">[singlepic id=1147 w=300 h=150 float=right]</td>
 		</tr>
 		<tr>
-			<td colspan="2" style="text-align: center;">Num. Thermal Components
+			<td colspan="4" style="text-align: center;">Num. Thermal Components
 				<input id="addOne" type="button" value="+" />
 				<input id="removeOne" type="button" value="-" />
 			</td>
@@ -68,7 +68,7 @@ $\Delta T$ = temperature drop (degrees Celcius)<br />
 		<tr>
 			<td></td>
 			<td style="text-align: center;">
-				<input onclick="ClearValues()" type="button" value="Clear Values" />
+				<input id="btClear" type="button" value="Clear Values" />
 			</td>
 			<td></td>
 			<td></td>
@@ -159,12 +159,20 @@ function StartUp()
 		'click',
 		function(){
 			AddRow();
+			Calculate();
 		},
 		false);
 	document.getElementById('removeOne').addEventListener(
 		'click',
 		function(){
 			RemoveRow();
+			Calculate();
+		},
+		false);
+	document.getElementById('btClear').addEventListener(
+		'click',
+		function(){
+			ClearValues();
 		},
 		false);
 	// Add first thermal component row to array
@@ -214,8 +222,6 @@ function DisableInputs(object)
 	}
 }
 
-
-
 function StartUp()
 {
    // LprccColourDisInput(document.getElementById("iqTextBox"));
@@ -239,6 +245,9 @@ function Calculate()
    //var res = parseFloat(calcForm.tbVar2.value)*parseFloat(calcForm.cbVar2.value);
    //var temp = parseFloat(calcForm.tbVar3.value)*parseFloat(calcForm.cbVar3.value);
  
+	console.log('Num thermal comp = ' + numThermComp);
+	console.log('Num array elements = ' + thermResA.length);
+ 
    // power
    if(calcForm.rbVar1.checked == true)     
    {
@@ -250,7 +259,10 @@ function Calculate()
 		for(var x = 0; x < thermResA.length; x++)
 		{
 			console.log(thermResA[x].childNodes[0]);
-			thermResTotal += parseFloat(thermResA[x].childNodes[0].value);
+			if(thermResA[x].childNodes[0].value != '')
+			{
+				thermResTotal += parseFloat(thermResA[x].childNodes[0].value);
+			}
 		}
 		
 		// Only displays total if more than 1 thermal component
@@ -264,7 +276,10 @@ function Calculate()
 		for(var x = 0; x < tempChangeA.length; x++)
 		{
 			console.log(tempChangeA[x].childNodes[0]);
-			tempChangeTotal += parseFloat(tempChangeA[x].childNodes[0].value);
+			if(tempChangeA[x].childNodes[0].value != '')
+			{
+				tempChangeTotal += parseFloat(tempChangeA[x].childNodes[0].value);
+			}
 		}
 		
 		// Only displays total if more than 1 thermal component
@@ -285,20 +300,30 @@ function Calculate()
 		var tempChangeTotal = 0.0;
 		for(var x = 0; x < tempChangeA.length; x++)
 		{
-			tempChangeTotal += parseFloat(tempChangeA[x].childNodes[0].value);
+			if(tempChangeA[x].childNodes[0].value != '')
+			{
+				tempChangeTotal += parseFloat(tempChangeA[x].childNodes[0].value);
+			}
 		}
 		
 		// Only displays total if more than 1 thermal component
 		if(numThermComp >= 2)
 		{
 			document.getElementById('tbTempChangeTotal').innerHTML = tempChangeTotal;
+			document.getElementById('tbThermResTotal').innerHTML = (tempChangeTotal/power)/calcForm.cbVar2.value;
 		}
 		console.log('Temp change total = ' + tempChangeTotal);
 		
-		document.getElementById('tbThermResTotal').innerHTML = (tempChangeTotal/power)/calcForm.cbVar2.value;     
+		// Update individual elements
+		for(var x = 0; x < thermResA.length; x++)
+		{
+			console.log('Therm Res[x] = ' + (tempChangeA[x].childNodes[0].value/power)/calcForm.cbVar2.value);
+			thermResA[x].childNodes[0].value = (tempChangeA[x].childNodes[0].value/power)/calcForm.cbVar2.value;
+		}
+		
     } 
 	
-    // res 
+    // Temp change
     if(calcForm.rbVar3.checked == true)       
     {   
 		console.log('Var 3 selected.');
@@ -309,17 +334,26 @@ function Calculate()
 		for(var x = 0; x < thermResA.length; x++)
 		{
 			console.log(thermResA[x].childNodes[0]);
-			thermResTotal += parseFloat(thermResA[x].childNodes[0].value);
+			if(thermResA[x].childNodes[0].value != '')
+			{
+				thermResTotal += parseFloat(thermResA[x].childNodes[0].value);
+			}
 		}
 		
 		// Only displays total if more than 1 thermal component
 		if(numThermComp >= 2)
 		{
 			document.getElementById('tbThermResTotal').innerHTML = thermResTotal;
+			document.getElementById('tbTempChangeTotal').innerHTML = (power*thermResTotal)/calcForm.cbVar3.value;
 		}
 		console.log('Therm res total = ' + thermResTotal);
 		
-		document.getElementById('tbTempChangeTotal').innerHTML = (power*thermResTotal)/calcForm.cbVar3.value;      
+		// Update individual elements
+		for(var x = 0; x < tempChangeA.length; x++)
+		{
+			console.log('Temp change[x] = ' + (power*thermResA[x].childNodes[0].value)/calcForm.cbVar3.value);
+			tempChangeA[x].childNodes[0].value = (power*thermResA[x].childNodes[0].value)/calcForm.cbVar3.value;
+		}
     }    
 }
 // Clears values from the first form
@@ -337,7 +371,6 @@ function ClearValues()
    // When clearing values from the first form, the second form has to be recalculated
    // since it is dependant
    Calculate();
-   AddRow();
 }
 // Animation stuff
 function moveRight(){
@@ -364,6 +397,21 @@ function AddRow()
 	// Add thermal resistance cell to array
 	thermResA[numThermComp - 1] = thermCompA[numThermComp - 1].cells[0];
 	tempChangeA[numThermComp - 1] = thermCompA[numThermComp - 1].cells[2];
+	
+	
+	
+	console.log('Test: ' + thermResA[numThermComp - 1].childNodes[0]);
+	// Add event listeners
+	thermResA[numThermComp - 1].childNodes[0].addEventListener('keyup',
+		function(){ 
+			Calculate();
+		},
+		false);
+	tempChangeA[numThermComp - 1].childNodes[0].addEventListener('keyup',
+		function(){ 
+			Calculate();
+		},
+		false);
 	
 	// Insert row into table
 	tBody.insertBefore(
@@ -396,6 +444,8 @@ function RemoveRow()
 	if(numThermComp > 1)
 	{
 		document.getElementById('mainTable').deleteRow(FIRST_THERMAL_ROW + numThermComp - 1);
+		thermResA = thermResA.splice(thermResA.length - 1, 1);
+		tempChangeA = tempChangeA.splice(tempChangeA.length - 1, 1);
 		// Decrement counter
 		numThermComp--;
 	}
