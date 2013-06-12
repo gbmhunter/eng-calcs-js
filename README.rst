@@ -4,8 +4,8 @@ Engineering Calculators Written In Javascript
 
 - Author: gbmhunter <gbmhunter@gmail.com> (http://www.cladlab.com)
 - Created: 2013/06/06
-- Last Modified: 2013/06/11
-- Version: v1.0.7.0
+- Last Modified: 2013/06/12
+- Version: v1.1.0.0
 - Company: CladLabs
 - Project: Free Code Libraries	.
 - Language: HTML/JS
@@ -21,6 +21,11 @@ Description
 
 Contains engineering calculators designed to be viewed with a browser.
 
+Heat Flow Calculator
+--------------------
+
+Calculates power dissipation, thermal resistance, or temperature change, given the other two parameters. You can dynamically add more thermal components (having both a thermal resistance and temperature change) to the equation.
+
 Internal Dependencies
 =====================
 
@@ -29,7 +34,7 @@ None.
 External Dependencies
 =====================
 
-Latex engine for latex rendering of equations.
+MathJax (delivered through MathJax CDN) for latex rendering of equations.
 
 Issues
 ======
@@ -49,9 +54,10 @@ Load .php files in browser.
 Changelog
 =========
 
-======== ========== ===================================================================================================
+======== ========== ============================================================================================================
 Version  Date       Comment
-======== ========== ===================================================================================================
+======== ========== ============================================================================================================
+v1.1.0.0 2013/06/12 Release version. Heat flow table working! Using MathJax to render latex client-side. Added image to folder. 
 v1.0.7.0 2013/06/11	Heat flow table almost working, except value calc bug when adding then removing rows.
 v1.0.6.0 2013/06/11	Heat flow table calculating totals correctly for all three variables.
 v1.0.5.0 2013/06/10 Heat flow table adding TOTAL row with 2 or more thermal components.
@@ -62,4 +68,4 @@ v1.0.1.1 2013/06/08 Changelog now in table format.
 v1.0.1.0 2013/06/08 Heat flow calc can now add more rows.
 v1.0.0.1 2013/06/06 Fixed two README section titles from having all capitals.
 v1.0.0.0 2013/06/06 Initial commit.
-======== ========== ===================================================================================================
+======== ========== ============================================================================================================

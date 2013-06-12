@@ -1,11 +1,15 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<p>[latexpage]</p>
-<p>The calculator works out either $P_D$, $\Delta T$, or $R_{\theta}$, given the other two parameters, using the heat flow equation:</p>
-<p style="text-align: center;">$P_D = \frac{\Delta T}{R_{\theta}}$</p>
-<p style="text-align: center;">where:<br />
-$P_D$ = dissipated power (Watts)<br />
-$\Delta T$ = temperature drop (degrees Celcius)<br />
-	$R_{\theta}$ = thermal resistance (degrees Celcius/Watt)</p>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<p>The calculator works out either \(P_D\), \(\Delta T\), or \(R_{\theta}\), given the other two parameters, using the heat flow equation:</p>
+<p style="text-align: center;">$$P_D = \frac{\Delta T}{R_{\theta}}$$</p>
+<p style="text-align: center;">
+	where:<br />
+	\(P_D\) = dissipated power (Watts)<br />
+	\(\Delta T\) = temperature drop (degrees Celcius)<br />
+	\(R_{\theta}\) = thermal resistance (degrees Celcius/Watt)
+</p>
 <form name="hfc">
 <table id="mainTable" style="margin-left: auto; margin-right: auto;" border="4">
 	<tbody>
@@ -17,7 +21,7 @@ $\Delta T$ = temperature drop (degrees Celcius)<br />
 			<td><strong>Variable Diagram:</strong></td>
 		</tr>
 		<tr>
-			<td style="text-align: center;">$P_D$</td>
+			<td style="text-align: center;">\(P_D\)</td>
 			<td>
 				<input id="tbVar1" type="text" size="16" />
 			</td>
@@ -31,7 +35,9 @@ $\Delta T$ = temperature drop (degrees Celcius)<br />
 			<td style="text-align: center;">
 				<input id="rbVar1" type="radio" name="input" />
 			</td>
-			<td rowspan="4">[singlepic id=1147 w=300 h=150 float=right]</td>
+			<td rowspan="20">
+				<img src="three-thermal-resistance-diagram-with-power-and-temp.png" width="150" height="200"/>
+			</td>
 		</tr>
 		<tr>
 			<td colspan="4" style="text-align: center;">Num. Thermal Components
@@ -40,11 +46,11 @@ $\Delta T$ = temperature drop (degrees Celcius)<br />
 			</td>
 		</tr>
 		<tr>
-			<td>$\Delta T$</td>
+			<td style="text-align: center;">\(R_{\theta}\)</td>
 			<td style="text-align: center;">
 				<input id="rbVar2" type="radio" name="input" />
 			</td>
-			<td style="text-align: center;">$R_{\theta}$</td>
+			<td style="text-align: center;">\(\Delta T\)</td>
 			<td style="text-align: center;">
 				<input id="rbVar3" type="radio" name="input" />
 			</td>
@@ -53,7 +59,7 @@ $\Delta T$ = temperature drop (degrees Celcius)<br />
 			<td><input id="tbVar2" type="text" size="16" /></td>
 			<td>
 				<select id="cbVar2">
-					<option selected="selected" value="1">°C</option>
+					<option selected="selected" value="1">&deg;C</option>
 				</select>
 			</td>
 			<td><input id="tbVar3" type="text" size="16" /></td>
@@ -391,7 +397,9 @@ function AddRow()
 	
 	// Create new row, and save in array
 	thermCompA[numThermComp - 1] = mainTable.rows[FIRST_THERMAL_ROW + numThermComp - 2].cloneNode(true);
+	thermCompA[numThermComp - 1].cells[0].childNodes[0].value = 0.0;
 	thermCompA[numThermComp - 1].cells[1].innerHTML = "";
+	thermCompA[numThermComp - 1].cells[2].childNodes[0].value = 0.0;
 	thermCompA[numThermComp - 1].cells[3].innerHTML = "";
 	
 	// Add thermal resistance cell to array
@@ -423,11 +431,15 @@ function AddRow()
 		var totalRow = mainTable.insertRow(FIRST_THERMAL_ROW + numThermComp);
 		var cell1 = totalRow.insertCell(0);
 		cell1.id = 'tbThermResTotal';
+		cell1.style.fontWeight = 'bold';
 		var cell2 = totalRow.insertCell(1);
 		var newText  = document.createTextNode('Totals')
 		cell2.appendChild(newText);
+		cell2.style.textAlign = 'center';
+		cell2.style.fontWeight = 'bold';
 		var cell3 = totalRow.insertCell(2);
 		cell3.id = 'tbTempChangeTotal';
+		cell3.style.fontWeight = 'bold';
 	}
 	
 }
@@ -444,8 +456,8 @@ function RemoveRow()
 	if(numThermComp > 1)
 	{
 		document.getElementById('mainTable').deleteRow(FIRST_THERMAL_ROW + numThermComp - 1);
-		thermResA = thermResA.splice(thermResA.length - 1, 1);
-		tempChangeA = tempChangeA.splice(tempChangeA.length - 1, 1);
+		thermResA.splice(thermResA.length - 1, 1);
+		tempChangeA.splice(tempChangeA.length - 1, 1);
 		// Decrement counter
 		numThermComp--;
 	}
