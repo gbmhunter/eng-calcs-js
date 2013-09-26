@@ -5,7 +5,7 @@ Engineering Calculators Written In Javascript
 - Author: gbmhunter <gbmhunter@gmail.com> (http://www.cladlab.com)
 - Created: 2013/06/06
 - Last Modified: 2013/09/26
-- Version: v2.1.1.0
+- Version: v2.1.2.0
 - Company: CladLabs
 - Project: Free Code Libraries	.
 - Language: HTML/JS
@@ -62,6 +62,7 @@ Changelog
 ======== ========== ============================================================================================================
 Version  Date       Comment
 ======== ========== ============================================================================================================
+v2.1.2.0 2013/09/26 Renamed another index.php to heat-flow.php.
 v2.1.1.0 2013/09/26 Renamed index.php to standard-resistance-finder.php. Added info about the standard resistance calculator to README.
 v2.1.0.0 2013/09/17 Standard resistance calculator now works for finding E12, E24, E48, E96 and E192 values. Reports closest match and percentage error.
 v2.0.0.0 2013/09/16 Added standard resistance calculator. Just started working on it's code, got a table looking half-decent. All the JS code from the heat flow calculator present in file, using as a template.
