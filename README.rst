@@ -5,7 +5,7 @@ Engineering Calculators Written In Javascript
 - Author: gbmhunter <gbmhunter@gmail.com> (http://www.cladlab.com)
 - Created: 2013/06/06
 - Last Modified: 2013/09/27
-- Version: v2.2.0.0
+- Version: v2.2.0.1
 - Company: CladLabs
 - Project: Free Code Libraries	.
 - Language: HTML/JS
@@ -41,6 +41,8 @@ External Dependencies
 
 MathJax (delivered through MathJax CDN) for latex rendering of equations.
 
+knockout.js (delivered through CDN) for MVVM framework.
+
 Issues
 ======
 
@@ -62,6 +64,7 @@ Changelog
 ======== ========== ============================================================================================================
 Version  Date       Comment
 ======== ========== ============================================================================================================
+v2.2.0.1 2013/09/27 Added knockout.js to list of external dependencies in README.
 v2.2.0.0 2013/09/27 Rewrote the standard resistance finder calculator to use the knockout.js MVVM framework.
 v2.1.2.0 2013/09/26 Renamed another index.php to heat-flow.php.
 v2.1.1.0 2013/09/26 Renamed index.php to standard-resistance-finder.php. Added info about the standard resistance calculator to README.
