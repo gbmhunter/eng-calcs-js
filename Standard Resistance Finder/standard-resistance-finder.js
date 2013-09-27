@@ -19,99 +19,99 @@ var j = jQuery.noConflict();
 // Debug flag. Set to true to print debug information, otherwise false.
 var DEBUG = true;
 
+var resUnit = function(name, multiplier) {
+        this.name = name;
+        this.multiplier = multiplier;
+    };
+	
+function AppViewModel() {
+    this.desiredRes = ko.observable();
+	
+	this.desiredResUnits = ko.observableArray([
+		new resUnit('m\u2126', 0.001),
+		new resUnit('\u2126', 1.0),
+		new resUnit('k\u2126', 1000.0)
+	]);
+	
+	
+	this.selectedResUnit = ko.observable();
+	
+	this.series = ko.observable("e12");
+	
+	this.actualRes = ko.computed(
+		function() 
+		{
+			Log('Calculating...');
+			
+			// Quit if units have not been initialised
+			if(this.selectedResUnit() === undefined)
+			{
+				return;
+			}
+			
+			Log('Val = ' + this.selectedResUnit().multiplier);
+			
+			// Get desired resistance  
+			var desRes = parseFloat(this.desiredRes())*parseFloat(this.selectedResUnit().multiplier);
+		 
+			var selectedRange = new Array();
+			
+			// Find out what resistance series was selected
+			if(this.series() == 'e12')     
+			{
+				Log('E12 range selected.');
+				selectedRange = e12;
+			}
+			else if(this.series() == 'e24')
+			{
+				Log('E24 range selected.');
+				selectedRange = e24;
+			}
+			else if(this.series() == 'e48')
+			{
+				Log('E48 range selected.');
+				selectedRange = BuildResArray(48);
+			}
+			else if(this.series() == 'e96')
+			{
+				Log('E96 range selected.');
+				selectedRange = BuildResArray(96);
+			}
+			else if(this.series() == 'e192')
+			{
+				Log('E192 range selected.');
+				selectedRange = BuildResArray(192);
+			}
+
+			var order = FindOrder(desRes);
+			var scaledDesRes = ScaleWrtOrder(desRes, order);
+			Log('Scaled resistance = ' + scaledDesRes);
+			var closestMatch = FindClosestMatch(scaledDesRes, selectedRange);
+			Log(closestMatch);
+			Log(closestMatch.val*Math.pow(10, order));
+			
+			// Update percentage error
+			this.percDiff(Math.round(closestMatch.diff*100)/100); 
+			
+			// Return the actual resistance
+			return (closestMatch.val*Math.pow(10, order)) / this.selectedResUnit().multiplier;
+        }, 
+		this);
+		
+	this.actualResUnits = ko.observable();
+	this.percDiff = ko.observable();
+}
+
 // Start-up function
 j(document).ready(
 	function StartUp()
-	{
-	   // Pre-select the bottom option
-
-		// Add event handlers	
-		document.getElementById('tbDesiredRes').addEventListener('keyup',
-			function(){ 
-				Calculate();
-			},
-			false);
-		document.getElementById('cbDesiredResUnits').addEventListener('onchange',
-			function(){ 
-				Calculate();
-			},
-			false);
-		document.getElementById('rbE12').addEventListener('click',
-			function(){ 
-				Calculate();
-			},
-			false);
-		document.getElementById('rbE24').addEventListener(
-			'click',
-			function(){
-				Calculate();
-			},
-			false);
-		document.getElementById('rbE48').addEventListener(
-			'click',
-			function(){
-				Calculate();
-			},
-			false);
-		document.getElementById('rbE96').addEventListener(
-			'click',
-			function(){
-				Calculate();
-			},
-			false);
-		document.getElementById('rbE192').addEventListener(
-			'click',
-			function(){
-				Calculate();
-			},
-			false);					
+	{	  		
+		// Activates knockout.js
+		ko.applyBindings(new AppViewModel());	
 	}
 );
 
-function Calculate()    
-{
-	Log('Calculating...');
-	
-   // Get desired resistance  
-   var desRes = parseFloat(formSrc.tbDesiredRes.value)*parseFloat(formSrc.cbDesiredResUnits.value);
- 
-	var selectedRange = new Array();
- 
-   // Find out what resistance series was selected
-   if(formSrc.rbE12.checked == true)     
-   {
-		Log('E12 range selected.');
-		selectedRange = e12;
-   }
-   else if(formSrc.rbE24.checked == true)
-   {
-		Log('E24 range selected.');
-		selectedRange = e24;
-   }
-   else if(formSrc.rbE48.checked == true)
-   {
-		Log('E48 range selected.');
-		selectedRange = BuildResArray(48);
-   }
-   else if(formSrc.rbE96.checked == true)
-   {
-		Log('E96 range selected.');
-		selectedRange = BuildResArray(96);
-   }
-   else if(formSrc.rbE192.checked == true)
-   {
-		Log('E192 range selected.');
-		selectedRange = BuildResArray(192);
-   }
-   
-	var order = FindOrder(desRes);
-	var scaledDesRes = ScaleWrtOrder(desRes, order);
-	Log('Scaled resistance = ' + scaledDesRes);
-	var closestMatch = FindClosestMatch(scaledDesRes, selectedRange);
-	Log(closestMatch);
-	formSrc.tbActualRes.value = closestMatch.val*Math.pow(10, order);
-	formSrc.tbDiff.value = Math.round(closestMatch.diff*100)/100;
-}
+
 
 function BuildResArray(numElements)
 {

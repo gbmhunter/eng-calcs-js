@@ -4,8 +4,8 @@ Engineering Calculators Written In Javascript
 
 - Author: gbmhunter <gbmhunter@gmail.com> (http://www.cladlab.com)
 - Created: 2013/06/06
-- Last Modified: 2013/09/26
-- Version: v2.1.2.0
+- Last Modified: 2013/09/27
+- Version: v2.2.0.0
 - Company: CladLabs
 - Project: Free Code Libraries	.
 - Language: HTML/JS
@@ -62,6 +62,7 @@ Changelog
 ======== ========== ============================================================================================================
 Version  Date       Comment
 ======== ========== ============================================================================================================
+v2.2.0.0 2013/09/27 Rewrote the standard resistance finder calculator to use the knockout.js MVVM framework.
 v2.1.2.0 2013/09/26 Renamed another index.php to heat-flow.php.
 v2.1.1.0 2013/09/26 Renamed index.php to standard-resistance-finder.php. Added info about the standard resistance calculator to README.
 v2.1.0.0 2013/09/17 Standard resistance calculator now works for finding E12, E24, E48, E96 and E192 values. Reports closest match and percentage error.
