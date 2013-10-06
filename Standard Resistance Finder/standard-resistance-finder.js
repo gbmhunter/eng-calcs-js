@@ -17,7 +17,7 @@ var e24 = new Array(1.0, 1.1, 1.2, 1.3, 1.5, 1.6, 1.8, 2.0, 2.2, 2.4, 2.7, 3.0, 
 var j = jQuery.noConflict();
 
 // Debug flag. Set to true to print debug information, otherwise false.
-var DEBUG = true;
+var DEBUG = false;
 
 var resUnit = function(name, multiplier) {
         this.name = name;
