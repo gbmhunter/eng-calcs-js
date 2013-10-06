@@ -1,6 +1,22 @@
+<!--
+// @file 		standard-resistance-finder.php
+// @author 		Geoffrey Hunter <gbmhunter@gmail.com> (www.cladlabs.com)
+// @edited 		n/a
+// @date 		2013/09/17
+// @brief 		Given an input resistance, finds the closest resistance in a specified series.
+// @details
+//				See the README in the root dir for more info.
+-->
+
+<!-- Jquery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
+<!-- MathJax for Latex rendering -->
 <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<!-- Include knockout for binding -->
 <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/knockout/2.3.0/knockout-min.js"></script>
+
 <p>This calculator finds a standard resistance value(s) that will best match the resistance \(R_{desired}\) you specify.</p>
 <form name="formSrc">
 <table id="mainTable" style="margin-left: auto; margin-right: auto;" border="4">
@@ -46,11 +62,13 @@
 	</tbody>
 </table>
 </form>
+<!-- Include Javascript file for calculator. Path is built from this scripts path, using __FILE__ variable. -->
 <?php
-	// First step: Get full path
+	// Get full path
 	$cur_file=str_replace('\\','/', realpath(dirname(__FILE__)));
-	// Second step: Remove the root path
+	// Remove everything up to public_html
 	$cur_file=preg_replace('/(.*?)\/public_html/', '', $cur_file);
+	// Output HTML
 	echo '<script type="text/javascript" src="' . $cur_file . '\standard-resistance-finder.js"></script>';
 ?>
 

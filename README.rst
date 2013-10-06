@@ -5,7 +5,7 @@ Engineering Calculators Written In Javascript
 - Author: gbmhunter <gbmhunter@gmail.com> (http://www.cladlab.com)
 - Created: 2013/06/06
 - Last Modified: 2013/10/07
-- Version: v2.2.5.1
+- Version: v2.2.5.2
 - Company: CladLabs
 - Project: Free Code Libraries	.
 - Language: HTML/JS
@@ -64,6 +64,7 @@ Changelog
 ======== ========== ============================================================================================================
 Version  Date       Comment
 ======== ========== ============================================================================================================
+v2.2.5.2 2013/10/07 Added title block to php files. Added comments to php files.
 v2.2.5.1 2013/10/07 Changed incorrect standard-resistance-calculator.c extension in title block to .js.
 v2.2.5.0 2013/10/07 Set debug to false in the standard resistance calculator Javascript file.
 v2.2.4.0 2013/10/07 Added backslashes to the start/end in the preg pattern, also escaped a forward slash. 
