@@ -4,8 +4,8 @@ Engineering Calculators Written In Javascript
 
 - Author: gbmhunter <gbmhunter@gmail.com> (http://www.cladlab.com)
 - Created: 2013/06/06
-- Last Modified: 2013/09/27
-- Version: v2.2.0.1
+- Last Modified: 2013/10/07
+- Version: v2.2.1.0
 - Company: CladLabs
 - Project: Free Code Libraries	.
 - Language: HTML/JS
@@ -64,6 +64,7 @@ Changelog
 ======== ========== ============================================================================================================
 Version  Date       Comment
 ======== ========== ============================================================================================================
+v2.2.1.0 2013/10/07 Removed defer keyword from Javascript file include in standard resistance calculator. Moved this include to below HTML code.
 v2.2.0.1 2013/09/27 Added knockout.js to list of external dependencies in README.
 v2.2.0.0 2013/09/27 Rewrote the standard resistance finder calculator to use the knockout.js MVVM framework.
 v2.1.2.0 2013/09/26 Renamed another index.php to heat-flow.php.

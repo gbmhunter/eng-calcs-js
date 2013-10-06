@@ -1,6 +1,5 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<script type="text/javascript" src="standard-resistance-finder.js" defer></script>
 <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/knockout/2.3.0/knockout-min.js"></script>
 <p>This calculator finds a standard resistance value(s) that will best match the resistance \(R_{desired}\) you specify.</p>
 <form name="formSrc">
@@ -47,6 +46,7 @@
 	</tbody>
 </table>
 </form>
+<script type="text/javascript" src="standard-resistance-finder.js"></script>
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
 
