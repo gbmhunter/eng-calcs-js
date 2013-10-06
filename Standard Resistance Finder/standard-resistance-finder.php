@@ -47,7 +47,11 @@
 </table>
 </form>
 <?php
-	echo '<script type="text/javascript" src="' . realpath(dirname(__FILE__)) . '\standard-resistance-finder.js"></script>';
+	// First step: Get full path
+	$cur_file=str_replace('\\','/', realpath(dirname(__FILE__)));
+	// Second step: Remove the root path
+	$cur_file=preg_replace('(.*?)/public_html/', '', $cur_file);
+	echo '<script type="text/javascript" src="' . $cur_file . '\standard-resistance-finder.js"></script>';
 ?>
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
