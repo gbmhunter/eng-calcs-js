@@ -5,7 +5,7 @@ Engineering Calculators Written In Javascript
 - Author: gbmhunter <gbmhunter@gmail.com> (http://www.cladlab.com)
 - Created: 2013/06/06
 - Last Modified: 2013/10/07
-- Version: v2.2.3.0
+- Version: v2.2.4.0
 - Company: CladLabs
 - Project: Free Code Libraries	.
 - Language: HTML/JS
@@ -64,6 +64,7 @@ Changelog
 ======== ========== ============================================================================================================
 Version  Date       Comment
 ======== ========== ============================================================================================================
+v2.2.4.0 2013/10/07 Added backslashes to the start/end in the preg pattern, also escaped a forward slash. 
 v2.2.3.0 2013/10/07 Formatted __FILE__ so remove leading public_html (and beforehand) parts to URL. 
 v2.2.2.0 2013/10/07 Made standard resistor php file load JS script with realpath(dirname(__FILE__)), which should give the correct path no matter where php file is included from.
 v2.2.1.0 2013/10/07 Removed defer keyword from Javascript file include in standard resistance calculator. Moved this include to below HTML code.

@@ -50,7 +50,7 @@
 	// First step: Get full path
 	$cur_file=str_replace('\\','/', realpath(dirname(__FILE__)));
 	// Second step: Remove the root path
-	$cur_file=preg_replace('(.*?)/public_html/', '', $cur_file);
+	$cur_file=preg_replace('/(.*?)\/public_html/', '', $cur_file);
 	echo '<script type="text/javascript" src="' . $cur_file . '\standard-resistance-finder.js"></script>';
 ?>
 
