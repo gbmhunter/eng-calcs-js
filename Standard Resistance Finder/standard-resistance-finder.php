@@ -46,7 +46,10 @@
 	</tbody>
 </table>
 </form>
-<script type="text/javascript" src="standard-resistance-finder.js"></script>
+<?php
+	echo '<script type="text/javascript" src="' . realpath(dirname(__FILE__)) . '\standard-resistance-finder.js"></script>';
+?>
+
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
 
