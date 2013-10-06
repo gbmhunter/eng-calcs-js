@@ -1,5 +1,5 @@
 //
-// @file 		standard-resistance-finder.c
+// @file 		standard-resistance-finder.js
 // @author 		Geoffrey Hunter <gbmhunter@gmail.com> (www.cladlabs.com)
 // @edited 		n/a
 // @date 		2013/09/17
