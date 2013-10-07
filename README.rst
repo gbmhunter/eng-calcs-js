@@ -5,7 +5,7 @@ Engineering Calculators Written In Javascript
 - Author: gbmhunter <gbmhunter@gmail.com> (http://www.cladlab.com)
 - Created: 2013/06/06
 - Last Modified: 2013/10/07
-- Version: v2.2.6.0
+- Version: v2.2.7.0
 - Company: CladLabs
 - Project: Free Code Libraries	.
 - Language: HTML/JS
@@ -64,6 +64,7 @@ Changelog
 ======== ========== ============================================================================================================
 Version  Date       Comment
 ======== ========== ============================================================================================================
+v2.2.7.0 2013/10/07 Fixed NaN bug when desired resistance was above highest number in series, by adding the first number in the next order of magnitude to the end of the series arrays. Re-included jQuery, as I discovered it is needed for these scripts.
 v2.2.6.0 2013/10/07 Removed jQuery include in standard resistance calculator, as not needed, and was causing issues with the Wordpress MegaMenu.
 v2.2.5.2 2013/10/07 Added title block to php files. Added comments to php files.
 v2.2.5.1 2013/10/07 Changed incorrect standard-resistance-calculator.c extension in title block to .js.

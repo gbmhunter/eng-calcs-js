@@ -14,6 +14,9 @@
 <!-- Include knockout for binding -->
 <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/knockout/2.3.0/knockout-min.js"></script>
 
+<!-- Jquery for on_load() -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+
 <p>This calculator finds a standard resistance value(s) that will best match the resistance \(R_{desired}\) you specify.</p>
 <form name="formSrc">
 <table id="mainTable" style="margin-left: auto; margin-right: auto;" border="4">
@@ -62,9 +65,10 @@
 <!-- Include Javascript file for calculator. Path is built from this scripts path, using __FILE__ variable. -->
 <?php
 	// Get full path
-	$cur_file=str_replace('\\','/', realpath(dirname(__FILE__)));
-	// Remove everything up to public_html
-	$cur_file=preg_replace('/(.*?)\/public_html/', '', $cur_file);
+	$cur_file = str_replace('\\','/', realpath(dirname(__FILE__)));
+	// Remove everything up to public_html (Apache) or htdocs (xampp)
+	$cur_file = preg_replace('/(.*?)\/public_html/', '', $cur_file);
+	$cur_file = preg_replace('/(.*?)\/htdocs/', '', $cur_file);
 	// Output HTML
 	echo '<script type="text/javascript" src="' . $cur_file . '\standard-resistance-finder.js"></script>';
 ?>
