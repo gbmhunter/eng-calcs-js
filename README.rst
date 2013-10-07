@@ -5,7 +5,7 @@ Engineering Calculators Written In Javascript
 - Author: gbmhunter <gbmhunter@gmail.com> (http://www.cladlab.com)
 - Created: 2013/06/06
 - Last Modified: 2013/10/07
-- Version: v2.2.5.2
+- Version: v2.2.6.0
 - Company: CladLabs
 - Project: Free Code Libraries	.
 - Language: HTML/JS
@@ -64,6 +64,7 @@ Changelog
 ======== ========== ============================================================================================================
 Version  Date       Comment
 ======== ========== ============================================================================================================
+v2.2.6.0 2013/10/07 Removed jQuery include in standard resistance calculator, as not needed, and was causing issues with the Wordpress MegaMenu.
 v2.2.5.2 2013/10/07 Added title block to php files. Added comments to php files.
 v2.2.5.1 2013/10/07 Changed incorrect standard-resistance-calculator.c extension in title block to .js.
 v2.2.5.0 2013/10/07 Set debug to false in the standard resistance calculator Javascript file.

@@ -8,9 +8,6 @@
 //				See the README in the root dir for more info.
 -->
 
-<!-- Jquery -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-
 <!-- MathJax for Latex rendering -->
 <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
