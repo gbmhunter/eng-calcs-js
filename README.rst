@@ -5,7 +5,7 @@ Engineering Calculators Written In Javascript
 - Author: gbmhunter <gbmhunter@gmail.com> (http://www.cladlab.com)
 - Created: 2013/06/06
 - Last Modified: 2013/10/07
-- Version: v2.2.11.0
+- Version: v2.2.11.1
 - Company: CladLabs
 - Project: Free Code Libraries	.
 - Language: HTML/JS
@@ -64,6 +64,7 @@ Changelog
 ========= ========== ============================================================================================================
 Version   Date       Comment
 ========= ========== ============================================================================================================
+v2.2.11.1 2013/10/07 Fixed restructured text table in README so that it displays correctly.
 v2.2.11.0 2013/10/07 Set the debug flag to false.
 v2.2.10.0 2013/10/07 Changes jQuery inclusion code again in attempt to fix conflict bug. This time uses window.onload().
 v2.2.9.0  2013/10/07 Changed conditional jQuery inclusion code in attempt to fix conflict bug.
@@ -94,4 +95,4 @@ v1.0.1.1  2013/06/08 Changelog now in table format.
 v1.0.1.0  2013/06/08 Heat flow calc can now add more rows.
 v1.0.0.1  2013/06/06 Fixed two README section titles from having all capitals.
 v1.0.0.0  2013/06/06 Initial commit.
-========  ========== ============================================================================================================
+========= ========== ============================================================================================================
