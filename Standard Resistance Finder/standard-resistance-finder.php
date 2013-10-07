@@ -14,9 +14,6 @@
 <!-- Include knockout for binding -->
 <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/knockout/2.3.0/knockout-min.js"></script>
 
-<!-- Jquery for on_load() -->
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
-
 <p>This calculator finds a standard resistance value(s) that will best match the resistance \(R_{desired}\) you specify.</p>
 <form name="formSrc">
 <table id="mainTable" style="margin-left: auto; margin-right: auto;" border="4">

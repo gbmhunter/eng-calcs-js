@@ -15,16 +15,28 @@ var e24 = new Array(1.0, 1.1, 1.2, 1.3, 1.5, 1.6, 1.8, 2.0, 2.2, 2.4, 2.7, 3.0, 
 
 // Get a variable for jQuery
 // var j = jQuery.noConflict();
-if(!window.jQuery)
-{
-   var script = document.createElement('script');
-   script.type = "text/javascript";
-   script.src = "http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js";
-   document.getElementsByTagName('head')[0].appendChild(script);
-}
+window.onload = function() 
+	{
+		if(!window.jQuery)
+		{
+			Log('jQuery not already present, loading jQuery...');
+		   var script = document.createElement('script');
+		   script.type = "text/javascript";
+		   script.src = "http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js";
+		   document.getElementsByTagName('head')[0].appendChild(script);
+		}
+		else
+		{
+			Log('jQuery already present.');
+		}
+		
+		// Activates knockout.js
+		ko.applyBindings(new AppViewModel());	
+	}
+
 
 // Debug flag. Set to true to print debug information, otherwise false.
-var DEBUG = false;
+var DEBUG = true;
 
 var resUnit = function(name, multiplier) {
         this.name = name;
@@ -107,15 +119,6 @@ function AppViewModel() {
 	this.actualResUnits = ko.observable();
 	this.percDiff = ko.observable();
 }
-
-// Start-up function
-jQuery(document).ready(
-	function StartUp()
-	{	  		
-		// Activates knockout.js
-		ko.applyBindings(new AppViewModel());	
-	}
-);
 
 function BuildResArray(numElements)
 {
