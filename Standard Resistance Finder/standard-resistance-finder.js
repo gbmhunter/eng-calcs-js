@@ -14,7 +14,13 @@ var e12 = new Array(1.0, 1.2, 1.5, 1.8, 2.2, 2.7, 3.3, 3.9, 4.7, 5.6, 6.8, 8.2, 
 var e24 = new Array(1.0, 1.1, 1.2, 1.3, 1.5, 1.6, 1.8, 2.0, 2.2, 2.4, 2.7, 3.0, 3.3, 3.6, 3.9, 4.3, 4.7, 5.1, 5.6, 6.2, 6.8, 7.5, 8.2, 9.1, 10.0);
 
 // Get a variable for jQuery
-var j = jQuery.noConflict();
+// var j = jQuery.noConflict();
+if (typeof jQuery == 'undefined') {
+    var script = document.createElement('script');
+    script.type = "text/javascript";
+    script.src = "http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js";
+    document.getElementsByTagName('head')[0].appendChild(script);
+}
 
 // Debug flag. Set to true to print debug information, otherwise false.
 var DEBUG = false;
@@ -32,7 +38,6 @@ function AppViewModel() {
 		new resUnit('\u2126', 1.0),
 		new resUnit('k\u2126', 1000.0)
 	]);
-	
 	
 	this.selectedResUnit = ko.observable();
 	
@@ -103,15 +108,13 @@ function AppViewModel() {
 }
 
 // Start-up function
-j(document).ready(
+jQuery(document).ready(
 	function StartUp()
 	{	  		
 		// Activates knockout.js
 		ko.applyBindings(new AppViewModel());	
 	}
 );
-
-
 
 function BuildResArray(numElements)
 {
