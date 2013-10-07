@@ -15,11 +15,12 @@ var e24 = new Array(1.0, 1.1, 1.2, 1.3, 1.5, 1.6, 1.8, 2.0, 2.2, 2.4, 2.7, 3.0, 
 
 // Get a variable for jQuery
 // var j = jQuery.noConflict();
-if (typeof jQuery == 'undefined') {
-    var script = document.createElement('script');
-    script.type = "text/javascript";
-    script.src = "http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js";
-    document.getElementsByTagName('head')[0].appendChild(script);
+if(!window.jQuery)
+{
+   var script = document.createElement('script');
+   script.type = "text/javascript";
+   script.src = "http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js";
+   document.getElementsByTagName('head')[0].appendChild(script);
 }
 
 // Debug flag. Set to true to print debug information, otherwise false.
