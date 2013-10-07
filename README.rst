@@ -5,7 +5,7 @@ Engineering Calculators Written In Javascript
 - Author: gbmhunter <gbmhunter@gmail.com> (http://www.cladlab.com)
 - Created: 2013/06/06
 - Last Modified: 2013/10/07
-- Version: v2.2.10.0
+- Version: v2.2.11.0
 - Company: CladLabs
 - Project: Free Code Libraries	.
 - Language: HTML/JS
@@ -64,6 +64,7 @@ Changelog
 ========= ========== ============================================================================================================
 Version   Date       Comment
 ========= ========== ============================================================================================================
+v2.2.11.0 2013/10/07 Set the debug flag to false.
 v2.2.10.0 2013/10/07 Changes jQuery inclusion code again in attempt to fix conflict bug. This time uses window.onload().
 v2.2.9.0  2013/10/07 Changed conditional jQuery inclusion code in attempt to fix conflict bug.
 v2.2.8.0  2013/10/07 Added check for jQuery before it is loaded, to prevent it being loaded twice and causing conflicts.

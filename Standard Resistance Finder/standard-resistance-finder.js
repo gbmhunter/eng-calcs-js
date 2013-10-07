@@ -7,6 +7,9 @@
 // @details
 //				See the README in the root dir for more info.
 
+// Debug flag. Set to true to print debug information, otherwise false.
+var DEBUG = false;
+
 // E12 resistance array
 var e12 = new Array(1.0, 1.2, 1.5, 1.8, 2.2, 2.7, 3.3, 3.9, 4.7, 5.6, 6.8, 8.2, 10.0); 
 
@@ -33,10 +36,6 @@ window.onload = function()
 		// Activates knockout.js
 		ko.applyBindings(new AppViewModel());	
 	}
-
-
-// Debug flag. Set to true to print debug information, otherwise false.
-var DEBUG = true;
 
 var resUnit = function(name, multiplier) {
         this.name = name;
