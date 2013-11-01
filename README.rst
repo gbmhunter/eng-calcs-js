@@ -4,11 +4,11 @@ Engineering Calculators Written In Javascript
 
 - Author: gbmhunter <gbmhunter@gmail.com> (http://www.cladlab.com)
 - Created: 2013/06/06
-- Last Modified: 2013/10/07
-- Version: v2.2.11.1
+- Last Modified: 2013/11/01
+- Version: v3.0.0.0
 - Company: CladLabs
 - Project: Free Code Libraries	.
-- Language: HTML/JS
+- Language: HTML/JS/PHP
 - Compiler: n/a
 - uC Model: n/a
 - Computer Architecture: n/a
@@ -30,6 +30,11 @@ Standard Resistance Calculator
 ------------------------------
 
 Given an input resistance, finds the closest resistance in a specified standard resistance series (an E series, e.g. E12 or E24).
+
+LT3745 Calculator
+-----------------
+
+Calculates values of the supporting passive components for the LT3745 LED driver by Linear Technology. Uses equations given in the datasheet.
 
 Internal Dependencies
 =====================
@@ -64,6 +69,7 @@ Changelog
 ========= ========== ============================================================================================================
 Version   Date       Comment
 ========= ========== ============================================================================================================
+v3.0.0.0  2013/11/01 Added calculator for LT3745 LED driver under chip-specific/lt3745. Calculates values for supporting passive components, based on equations given in the datasheet. Added relevant info to the datasheet.
 v2.2.11.1 2013/10/07 Fixed restructured text table in README so that it displays correctly.
 v2.2.11.0 2013/10/07 Set the debug flag to false.
 v2.2.10.0 2013/10/07 Changes jQuery inclusion code again in attempt to fix conflict bug. This time uses window.onload().
