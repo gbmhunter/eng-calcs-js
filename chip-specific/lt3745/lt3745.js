@@ -3,15 +3,9 @@
 // @author 		Geoffrey Hunter <gbmhunter@gmail.com> (www.cladlabs.com)
 // @edited 		n/a
 // @date 		2013/11/01
-// @brief 		
+// @brief 		Binding/calculating code for the LT3745 calculator. PHP/HTML code is in lt3745.php.
 // @details
 //				See the README in the root dir for more info.
-
-// E12 resistance array
-//var e12 = new Array(1.0, 1.2, 1.5, 1.8, 2.2, 2.7, 3.3, 3.9, 4.7, 5.6, 6.8, 8.2); 
-
-// E24 resistance array
-//var e24 = new Array(1.0, 1.1, 1.2, 1.3, 1.5, 1.6, 1.8, 2.0, 2.2, 2.4, 2.7, 3.0, 3.3, 3.6, 3.9, 4.3, 4.7, 5.1, 5.6, 6.2, 6.8, 7.5, 8.2, 9.1);
 
 // Get a variable for jQuery
 var j = jQuery.noConflict();

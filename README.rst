@@ -4,8 +4,8 @@ Engineering Calculators Written In Javascript
 
 - Author: gbmhunter <gbmhunter@gmail.com> (http://www.cladlab.com)
 - Created: 2013/06/06
-- Last Modified: 2013/11/02
-- Version: v3.1.0.0
+- Last Modified: 2013/11/03
+- Version: v3.2.0.0
 - Company: CladLabs
 - Project: Free Code Libraries	.
 - Language: HTML/JS/PHP
@@ -69,6 +69,7 @@ Changelog
 ========= ========== ============================================================================================================
 Version   Date       Comment
 ========= ========== ============================================================================================================
+v3.2.0.0  2013/11/03 Added comments column to calculator table, and populated some of the comment cells. Added 'brief' doxygen comments to lt3745.php and lt3745.js. Removed old code from a previous calculator in lt3745.js. Add style rule so that calculator is 90% of the width of the parent element.
 v3.1.0.0  2013/11/02 Added more variables to the LT3745 calculator. Now finds maximum switching frequency, minimum output capacitance, minimum inductance, and minimum input capacitance.
 v3.0.0.0  2013/11/01 Added calculator for LT3745 LED driver under chip-specific/lt3745. Calculates values for supporting passive components, based on equations given in the datasheet. Added relevant info to the datasheet.
 v2.2.11.1 2013/10/07 Fixed restructured text table in README so that it displays correctly.
