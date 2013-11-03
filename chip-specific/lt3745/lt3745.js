@@ -28,7 +28,7 @@ function AppViewModel() {
 		new unit('V', 1.0),
 	]);
 	
-	this.loadVoltageSelUnit = ko.observable();
+	this.loadVoltageSelUnit = ko.observable(this.loadVoltageUnits()[0]);
 	
 	//============== Vbuck,out ===========//
 		
@@ -43,7 +43,7 @@ function AppViewModel() {
 		new unit('V', 1.0),
 	]);
 	
-	this.vBuckOutSelUnit = ko.observable();
+	this.vBuckOutSelUnit = ko.observable(this.vBuckOutUnits()[0]);
 	
 	//=============== Vin(min) ===============//
 	
@@ -58,7 +58,7 @@ function AppViewModel() {
 		new unit('V', 1.0),
 	]);
 	
-	this.vInMinSelUnit = ko.observable();
+	this.vInMinSelUnit = ko.observable(this.vInMinUnits()[0]);
 	
 	//================= Vin(max) ================//
 	
@@ -68,7 +68,7 @@ function AppViewModel() {
 		new unit('V', 1.0),
 	]);
 	
-	this.vInMaxSelUnit = ko.observable();
+	this.vInMaxSelUnit = ko.observable(this.vInMaxUnits()[0]);
 	
 	//========== Rfb1 =============//
 	
@@ -93,10 +93,6 @@ function AppViewModel() {
 	this.rfb2 = ko.computed(
 		function() 
 		{
-			if(this.rfb1SelUnit() == null)
-				return;
-			if(this.rfb2SelUnit() == null)
-				return;
 			//Log('Rfb1 unit =' + this.rfb1SelUnit());
 			return ((parseFloat(this.rfb1())*parseFloat(this.rfb1SelUnit().multiplier))*(parseFloat(this.vBuckOut())/1.205 - 1))/this.rfb2SelUnit().multiplier;
       }, 
@@ -111,50 +107,38 @@ function AppViewModel() {
 		new unit('A', 1.0),
 	]);
 	
-	this.iOutMaxSelUnit = ko.observable();
+	this.iOutMaxSelUnit = ko.observable(this.iOutMaxUnits()[0]);
 	
 	//=========== Rsense ============//
-	
-	this.rSenseSelUnit = ko.observable();
 	
 	this.rSenseUnits = ko.observableArray([
 		new unit('m\u2126', 0.001),
 		new unit('\u2126', 1.0),
 	]);
+		
+	this.rSenseSelUnit = ko.observable(this.rSenseUnits()[0]);
 	
 	// Rsense = 35mV/Iout(max)
 	this.rSense = ko.computed(
 		function() 
-		{
-			if(this.iOutMaxSelUnit() == null)
-				return;
-			if(this.rSenseSelUnit() == null)
-				return;
-			
+		{	
 			return (0.035/(parseFloat(this.iOutMax())*parseFloat(this.iOutMaxSelUnit().multiplier)))/this.rSenseSelUnit().multiplier;
       }, 
 		this);
 		
 	//======= Prsense =========//
 	
-	this.prsenseSelUnit = ko.observable();
-	
 	this.prsenseUnits = ko.observableArray([
 		new unit('mW', 0.001),
 		new unit('W', 1),
-	]);
+	]);	
+		
+	this.prsenseSelUnit = ko.observable(this.prsenseUnits()[0]);
 	
 	// Prsense = Iout(max)^2*Rsense
 	this.prsense = ko.computed(
 		function() 
-		{
-			if(this.iOutMaxSelUnit() == null)
-				return;
-			if(this.rSenseSelUnit() == null)
-				return;
-			if(this.prsenseSelUnit() == null)
-				return;
-			
+		{			
 			var iOutMax = parseFloat(this.iOutMax())*this.iOutMaxSelUnit().multiplier;
 			var rSense = parseFloat(this.rSense())*this.rSenseSelUnit().multiplier;
 			
@@ -171,7 +155,7 @@ function AppViewModel() {
 		new unit('A', 1.0),
 	]);
 	
-	this.iLedPinNomSelUnit = ko.observable();
+	this.iLedPinNomSelUnit = ko.observable(this.iLedPinNomUnits()[0]);
 	
 	//======= Riset =========//
 	
@@ -186,11 +170,6 @@ function AppViewModel() {
 	this.riSet = ko.computed(
 		function() 
 		{
-			if(this.iLedPinNomSelUnit() == null)
-				return;
-			if(this.riSetSelUnit() == null)
-				return;
-			
 			var iLedPinNom = parseFloat(this.iLedPinNom())*this.iLedPinNomSelUnit().multiplier;
 			
 			return (2500*(1.205/iLedPinNom))/this.riSetSelUnit().multiplier;
@@ -205,7 +184,7 @@ function AppViewModel() {
 		new unit('V', 1.0)
 	]);
 	
-	this.vdfSelUnit = ko.observable();
+	this.vdfSelUnit = ko.observable(this.vdfUnits()[0]);
 	
 	//======= Dmin =========//
 	
@@ -213,21 +192,12 @@ function AppViewModel() {
 		new unit('%', 1.0),
 	]);
 	
-	this.dMinSelUnit = ko.observable();
+	this.dMinSelUnit = ko.observable(this.dMinUnits()[0]);
 	
 	// Dmin = (Vout(max) + Vd,f) / (Vin(max) + Vd,f)
 	this.dMin = ko.computed(
 		function() 
-		{
-			if(this.vBuckOutSelUnit() == null)
-				return;
-			if(this.vdfSelUnit() == null)
-				return;
-			if(this.vInMaxSelUnit() == null)
-				return;
-			if(this.dMinSelUnit() == null)
-				return;
-			
+		{		
 			var vBuckOut = parseFloat(this.vBuckOut())*this.vBuckOutSelUnit().multiplier;
 			var vdf = parseFloat(this.vdf())*this.vdfSelUnit().multiplier;
 			var vInMax = parseFloat(this.vInMax())*this.vInMaxSelUnit().multiplier;
@@ -242,21 +212,12 @@ function AppViewModel() {
 		new unit('%', 1.0),
 	]);
 	
-	this.dMaxSelUnit = ko.observable();
+	this.dMaxSelUnit = ko.observable(this.dMaxUnits()[0]);
 	
 	// Dmax = (Vout(max) + Vd,f) / (Vin(min) + Vd,f)
 	this.dMax = ko.computed(
 		function() 
-		{
-			if(this.vBuckOutSelUnit() == null)
-				return;
-			if(this.vdfSelUnit() == null)
-				return;
-			if(this.vInMinSelUnit() == null)
-				return;
-			if(this.dMaxSelUnit() == null)
-				return;
-			
+		{			
 			var vBuckOut = parseFloat(this.vBuckOut())*this.vBuckOutSelUnit().multiplier;
 			var vdf = parseFloat(this.vdf())*this.vdfSelUnit().multiplier;
 			var vInMin = parseFloat(this.vInMin())*this.vInMinSelUnit().multiplier;
@@ -274,7 +235,7 @@ function AppViewModel() {
 		new unit('us', 0.000001)
 	]);
 	
-	this.tOnMinSelUnit = ko.observable();
+	this.tOnMinSelUnit = ko.observable(this.tOnMinUnits()[0]);
 	
 	//================ toff(min) ============//
 	
@@ -285,7 +246,7 @@ function AppViewModel() {
 		new unit('us', 0.000001)
 	]);
 	
-	this.tOffMinSelUnit = ko.observable();
+	this.tOffMinSelUnit = ko.observable(this.tOffMinUnits()[0]);
 	
 	//================ fsw(max) ==============//
 	
@@ -293,23 +254,12 @@ function AppViewModel() {
 		new unit('kHz', 1000.0),
 	]);
 	
-	this.fSwMaxSelUnit = ko.observable();
+	this.fSwMaxSelUnit = ko.observable(this.fSwMaxUnits()[0]);
 	
 	// fsw(max) = min( Dmin/ton(min) , (1 - Dmax)/toff(min) )
 	this.fSwMax = ko.computed(
 		function() 
-		{
-			if(this.dMinSelUnit() == null)
-				return;
-			if(this.tOnMinSelUnit() == null)
-				return;
-			if(this.dMaxSelUnit() == null)
-				return;
-			if(this.tOffMinSelUnit() == null)
-				return;
-			if(this.fSwMaxSelUnit() == null)
-				return;
-			
+		{			
 			var dMin = parseFloat(this.dMin())*this.dMinSelUnit().multiplier;
 			var tOnMin = parseFloat(this.tOnMin())*this.tOnMinSelUnit().multiplier;
 			var dMax = parseFloat(this.dMax())*this.dMaxSelUnit().multiplier;
@@ -335,17 +285,12 @@ function AppViewModel() {
 		new unit('kHz', 1000.0),
 	]);
 	
-	this.fugfSelUnit = ko.observable();
+	this.fugfSelUnit = ko.observable(this.fugfUnits()[0]);
 	
 	// fugf = fsw(act)/10
 	this.fugf = ko.computed(
 		function() 
-		{
-			if(this.fSwActSelUnit() == null)
-				return;
-			if(this.fugfSelUnit() == null)
-				return;
-			
+		{			
 			var fSwAct = parseFloat(this.fSwAct())*this.fSwActSelUnit().multiplier;
 			
 			return (fSwAct/10.0)/this.fugfSelUnit().multiplier;
@@ -358,21 +303,12 @@ function AppViewModel() {
 		new unit('uF', 0.000001),
 	]);
 	
-	this.cOutMinSelUnit = ko.observable();
+	this.cOutMinSelUnit = ko.observable(this.cOutMinUnits()[0]);
 	
 	// Cout(min) = max( 0.25/(Rsense*fugf) , 1.5/(Rsense*Vbuck,out*fugf) )
 	this.cOutMin = ko.computed(
 		function() 
 		{
-			if(this.rSenseSelUnit() == null)
-				return;
-			if(this.fugfSelUnit() == null)
-				return;
-			if(this.vBuckOutSelUnit() == null)
-				return;
-			if(this.cOutMinSelUnit() == null)
-				return;
-			
 			var rSense = parseFloat(this.rSense())*this.rSenseSelUnit().multiplier;
 			var fugf = parseFloat(this.fugf())*this.fugfSelUnit().multiplier;
 			var vBuckOut = parseFloat(this.vBuckOut())*this.vBuckOutSelUnit().multiplier;
@@ -389,7 +325,7 @@ function AppViewModel() {
 		new unit('%', 0.01)
 	]);
 	
-	this.iLDeltaSelUnit = ko.observable();
+	this.iLDeltaSelUnit = ko.observable(this.iLDeltaUnits()[0]);
 	
 	//================ L(min) ==============//
 	
@@ -397,25 +333,12 @@ function AppViewModel() {
 		new unit('uH', 0.000001),
 	]);
 	
-	this.lMinSelUnit = ko.observable();
+	this.lMinSelUnit = ko.observable(this.lMinUnits()[0]);
 	
 	// Lmin = [ (Vbuck,out + Vd,f) / (Vin(max) + Vd,f) ] * [ (Vin(max) - Vbuck,out) / (fsw(act)*Il(delta)) ]
 	this.lMin = ko.computed(
 		function() 
 		{
-			if(this.vBuckOutSelUnit() == null)
-				return;
-			if(this.vdfSelUnit() == null)
-				return;
-			if(this.vInMaxSelUnit() == null)
-				return;
-			if(this.fSwActSelUnit() == null)
-				return;
-			if(this.iLDeltaSelUnit() == null)
-				return;
-			if(this.lMinSelUnit() == null)
-				return;
-			
 			var vBuckOut = parseFloat(this.vBuckOut())*this.vBuckOutSelUnit().multiplier;
 			var vdf = parseFloat(this.vdf())*this.vdfSelUnit().multiplier;
 			var vInMax = parseFloat(this.vInMax())*this.vInMaxSelUnit().multiplier;
@@ -434,7 +357,7 @@ function AppViewModel() {
 		new unit('mV', 0.001)
 	]);
 	
-	this.vInRippleSelUnit = ko.observable();
+	this.vInRippleSelUnit = ko.observable(this.vInRippleUnits()[0]);
 	
 	//================ Cin(min) ==============//
 	
@@ -442,23 +365,12 @@ function AppViewModel() {
 		new unit('uF', 0.000001),
 	]);
 	
-	this.cInMinSelUnit = ko.observable();
+	this.cInMinSelUnit = ko.observable(this.cInMinUnits()[0]);
 	
 	// Cin(min) = (Dmax*Iout(max)) / (Vin,ripple*fsw(act))
 	this.cInMin = ko.computed(
 		function() 
 		{
-			if(this.dMaxSelUnit() == null)
-				return;
-			if(this.iOutMaxSelUnit() == null)
-				return;
-			if(this.vInRippleSelUnit() == null)
-				return;
-			if(this.fSwActSelUnit() == null)
-				return;
-			if(this.cInMinSelUnit() == null)
-				return;
-			
 			var dMax = parseFloat(this.dMax())*this.dMaxSelUnit().multiplier;
 			var iOutMax = parseFloat(this.iOutMax())*this.iOutMaxSelUnit().multiplier;
 			var vInRipple = parseFloat(this.vInRipple())*this.vInRippleSelUnit().multiplier;
