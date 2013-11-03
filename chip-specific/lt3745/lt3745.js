@@ -327,7 +327,7 @@ function AppViewModel() {
 		new unit('kHz', 1000.0)
 	]);
 	
-	this.fSwActSelUnit = ko.observable();
+	this.fSwActSelUnit = ko.observable(this.fSwActUnits()[0]);
 	
 	//================ fugf ==============//
 	
