@@ -26,6 +26,15 @@ var calcVar = function(value, units, selUnit, lowerBound, upperBound) {
 			this.selUnit = selUnit;
 			this.lowerBound = ko.observable(lowerBound);
 			this.upperBound = ko.observable(upperBound);
+			
+			// Boolean which indicates whether data is valid or not
+			this.valueValid = ko.computed( function(){
+				if(this.value < this.lowerBound || this.value > this.upperBound)
+					return false;
+				else
+					return true;
+			},
+			this);
    };
 
 function AppViewModel() {
@@ -281,7 +290,7 @@ function AppViewModel() {
 	
 	//================ fsw(act) ============//
 	
-	this.fSwAct = new calcVar(200, 100, 100, 0, 1000);
+	this.fSwAct = ko.observable(new calcVar(200, 100, 100, 0, 1000));
 	
 	this.fSwActUnits = ko.observableArray([
 		new unit('kHz', 1000.0)
@@ -301,7 +310,7 @@ function AppViewModel() {
 	this.fugf = ko.computed(
 		function() 
 		{			
-			var fSwAct = parseFloat(this.fSwAct.value())*this.fSwActSelUnit().multiplier;
+			var fSwAct = parseFloat(this.fSwAct().value())*this.fSwActSelUnit().multiplier;
 			
 			return (fSwAct/10.0)/this.fugfSelUnit().multiplier;
       }, 
@@ -352,10 +361,10 @@ function AppViewModel() {
 			var vBuckOut = parseFloat(this.vBuckOut())*this.vBuckOutSelUnit().multiplier;
 			var vdf = parseFloat(this.vdf())*this.vdfSelUnit().multiplier;
 			var vInMax = parseFloat(this.vInMax())*this.vInMaxSelUnit().multiplier;
-			var fSwAct = parseFloat(this.fSwAct.value())*this.fSwActSelUnit().multiplier;
+			//var fSwAct = parseFloat(this.fSwAct.value())*this.fSwActSelUnit().multiplier;
 			var iLDelta = parseFloat(this.iLDelta())*this.iLDeltaSelUnit().multiplier;
 			
-			return ( ((vBuckOut + vdf)/(vInMax + vdf))*((vInMax - vBuckOut)/(fSwAct*iLDelta)))/this.lMinSelUnit().multiplier;
+			//return ( ((vBuckOut + vdf)/(vInMax + vdf))*((vInMax - vBuckOut)/(fSwAct*iLDelta)))/this.lMinSelUnit().multiplier;
       }, 
 		this);
 		
@@ -384,9 +393,9 @@ function AppViewModel() {
 			var dMax = parseFloat(this.dMax())*this.dMaxSelUnit().multiplier;
 			var iOutMax = parseFloat(this.iOutMax())*this.iOutMaxSelUnit().multiplier;
 			var vInRipple = parseFloat(this.vInRipple())*this.vInRippleSelUnit().multiplier;
-			var fSwAct = parseFloat(this.fSwAct.value())*this.fSwActSelUnit().multiplier;
+			//var fSwAct = parseFloat(this.fSwAct.value())*this.fSwActSelUnit().multiplier;
 			
-			return ( (dMax*iOutMax)/(vInRipple*fSwAct) )/this.cInMinSelUnit().multiplier;
+			//return ( (dMax*iOutMax)/(vInRipple*fSwAct) )/this.cInMinSelUnit().multiplier;
       }, 
 		this);
 	
@@ -401,17 +410,26 @@ j(document).ready(
 			 init: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
 				  // This will be called when the binding is first applied to an element
 				  // Set up any initial state, event handlers, etc. here
-				  console.log(valueAccessor().value());
+				  console.log(valueAccessor()().value());
 			  // Call value binding (child binding)
-				  ko.bindingHandlers.value.init(element, function (){ return valueAccessor().value } , allBindings, viewModel, bindingContext);
+				  ko.bindingHandlers.value.init(element, function (){ return valueAccessor()().value } , allBindings, viewModel, bindingContext);
+				  
 			 },
 			 update: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
 				  // This will be called once when the binding is first applied to an element,
 				  // and again whenever the associated observable changes value.
 				  // Update the DOM element based on the supplied values here.
-				  alert('test');
+				  //alert('test');
+				  console.log(valueAccessor()().value());
+				  console.log(j(element).css('background-color', 'red'));
 				  // Call value binding (child binding)
-				  ko.bindingHandlers.value.update(element, function (){ return valueAccessor().value } , allBindings, viewModel, bindingContext);
+				  ko.bindingHandlers.value.update(element, function (){ return valueAccessor()().value } , allBindings, viewModel, bindingContext);
+				  
+				  // Update background colour of input
+					if(valueAccessor()().value() < valueAccessor()().lowerBound() || valueAccessor()().value() > valueAccessor()().upperBound())
+						j(element).css('background-color', '#FF9999');
+					else
+						j(element).css('background-color', '#99FF99');
 			 }
 		};
 		// Activates knockout.js
