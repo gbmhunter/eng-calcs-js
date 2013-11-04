@@ -4,8 +4,8 @@ Engineering Calculators Written In Javascript
 
 - Author: gbmhunter <gbmhunter@gmail.com> (http://www.cladlab.com)
 - Created: 2013/06/06
-- Last Modified: 2013/11/04
-- Version: v3.4.1.0
+- Last Modified: 2013/11/05
+- Version: v3.4.2.0
 - Company: CladLabs
 - Project: Free Code Libraries	.
 - Language: HTML/JS/PHP
@@ -69,6 +69,7 @@ Changelog
 ========= ========== ============================================================================================================
 Version   Date       Comment
 ========= ========== ============================================================================================================
+v3.4.2.0  2013/11/05 Validator is now implemented with a function assigned to the validator variable. Still only testing with one variable in the LT3745 calculator.
 v3.4.1.0  2013/11/04 Improved custom binding for fsw(act) with automatic colour changes on invalid value.
 v3.4.0.0  2013/11/04 Basic custom binding working for fsw(act). Full functionality has not yet been added.
 v3.3.1.0  2013/11/04 Replaced object == null checks with initialisers into the ko.observable() function in the LT3745 calculator.

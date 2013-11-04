@@ -174,9 +174,8 @@
 		<tr>
 			<td style="text-align: center;">Actual Switching Frequency</td>
 			<td>\(f_{sw(act)}\)</td>
-			<!--<td><input data-bind="value: fSwAct, style: {'background-color': parseFloat(fSwAct())*fSwActSelUnit().multiplier > 1000000 ? '#FF9999' : '#99FF99' }" type="text" size="16" /></td>-->
 			<td><input data-bind="calcVar: fSwAct" type="text" size="16" /></td>
-			<td><select data-bind="options: fSwActUnits, optionsText: 'name', value: fSwActSelUnit"></select></td>
+			<td><select data-bind="options: fSwAct().units, optionsText: 'name', value: fSwAct().selUnit"></select></td>
 			<td>n/a</td>
 			<td>This is the switching frequency you want to use, set by the resistor \( R_T \). It has to be between 100kHz and 1MHz, and also less than \(f_{sw(max)}\).</td>
 		</tr>

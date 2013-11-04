@@ -19,22 +19,32 @@ var unit = function(name, multiplier) {
    };
 	
 	
-// Class for a calc variable
-var calcVar = function(value, units, selUnit, lowerBound, upperBound) {
-			this.value = ko.observable(value);
-			this.units = units;
-			this.selUnit = selUnit;
-			this.lowerBound = ko.observable(lowerBound);
-			this.upperBound = ko.observable(upperBound);
+function calc()
+{
+	this.addValidator = function(calcVar, validatorFunc)
+	{
+		calcVar.validators.push(validatorFunc);
+	}
+}
+	
+// "Class" for a calc variable
+var calcVar = function(rawVal, units, selUnit, lowerBound, upperBound) {
+			this.rawVal = ko.observable(rawVal);
+			this.units = ko.observableArray(units);
+			this.selUnit = ko.observable(this.units()[0]);
 			
-			// Boolean which indicates whether data is valid or not
-			this.valueValid = ko.computed( function(){
-				if(this.value < this.lowerBound || this.value > this.upperBound)
-					return false;
-				else
-					return true;
+			// Scaled value, taking into account the units
+			this.val = ko.computed( function(){
+				return parseFloat(this.rawVal())*parseFloat(this.selUnit().multiplier);
 			},
 			this);
+			
+			this.lowerBound = ko.observable(lowerBound);
+			this.upperBound = ko.observable(upperBound);
+
+			// Default is to just return true.
+			this.validator = ko.computed( function(){ return true; }, this);
+			
    };
 
 function AppViewModel() {
@@ -290,13 +300,16 @@ function AppViewModel() {
 	
 	//================ fsw(act) ============//
 	
-	this.fSwAct = ko.observable(new calcVar(200, 100, 100, 0, 1000));
-	
-	this.fSwActUnits = ko.observableArray([
-		new unit('kHz', 1000.0)
-	]);
-	
-	this.fSwActSelUnit = ko.observable(this.fSwActUnits()[0]);
+	this.fSwAct = ko.observable(new calcVar(200, [ new unit('kHz', 1000.0) ], 0, 100000, 1000000));
+	this.fSwAct().validator =  ko.computed(function(){
+				if(this.fSwAct().val() > 1000000)
+				{
+					return false;
+					}
+				else 
+					return true;
+		},
+		this);
 	
 	//================ fugf ==============//
 	
@@ -310,8 +323,8 @@ function AppViewModel() {
 	this.fugf = ko.computed(
 		function() 
 		{			
-			var fSwAct = parseFloat(this.fSwAct().value())*this.fSwActSelUnit().multiplier;
-			
+			//var fSwAct = parseFloat(this.fSwAct().value())*this.fSwAct().selUnit().multiplier;
+			var fSwAct = this.fSwAct().val();
 			return (fSwAct/10.0)/this.fugfSelUnit().multiplier;
       }, 
 		this);
@@ -410,28 +423,35 @@ j(document).ready(
 			 init: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
 				  // This will be called when the binding is first applied to an element
 				  // Set up any initial state, event handlers, etc. here
-				  console.log(valueAccessor()().value());
+				  console.log(valueAccessor()().rawVal());
 			  // Call value binding (child binding)
-				  ko.bindingHandlers.value.init(element, function (){ return valueAccessor()().value } , allBindings, viewModel, bindingContext);
+				  ko.bindingHandlers.value.init(element, function (){ return valueAccessor()().rawVal } , allBindings, viewModel, bindingContext);
 				  
 			 },
 			 update: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
 				  // This will be called once when the binding is first applied to an element,
 				  // and again whenever the associated observable changes value.
 				  // Update the DOM element based on the supplied values here.
-				  //alert('test');
-				  console.log(valueAccessor()().value());
-				  console.log(j(element).css('background-color', 'red'));
+		
 				  // Call value binding (child binding)
-				  ko.bindingHandlers.value.update(element, function (){ return valueAccessor()().value } , allBindings, viewModel, bindingContext);
+				  ko.bindingHandlers.value.update(element, function (){ return valueAccessor()().rawVal } , allBindings, viewModel, bindingContext);
 				  
 				  // Update background colour of input
-					if(valueAccessor()().value() < valueAccessor()().lowerBound() || valueAccessor()().value() > valueAccessor()().upperBound())
+					if(valueAccessor()().val() < valueAccessor()().lowerBound() || valueAccessor()().val() > valueAccessor()().upperBound())
+					{
 						j(element).css('background-color', '#FF9999');
+					}
+					else if(valueAccessor()().validator() == false)
+					{
+						j(element).css('background-color', '#FF9999');
+					}
 					else
+					{
 						j(element).css('background-color', '#99FF99');
+					}
 			 }
 		};
+		
 		// Activates knockout.js
 		var app = new AppViewModel();
 		ko.applyBindings(app);	
@@ -445,3 +465,4 @@ function Log(msg)
 	if(DEBUG == true)
 		console.log(msg);
 }
+
