@@ -53,15 +53,15 @@
 			<td><input data-bind="value: vInMin" type="text" size="16" disabled="true" /></td>
 			<td><select data-bind="options: vInMinUnits, optionsText: 'name', value: vInMinSelUnit" ></select></td>
 			<td>\(V_{out(max)} + 2.1V\)</td>
-			<td></td>
+			<td>The is a minimum input voltage allowed to sustain current regulation. It also cannot be less than 6V.</td>
 		</tr>
 		<tr>
 			<td style="text-align: center;">Maximum Input Voltage</td>
 			<td>\(V_{in(max)}\)</td>
-			<td><input data-bind="value: vInMax" type="text" size="16" /></td>
-			<td><select data-bind="options: vInMaxUnits, optionsText: 'name', value: vInMaxSelUnit"></select></td>
+			<td><input data-bind="calcVar: vInMax" type="text" size="16" /></td>
+			<td><select data-bind="options: vInMax().units, optionsText: 'name', value: vInMax().selUnit"></select></td>
 			<td>n/a</td>
-			<td></td>
+			<td>This is the maximum input voltage that will ever be provided to the LT3745. Must be greater or equal to \( V_{in(min)} \), and less or equal to 55V.</td>
 		<tr>
 		<tr />
 		<tr>

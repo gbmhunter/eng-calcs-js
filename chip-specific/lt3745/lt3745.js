@@ -29,7 +29,7 @@ function calc()
 	
 // "Class" for a calc variable
 var calcVar = function(rawVal, units, selUnit, lowerBound, upperBound) {
-			this.rawVal = ko.observable(rawVal);
+			this.rawVal = ko.observable();
 			this.units = ko.observableArray(units);
 			this.selUnit = ko.observable(this.units()[0]);
 			
@@ -90,14 +90,17 @@ function AppViewModel() {
 	this.vInMinSelUnit = ko.observable(this.vInMinUnits()[0]);
 	
 	//================= Vin(max) ================//
-	
-	this.vInMax = ko.observable();
-	
-	this.vInMaxUnits = ko.observableArray([
-		new unit('V', 1.0),
-	]);
-	
-	this.vInMaxSelUnit = ko.observable(this.vInMaxUnits()[0]);
+
+	this.vInMax = ko.observable(new calcVar(200, [ new unit('V', 1.0) ], 0));
+	this.vInMax().validator =  ko.computed(function(){
+				if(this.vInMax().val() < this.vInMin() || this.vInMax().val() > 55.0)
+				{
+					return false;
+				}
+				else 
+					return true;
+		},
+		this);
 	
 	//========== Rfb1 =============//
 	
@@ -229,7 +232,7 @@ function AppViewModel() {
 		{		
 			var vBuckOut = parseFloat(this.vBuckOut())*this.vBuckOutSelUnit().multiplier;
 			var vdf = parseFloat(this.vdf())*this.vdfSelUnit().multiplier;
-			var vInMax = parseFloat(this.vInMax())*this.vInMaxSelUnit().multiplier;
+			var vInMax = this.vInMax().val;
 			
 			return ((vBuckOut + vdf) / (vInMax + vdf))/this.dMinSelUnit().multiplier;
       }, 
@@ -373,7 +376,7 @@ function AppViewModel() {
 		{
 			var vBuckOut = parseFloat(this.vBuckOut())*this.vBuckOutSelUnit().multiplier;
 			var vdf = parseFloat(this.vdf())*this.vdfSelUnit().multiplier;
-			var vInMax = parseFloat(this.vInMax())*this.vInMaxSelUnit().multiplier;
+			var vInMax = this.vInMax().val;
 			//var fSwAct = parseFloat(this.fSwAct.value())*this.fSwActSelUnit().multiplier;
 			var iLDelta = parseFloat(this.iLDelta())*this.iLDeltaSelUnit().multiplier;
 			
