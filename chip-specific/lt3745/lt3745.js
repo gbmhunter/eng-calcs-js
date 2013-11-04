@@ -16,8 +16,18 @@ var DEBUG = true;
 var unit = function(name, multiplier) {
         this.name = name;
         this.multiplier = multiplier;
-    };
+   };
 	
+	
+// Class for a calc variable
+var calcVar = function(value, units, selUnit, lowerBound, upperBound) {
+			this.value = ko.observable(value);
+			this.units = units;
+			this.selUnit = selUnit;
+			this.lowerBound = ko.observable(lowerBound);
+			this.upperBound = ko.observable(upperBound);
+   };
+
 function AppViewModel() {
 
 	//============= Vload ============//
@@ -271,7 +281,7 @@ function AppViewModel() {
 	
 	//================ fsw(act) ============//
 	
-	this.fSwAct = ko.observable();
+	this.fSwAct = new calcVar(200, 100, 100, 0, 1000);
 	
 	this.fSwActUnits = ko.observableArray([
 		new unit('kHz', 1000.0)
@@ -291,7 +301,7 @@ function AppViewModel() {
 	this.fugf = ko.computed(
 		function() 
 		{			
-			var fSwAct = parseFloat(this.fSwAct())*this.fSwActSelUnit().multiplier;
+			var fSwAct = parseFloat(this.fSwAct.value())*this.fSwActSelUnit().multiplier;
 			
 			return (fSwAct/10.0)/this.fugfSelUnit().multiplier;
       }, 
@@ -342,7 +352,7 @@ function AppViewModel() {
 			var vBuckOut = parseFloat(this.vBuckOut())*this.vBuckOutSelUnit().multiplier;
 			var vdf = parseFloat(this.vdf())*this.vdfSelUnit().multiplier;
 			var vInMax = parseFloat(this.vInMax())*this.vInMaxSelUnit().multiplier;
-			var fSwAct = parseFloat(this.fSwAct())*this.fSwActSelUnit().multiplier;
+			var fSwAct = parseFloat(this.fSwAct.value())*this.fSwActSelUnit().multiplier;
 			var iLDelta = parseFloat(this.iLDelta())*this.iLDeltaSelUnit().multiplier;
 			
 			return ( ((vBuckOut + vdf)/(vInMax + vdf))*((vInMax - vBuckOut)/(fSwAct*iLDelta)))/this.lMinSelUnit().multiplier;
@@ -374,7 +384,7 @@ function AppViewModel() {
 			var dMax = parseFloat(this.dMax())*this.dMaxSelUnit().multiplier;
 			var iOutMax = parseFloat(this.iOutMax())*this.iOutMaxSelUnit().multiplier;
 			var vInRipple = parseFloat(this.vInRipple())*this.vInRippleSelUnit().multiplier;
-			var fSwAct = parseFloat(this.fSwAct())*this.fSwActSelUnit().multiplier;
+			var fSwAct = parseFloat(this.fSwAct.value())*this.fSwActSelUnit().multiplier;
 			
 			return ( (dMax*iOutMax)/(vInRipple*fSwAct) )/this.cInMinSelUnit().multiplier;
       }, 
@@ -386,6 +396,24 @@ function AppViewModel() {
 j(document).ready(
 	function StartUp()
 	{	  		
+		// Create custom binding
+		ko.bindingHandlers.calcVar = {
+			 init: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
+				  // This will be called when the binding is first applied to an element
+				  // Set up any initial state, event handlers, etc. here
+				  console.log(valueAccessor().value());
+			  // Call value binding (child binding)
+				  ko.bindingHandlers.value.init(element, function (){ return valueAccessor().value } , allBindings, viewModel, bindingContext);
+			 },
+			 update: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
+				  // This will be called once when the binding is first applied to an element,
+				  // and again whenever the associated observable changes value.
+				  // Update the DOM element based on the supplied values here.
+				  alert('test');
+				  // Call value binding (child binding)
+				  ko.bindingHandlers.value.update(element, function (){ return valueAccessor().value } , allBindings, viewModel, bindingContext);
+			 }
+		};
 		// Activates knockout.js
 		var app = new AppViewModel();
 		ko.applyBindings(app);	
