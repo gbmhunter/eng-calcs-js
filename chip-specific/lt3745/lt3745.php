@@ -50,8 +50,8 @@
 		<tr>
 			<td style="text-align: center;">Minimum Input Voltage</td>
 			<td>\(V_{in(min)}\)</td>
-			<td><input data-bind="value: vInMin" type="text" size="16" disabled="true" /></td>
-			<td><select data-bind="options: vInMinUnits, optionsText: 'name', value: vInMinSelUnit" ></select></td>
+			<td><input data-bind="calcVar: vInMin" type="text" size="16" disabled="true" /></td>
+			<td><select data-bind="options: vInMin().units, optionsText: 'name', value: vInMin().selUnit" ></select></td>
 			<td>\(V_{out(max)} + 2.1V\)</td>
 			<td>The is a minimum input voltage allowed to sustain current regulation. It also cannot be less than 6V.</td>
 		</tr>
@@ -75,8 +75,8 @@
 		<tr>
 			<td style="text-align: center;">Feedback Resistor 2</td>
 			<td>\(R_{fb2}\)</td>
-			<td><input data-bind="value: rfb2" type="text" size="16" disabled="true" /></td>
-			<td><select data-bind="options: rfb2Units, optionsText: 'name', value: rfb2SelUnit" ></select></td>
+			<td><input data-bind="calcVar: rfb2" type="text" size="16" disabled="true" /></td>
+			<td><select data-bind="options: rfb2().units, optionsText: 'name', value: rfb2.selUnit" ></select></td>
 			<td>\(R_{fb1}*\left(\frac{V_{out(max)}}{1.205V} - 1\right)\)</td>
 			<td></td>
 		</tr>

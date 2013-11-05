@@ -46,6 +46,31 @@ var calcVar = function(rawVal, units, selUnit, lowerBound, upperBound) {
 			this.validator = ko.computed( function(){ return true; }, this);
 			
    };
+	
+var compVar = function(units, selUnit) {
+			
+			this.units = ko.observableArray(units);
+			this.selUnit = ko.observable(this.units()[0]);
+			this.val = ko.computed(function(){ return 1; }, this);
+			
+			// Number of decimal places to round value to
+			this.roundTo = 1;
+			
+			// This is the displayed value
+			this.rawVal = ko.computed(function(){
+				var unroundedVal = this.val()/this.selUnit().multiplier;
+				var roundedVal = unroundedVal*Math.pow(10, this.roundTo);
+				return roundedVal;
+			},
+			this);						
+			
+			this.lowerBound = 0; //ko.observable(lowerBound);
+			this.upperBound = 0; //ko.observable(upperBound);
+
+			// Default is to just return true.
+			this.validator = ko.computed( function(){ return true; }, this);
+			
+   };
 
 function AppViewModel() {
 
@@ -76,6 +101,7 @@ function AppViewModel() {
 	
 	//=============== Vin(min) ===============//
 	
+	/*
 	this.vInMin = ko.computed(
 		function() 
 		{
@@ -88,6 +114,22 @@ function AppViewModel() {
 	]);
 	
 	this.vInMinSelUnit = ko.observable(this.vInMinUnits()[0]);
+	*/
+	
+	this.vInMin = ko.observable(new compVar([ new unit('V', 1.0) ], 0));
+	this.vInMin().val = ko.computed(
+		function() 
+		{
+			return parseFloat(this.vBuckOut()) + 2.1;
+      }, 
+		this);
+		
+	this.vInMin().rawVal = ko.computed(
+		function() 
+		{
+			return this.vInMin().val()/this.vInMin().selUnit().multiplier;
+      }, 
+		this);
 	
 	//================= Vin(max) ================//
 
@@ -114,7 +156,7 @@ function AppViewModel() {
 	this.rfb1 = ko.observable();
 	
 	//============== Rfb2 ==============//
-	
+	/*
 	this.rfb2Units = ko.observableArray([
 		new unit('\u2126', 1.0),
 		new unit('k\u2126', 1000.0),
@@ -126,7 +168,23 @@ function AppViewModel() {
 		function() 
 		{
 			//Log('Rfb1 unit =' + this.rfb1SelUnit());
-			return ((parseFloat(this.rfb1())*parseFloat(this.rfb1SelUnit().multiplier))*(parseFloat(this.vBuckOut())/1.205 - 1))/this.rfb2SelUnit().multiplier;
+			
+      }, 
+		this);
+		*/
+		
+	this.rfb2 = ko.observable(new compVar([ new unit('\u2126', 1.0), new unit('k\u2126', 1000.0) ], 0));
+	this.rfb2().val = ko.computed(
+		function() 
+		{
+			return ((parseFloat(this.rfb1())*parseFloat(this.rfb1SelUnit().multiplier))*(parseFloat(this.vBuckOut())/1.205 - 1));
+      }, 
+		this);
+		
+	this.rfb2().rawVal = ko.computed(
+		function() 
+		{
+			return this.rfb2().val()/this.rfb2().selUnit().multiplier;
       }, 
 		this);
 		
@@ -232,7 +290,7 @@ function AppViewModel() {
 		{		
 			var vBuckOut = parseFloat(this.vBuckOut())*this.vBuckOutSelUnit().multiplier;
 			var vdf = parseFloat(this.vdf())*this.vdfSelUnit().multiplier;
-			var vInMax = this.vInMax().val;
+			var vInMax = this.vInMax().val();
 			
 			return ((vBuckOut + vdf) / (vInMax + vdf))/this.dMinSelUnit().multiplier;
       }, 
@@ -252,7 +310,7 @@ function AppViewModel() {
 		{			
 			var vBuckOut = parseFloat(this.vBuckOut())*this.vBuckOutSelUnit().multiplier;
 			var vdf = parseFloat(this.vdf())*this.vdfSelUnit().multiplier;
-			var vInMin = parseFloat(this.vInMin())*this.vInMinSelUnit().multiplier;
+			var vInMin = this.vInMin().val();
 			
 			return ((vBuckOut + vdf) / (vInMin + vdf))/this.dMaxSelUnit().multiplier;
       }, 
@@ -440,11 +498,11 @@ j(document).ready(
 				  ko.bindingHandlers.value.update(element, function (){ return valueAccessor()().rawVal } , allBindings, viewModel, bindingContext);
 				  
 				  // Update background colour of input
-					if(valueAccessor()().val() < valueAccessor()().lowerBound() || valueAccessor()().val() > valueAccessor()().upperBound())
-					{
-						j(element).css('background-color', '#FF9999');
-					}
-					else if(valueAccessor()().validator() == false)
+					//if(valueAccessor()().val() < valueAccessor()().lowerBound() || valueAccessor()().val() > valueAccessor()().upperBound())
+					//{
+					//	j(element).css('background-color', '#FF9999');
+					//}
+					if(valueAccessor()().validator() == false)
 					{
 						j(element).css('background-color', '#FF9999');
 					}

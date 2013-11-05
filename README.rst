@@ -5,7 +5,7 @@ Engineering Calculators Written In Javascript
 - Author: gbmhunter <gbmhunter@gmail.com> (http://www.cladlab.com)
 - Created: 2013/06/06
 - Last Modified: 2013/11/05
-- Version: v3.4.3.0
+- Version: v3.4.4.0
 - Company: CladLabs
 - Project: Free Code Libraries	.
 - Language: HTML/JS/PHP
@@ -69,6 +69,7 @@ Changelog
 ========= ========== ============================================================================================================
 Version   Date       Comment
 ========= ========== ============================================================================================================
+v3.4.4.0  2013/11/05 Working on a validator for computed variables, along with rounding capabilities.
 v3.4.3.0  2013/11/05 Validator has now been applied to two observable variables. Have to work on computed variables next.
 v3.4.2.0  2013/11/05 Validator is now implemented with a function assigned to the validator variable. Still only testing with one variable in the LT3745 calculator.
 v3.4.1.0  2013/11/04 Improved custom binding for fsw(act) with automatic colour changes on invalid value.
