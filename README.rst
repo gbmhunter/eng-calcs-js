@@ -4,8 +4,8 @@ Engineering Calculators Written In Javascript
 
 - Author: gbmhunter <gbmhunter@gmail.com> (http://www.cladlab.com)
 - Created: 2013/06/06
-- Last Modified: 2013/11/07
-- Version: v3.5.0.0
+- Last Modified: 2013/11/08
+- Version: v3.5.1.0
 - Company: CladLabs
 - Project: Free Code Libraries	.
 - Language: HTML/JS/PHP
@@ -69,6 +69,7 @@ Changelog
 ========= ========== ============================================================================================================
 Version   Date       Comment
 ========= ========== ============================================================================================================
+v3.5.1.0  2013/11/08 Changed all variables to use the calc object in the LT3745 calculator.
 v3.5.0.0  2013/11/07 Fixed calculator object code bugs in the LT3745 calculator. The calc object now works fine, making it easier to created input and calculated variables which bind to the markup. One issue remaining is that the validator function has to be assigned after the object is created, not as part of the constructor.
 v3.4.4.0  2013/11/05 Working on a validator for computed variables, along with rounding capabilities.
 v3.4.3.0  2013/11/05 Validator has now been applied to two observable variables. Have to work on computed variables next.
