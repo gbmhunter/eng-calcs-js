@@ -51,7 +51,7 @@
 			<td style="text-align: center;">Minimum Input Voltage</td>
 			<td>\(V_{in(min)}\)</td>
 			<td><input data-bind="calcVar: vInMin" type="text" size="16" disabled="true" /></td>
-			<td><select data-bind="options: vInMin().units, optionsText: 'name', value: vInMin().selUnit" ></select></td>
+			<td><select data-bind="options: vInMin.units, optionsText: 'name', value: vInMin.selUnit" ></select></td>
 			<td>\(V_{out(max)} + 2.1V\)</td>
 			<td>The is a minimum input voltage allowed to sustain current regulation. It also cannot be less than 6V.</td>
 		</tr>
@@ -59,7 +59,7 @@
 			<td style="text-align: center;">Maximum Input Voltage</td>
 			<td>\(V_{in(max)}\)</td>
 			<td><input data-bind="calcVar: vInMax" type="text" size="16" /></td>
-			<td><select data-bind="options: vInMax().units, optionsText: 'name', value: vInMax().selUnit"></select></td>
+			<td><select data-bind="options: vInMax.units, optionsText: 'name', value: vInMax.selUnit"></select></td>
 			<td>n/a</td>
 			<td>This is the maximum input voltage that will ever be provided to the LT3745. Must be greater or equal to \( V_{in(min)} \), and less or equal to 55V.</td>
 		<tr>
@@ -76,7 +76,7 @@
 			<td style="text-align: center;">Feedback Resistor 2</td>
 			<td>\(R_{fb2}\)</td>
 			<td><input data-bind="calcVar: rfb2" type="text" size="16" disabled="true" /></td>
-			<td><select data-bind="options: rfb2().units, optionsText: 'name', value: rfb2.selUnit" ></select></td>
+			<td><select data-bind="options: rfb2.units, optionsText: 'name', value: rfb2.selUnit" ></select></td>
 			<td>\(R_{fb1}*\left(\frac{V_{out(max)}}{1.205V} - 1\right)\)</td>
 			<td></td>
 		</tr>
@@ -175,7 +175,7 @@
 			<td style="text-align: center;">Actual Switching Frequency</td>
 			<td>\(f_{sw(act)}\)</td>
 			<td><input data-bind="calcVar: fSwAct" type="text" size="16" /></td>
-			<td><select data-bind="options: fSwAct().units, optionsText: 'name', value: fSwAct().selUnit"></select></td>
+			<td><select data-bind="options: fSwAct.units, optionsText: 'name', value: fSwAct.selUnit"></select></td>
 			<td>n/a</td>
 			<td>This is the switching frequency you want to use, set by the resistor \( R_T \). It has to be between 100kHz and 1MHz, and also less than \(f_{sw(max)}\).</td>
 		</tr>

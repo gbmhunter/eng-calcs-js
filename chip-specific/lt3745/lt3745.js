@@ -28,47 +28,45 @@ function calc()
 }
 	
 // "Class" for a calc variable
-var calcVar = function(rawVal, units, selUnit, lowerBound, upperBound) {
-			this.rawVal = ko.observable();
+var calcInput = function(app, validatorFn, units, selUnit) {
+			this.dispVal = ko.observable();
 			this.units = ko.observableArray(units);
 			this.selUnit = ko.observable(this.units()[0]);
 			
 			// Scaled value, taking into account the units
 			this.val = ko.computed( function(){
-				return parseFloat(this.rawVal())*parseFloat(this.selUnit().multiplier);
+				return parseFloat(this.dispVal())*parseFloat(this.selUnit().multiplier);
 			},
 			this);
-			
-			this.lowerBound = ko.observable(lowerBound);
-			this.upperBound = ko.observable(upperBound);
 
 			// Default is to just return true.
-			this.validator = ko.computed( function(){ return true; }, this);
-			
+			this.isValid = ko.computed(validatorFn, app);
    };
 	
-var compVar = function(units, selUnit) {
+var calcComp = function(app, compFn, validatorFn, units, selUnit) {
 			
 			this.units = ko.observableArray(units);
 			this.selUnit = ko.observable(this.units()[0]);
-			this.val = ko.computed(function(){ return 1; }, this);
+			
+			this.val = ko.computed(compFn, app);
 			
 			// Number of decimal places to round value to
 			this.roundTo = 1;
 			
 			// This is the displayed value
-			this.rawVal = ko.computed(function(){
-				var unroundedVal = this.val()/this.selUnit().multiplier;
-				var roundedVal = unroundedVal*Math.pow(10, this.roundTo);
-				return roundedVal;
-			},
-			this);						
+			this.dispVal = ko.computed(function(){
+					var unroundedVal = this.val()/this.selUnit().multiplier;
+					// Round the value
+					var roundedVal = Math.round(unroundedVal*Math.pow(10, this.roundTo))/Math.pow(10, this.roundTo);
+					return roundedVal;
+				},
+				this);				
 			
 			this.lowerBound = 0; //ko.observable(lowerBound);
 			this.upperBound = 0; //ko.observable(upperBound);
 
 			// Default is to just return true.
-			this.validator = ko.computed( function(){ return true; }, this);
+			this.isValid = ko.computed(validatorFn, app);
 			
    };
 
@@ -76,7 +74,7 @@ function AppViewModel() {
 
 	//============= Vload ============//
 	
-    this.loadVoltage = ko.observable();
+   this.loadVoltage = ko.observable();
 	
 	this.loadVoltageUnits = ko.observableArray([
 		new unit('V', 1.0),
@@ -100,49 +98,41 @@ function AppViewModel() {
 	this.vBuckOutSelUnit = ko.observable(this.vBuckOutUnits()[0]);
 	
 	//=============== Vin(min) ===============//
-	
-	/*
-	this.vInMin = ko.computed(
-		function() 
-		{
-			return parseFloat(this.vBuckOut()) + 2.1;
-      }, 
-		this);
-	
-	this.vInMinUnits = ko.observableArray([
-		new unit('V', 1.0),
-	]);
-	
-	this.vInMinSelUnit = ko.observable(this.vInMinUnits()[0]);
-	*/
-	
-	this.vInMin = ko.observable(new compVar([ new unit('V', 1.0) ], 0));
-	this.vInMin().val = ko.computed(
-		function() 
-		{
-			return parseFloat(this.vBuckOut()) + 2.1;
-      }, 
-		this);
 		
-	this.vInMin().rawVal = ko.computed(
+	this.vInMin = new calcComp(
+		this,
 		function() 
 		{
-			return this.vInMin().val()/this.vInMin().selUnit().multiplier;
+			return parseFloat(this.vBuckOut()) + 2.1;
       }, 
-		this);
+		function()
+		{
+			return true;
+		},
+		[ new unit('V', 1.0) ],
+		0);
 	
 	//================= Vin(max) ================//
 
-	this.vInMax = ko.observable(new calcVar(200, [ new unit('V', 1.0) ], 0));
-	this.vInMax().validator =  ko.computed(function(){
-				if(this.vInMax().val() < this.vInMin() || this.vInMax().val() > 55.0)
-				{
-					return false;
-				}
-				else 
-					return true;
+	this.vInMax = new calcInput(
+		this,
+		function()
+		{
+			return true;
 		},
-		this);
+		[ new unit('V', 1.0) ],
+		0);
+		
+	this.vInMax.isValid = ko.computed(
+		function()
+		{
+			if(this.vInMax.val() < this.vInMin.val())
+				return false;
+			else
+				return true;
+		},
+		this
+	);
 	
 	//========== Rfb1 =============//
 	
@@ -156,39 +146,21 @@ function AppViewModel() {
 	this.rfb1 = ko.observable();
 	
 	//============== Rfb2 ==============//
-	/*
-	this.rfb2Units = ko.observableArray([
-		new unit('\u2126', 1.0),
-		new unit('k\u2126', 1000.0),
-	]);
-	
-	this.rfb2SelUnit = ko.observable(this.rfb2Units()[1]);
-	
-	this.rfb2 = ko.computed(
-		function() 
-		{
-			//Log('Rfb1 unit =' + this.rfb1SelUnit());
-			
-      }, 
-		this);
-		*/
 		
-	this.rfb2 = ko.observable(new compVar([ new unit('\u2126', 1.0), new unit('k\u2126', 1000.0) ], 0));
-	this.rfb2().val = ko.computed(
+	this.rfb2 = new calcComp(
+		this,
 		function() 
 		{
 			return ((parseFloat(this.rfb1())*parseFloat(this.rfb1SelUnit().multiplier))*(parseFloat(this.vBuckOut())/1.205 - 1));
-      }, 
-		this);
-		
-	this.rfb2().rawVal = ko.computed(
-		function() 
+      },
+		function()
 		{
-			return this.rfb2().val()/this.rfb2().selUnit().multiplier;
-      }, 
-		this);
+			return true;
+		},
+		[ new unit('\u2126', 1.0), new unit('k\u2126', 1000.0) ],
+		0);
 		
-	// Iout(max)
+	//=============== Iout(max) =================//
 	
 	this.iOutMax = ko.observable();
 	
@@ -290,7 +262,7 @@ function AppViewModel() {
 		{		
 			var vBuckOut = parseFloat(this.vBuckOut())*this.vBuckOutSelUnit().multiplier;
 			var vdf = parseFloat(this.vdf())*this.vdfSelUnit().multiplier;
-			var vInMax = this.vInMax().val();
+			var vInMax = this.vInMax.val();
 			
 			return ((vBuckOut + vdf) / (vInMax + vdf))/this.dMinSelUnit().multiplier;
       }, 
@@ -310,7 +282,7 @@ function AppViewModel() {
 		{			
 			var vBuckOut = parseFloat(this.vBuckOut())*this.vBuckOutSelUnit().multiplier;
 			var vdf = parseFloat(this.vdf())*this.vdfSelUnit().multiplier;
-			var vInMin = this.vInMin().val();
+			var vInMin = this.vInMin.val();
 			
 			return ((vBuckOut + vdf) / (vInMin + vdf))/this.dMaxSelUnit().multiplier;
       }, 
@@ -361,16 +333,25 @@ function AppViewModel() {
 	
 	//================ fsw(act) ============//
 	
-	this.fSwAct = ko.observable(new calcVar(200, [ new unit('kHz', 1000.0) ], 0, 100000, 1000000));
-	this.fSwAct().validator =  ko.computed(function(){
-				if(this.fSwAct().val() > 1000000)
-				{
-					return false;
-					}
-				else 
-					return true;
+	this.fSwAct = new calcInput(
+		this,
+		function(){
+			return true;
 		},
-		this);
+		[ new unit('kHz', 1000.0) ],
+		0);
+	
+	this.fSwAct.validator = ko.computed(
+		function(){
+			if(this.fSwAct.val() > 1000000)
+			{
+				return false;
+				}
+			else 
+				return true;
+		},
+		this
+	);
 	
 	//================ fugf ==============//
 	
@@ -385,7 +366,7 @@ function AppViewModel() {
 		function() 
 		{			
 			//var fSwAct = parseFloat(this.fSwAct().value())*this.fSwAct().selUnit().multiplier;
-			var fSwAct = this.fSwAct().val();
+			var fSwAct = this.fSwAct.val();
 			return (fSwAct/10.0)/this.fugfSelUnit().multiplier;
       }, 
 		this);
@@ -434,7 +415,7 @@ function AppViewModel() {
 		{
 			var vBuckOut = parseFloat(this.vBuckOut())*this.vBuckOutSelUnit().multiplier;
 			var vdf = parseFloat(this.vdf())*this.vdfSelUnit().multiplier;
-			var vInMax = this.vInMax().val;
+			var vInMax = this.vInMax.val();
 			//var fSwAct = parseFloat(this.fSwAct.value())*this.fSwActSelUnit().multiplier;
 			var iLDelta = parseFloat(this.iLDelta())*this.iLDeltaSelUnit().multiplier;
 			
@@ -475,6 +456,8 @@ function AppViewModel() {
 	
 }
 
+var app = new AppViewModel();
+
 // Start-up function
 j(document).ready(
 	function StartUp()
@@ -484,9 +467,9 @@ j(document).ready(
 			 init: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
 				  // This will be called when the binding is first applied to an element
 				  // Set up any initial state, event handlers, etc. here
-				  console.log(valueAccessor()().rawVal());
+				  //console.log(valueAccessor()().rawVal());
 			  // Call value binding (child binding)
-				  ko.bindingHandlers.value.init(element, function (){ return valueAccessor()().rawVal } , allBindings, viewModel, bindingContext);
+				  ko.bindingHandlers.value.init(element, function (){ return valueAccessor().dispVal } , allBindings, viewModel, bindingContext);
 				  
 			 },
 			 update: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
@@ -495,14 +478,15 @@ j(document).ready(
 				  // Update the DOM element based on the supplied values here.
 		
 				  // Call value binding (child binding)
-				  ko.bindingHandlers.value.update(element, function (){ return valueAccessor()().rawVal } , allBindings, viewModel, bindingContext);
+				  ko.bindingHandlers.value.update(element, function (){ return valueAccessor().dispVal } , allBindings, viewModel, bindingContext);
 				  
 				  // Update background colour of input
 					//if(valueAccessor()().val() < valueAccessor()().lowerBound() || valueAccessor()().val() > valueAccessor()().upperBound())
 					//{
 					//	j(element).css('background-color', '#FF9999');
 					//}
-					if(valueAccessor()().validator() == false)
+					
+					if(valueAccessor().isValid() == false)
 					{
 						j(element).css('background-color', '#FF9999');
 					}
@@ -510,11 +494,12 @@ j(document).ready(
 					{
 						j(element).css('background-color', '#99FF99');
 					}
+					
 			 }
 		};
 		
 		// Activates knockout.js
-		var app = new AppViewModel();
+		
 		ko.applyBindings(app);	
 	}
 );
