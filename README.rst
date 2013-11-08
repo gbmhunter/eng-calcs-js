@@ -5,7 +5,7 @@ Engineering Calculators Written In Javascript
 - Author: gbmhunter <gbmhunter@gmail.com> (http://www.cladlab.com)
 - Created: 2013/06/06
 - Last Modified: 2013/11/09
-- Version: v3.5.4.1
+- Version: v3.5.4.2
 - Company: CladLabs
 - Project: Free Code Libraries	.
 - Language: HTML/JS/PHP
@@ -61,12 +61,13 @@ None documented.
 Usage
 =====
 
-This repo is designed so that you can clone it directly (using SSH) into a web servers public_html folder (or any sub-folder). Then using PHP on a web page, include the php file of the specific calculator you wish to use, e.g.
+This repo is designed so that you can clone it directly (using SSH) into a web servers ``public_html`` folder (or any sub-folder). Then using PHP on a web page, include the php file of the specific calculator you wish to use, e.g.
 
 ::
+
 	include $_SERVER['DOCUMENT_ROOT'] . '/Js-EngCalcs/chip-specific/lt3745/lt3745.php';
 	
-(assuming you cloned the repo directly into public_html). The PHP file will automatically include it's respective Javascript file that resides in the same directory. All dependencies are automatically included via CDNs.
+(assuming you cloned the repo directly into ``public_html``). The PHP file will automatically include it's respective Javascript file that resides in the same directory. All dependencies are automatically included via CDNs.
 	
 Changelog
 =========
@@ -74,6 +75,7 @@ Changelog
 ========= ========== ============================================================================================================
 Version   Date       Comment
 ========= ========== ============================================================================================================
+v3.5.4.2  2013/11/09 Fixed incorrect rendering of code in README.
 v3.5.4.1  2013/11/09 Improved the usage section of the README, adding more detailed info on how to clone the repo onto a server, and then include a calculators PHP file.
 v3.5.4.0  2013/11/09 Removed all spaces from standard resistance finder and heat flow calculator folder names.
 v3.5.3.0  2013/11/08 Changed the table width from 90% width to 1000px because it was being rendered too small in the web page.
