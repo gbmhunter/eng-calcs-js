@@ -31,7 +31,7 @@ function calc()
 var calcInput = function(app, validatorFn, units, selUnit) {
 			this.dispVal = ko.observable();
 			this.units = ko.observableArray(units);
-			this.selUnit = ko.observable(this.units()[0]);
+			this.selUnit = ko.observable(this.units()[selUnit]);
 			
 			// Scaled value, taking into account the units
 			this.val = ko.computed( function(){
@@ -46,7 +46,7 @@ var calcInput = function(app, validatorFn, units, selUnit) {
 var calcComp = function(app, compFn, validatorFn, units, selUnit) {
 			
 			this.units = ko.observableArray(units);
-			this.selUnit = ko.observable(this.units()[0]);
+			this.selUnit = ko.observable(this.units()[selUnit]);
 			
 			this.val = ko.computed(compFn, app);
 			
@@ -136,7 +136,10 @@ function AppViewModel() {
 	this.rfb1 = new calcInput(
 		this,
 		function() { return true; },
-		[ new unit('\u2126', 1.0),	new unit('k\u2126', 1000.0) ],
+		[ 
+			new unit('\u2126', 1.0),
+			new unit('k\u2126', 1000.0) 
+		],
 		1
 	);
 	
@@ -146,14 +149,17 @@ function AppViewModel() {
 		this,
 		function() 
 		{
-			return (this.rfb1.val()*(this.vBuckOut.val/1.205 - 1));
+			return (this.rfb1.val()*(this.vBuckOut.val()/1.205 - 1));
       },
 		function()
 		{
 			return true;
 		},
-		[ new unit('\u2126', 1.0), new unit('k\u2126', 1000.0) ],
-		0);
+		[ 
+			new unit('\u2126', 1.0), 
+			new unit('k\u2126', 1000.0)
+		],
+		1);
 		
 	//=============== Iout(max) =================//
 	
