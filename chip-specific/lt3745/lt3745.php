@@ -27,7 +27,7 @@
 <p>The datasheet can be found <a href="http://cds.linear.com/docs/en/datasheet/3745f.pdf">here</a>.</p>
 <p>For more information you can check out the Linear Technology Demonstration Circuit 1608A.</p>
 <form name="formSrc">
-<table id="mainTable" style="margin-left: auto; margin-right: auto; width: 90%;" border="4">
+<table id="mainTable" style="margin-left: auto; margin-right: auto; width: 1000px;" border="4">
 	<tbody>
 		<tr>
 			<td id="td1"><strong>Variable Name:</strong></td>
