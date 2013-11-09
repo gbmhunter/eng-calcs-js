@@ -5,7 +5,7 @@ Engineering Calculators Written In Javascript
 - Author: gbmhunter <gbmhunter@gmail.com> (http://www.cladlab.com)
 - Created: 2013/06/06
 - Last Modified: 2013/11/10
-- Version: v3.5.6.0
+- Version: v3.6.0.0
 - Company: CladLabs
 - Project: Free Code Libraries	.
 - Language: HTML/JS/PHP
@@ -75,6 +75,7 @@ Changelog
 ========= ========== ============================================================================================================
 Version   Date       Comment
 ========= ========== ============================================================================================================
+v3.6.0.0  2013/11/10 Add qTip (jQuery tooltip library), and implemented basic tooltip functionality on non-valid inputs/outputs.
 v3.5.6.0  2013/11/10 Fixed the too-large 'Comments' column by add all cells in this column to the 'comment' class, and then applying 'text-size: small' to this class using CSS.
 v3.5.5.0  2013/11/10 Fixed too-small Latex equations in the LT3745 calculator by replacing the command \frac with \dfrac.
 v3.5.4.2  2013/11/09 Fixed incorrect rendering of code in README.

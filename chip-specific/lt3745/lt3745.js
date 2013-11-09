@@ -7,8 +7,8 @@
 // @details
 //				See the README in the root dir for more info.
 
-// Get a variable for jQuery
-var j = jQuery.noConflict();
+
+//var j = jQuery.noConflict();
 
 // Debug flag. Set to true to print debug information, otherwise false.
 var DEBUG = true;
@@ -467,18 +467,26 @@ function AppViewModel() {
 var app = new AppViewModel();
 
 // Start-up function
-j(document).ready(
+$(document).ready(
 	function StartUp()
 	{	  		
 		// Create custom binding
 		ko.bindingHandlers.calcVar = {
-			 init: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
-				  // This will be called when the binding is first applied to an element
-				  // Set up any initial state, event handlers, etc. here
-				  //console.log(valueAccessor()().rawVal());
-			  // Call value binding (child binding)
-				  ko.bindingHandlers.value.init(element, function (){ return valueAccessor().dispVal } , allBindings, viewModel, bindingContext);
+			init: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
+				// This will be called when the binding is first applied to an element
+				// Set up any initial state, event handlers, etc. here
+				//console.log(valueAccessor()().rawVal());
+				// Call value binding (child binding)
+				ko.bindingHandlers.value.init(element, function (){ return valueAccessor().dispVal } , allBindings, viewModel, bindingContext);
 				  
+				// Create Opentip (tooltip) for input box
+				$(element).qtip({ // Grab some elements to apply the tooltip to
+					 content: {
+						  text: 'Error!'
+					 }
+				})
+				$(element).qtip('disable', true);
+								
 			 },
 			 update: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
 				  // This will be called once when the binding is first applied to an element,
@@ -487,20 +495,18 @@ j(document).ready(
 		
 				  // Call value binding (child binding)
 				  ko.bindingHandlers.value.update(element, function (){ return valueAccessor().dispVal } , allBindings, viewModel, bindingContext);
-				  
-				  // Update background colour of input
-					//if(valueAccessor()().val() < valueAccessor()().lowerBound() || valueAccessor()().val() > valueAccessor()().upperBound())
-					//{
-					//	j(element).css('background-color', '#FF9999');
-					//}
-					
+				  																				
 					if(valueAccessor().isValid() == false)
 					{
-						j(element).css('background-color', '#FF9999');
+						$(element).css('background-color', '#FF9999');
+						//console.log('Activating tooltip.');
+						$(element).qtip('disable', false);
 					}
 					else
 					{
-						j(element).css('background-color', '#99FF99');
+						$(element).css('background-color', '#99FF99');
+						//console.log('Deactivating tooltip');
+						$(element).qtip('disable', true);
 					}
 					
 			 }

@@ -27,6 +27,12 @@
 <!-- Jquery -->
 <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
 
+<!-- CSS file -->
+<link type="text/css" rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/qtip2/2.1.0/jquery.qtip.min.css" />
+
+<!-- Include either the minifed or production version, not both -->
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/qtip2/2.1.0/jquery.qtip.min.js"></script>
+
 <p>A calculator to help you choose the values of the supporting passive components for the Linear Technology LT3745 16-channel LED driver.</p>
 <p>The datasheet can be found <a href="http://cds.linear.com/docs/en/datasheet/3745f.pdf">here</a>.</p>
 <p>For more information you can check out the Linear Technology Demonstration Circuit 1608A.</p>
@@ -34,7 +40,7 @@
 <table id="mainTable" style="margin-left: auto; margin-right: auto; width: 1000px;" border="4">
 	<tbody>
 		<tr>
-			<td id="td1"><strong>Variable Name:</strong></td>
+			<td><strong>Variable Name:</strong></td>
 			<td><strong>Variable Symbol:</strong></td>
 			<td><strong>Value:</strong></td>
 			<td><strong>Units:</strong></td>
@@ -44,7 +50,7 @@
 		<tr>
 			<td class="name">Load Voltage</td>
 			<td class="symbol">\(V_{load}\)</td>
-			<td><input data-bind="calcVar: loadVoltage" size="16" ></input></td>
+			<td><input data-bind="calcVar: loadVoltage" size="16"></input></td>
 			<td><select data-bind="options: loadVoltage.units, optionsText: 'name', value: loadVoltage.selUnit"></select></td>	
 			<td class="equation">n/a</td>
 			<td class="comment">This is the maximum voltage that the load will ever see. If driving LEDs, this is equal to the forward voltage of the LED at the maximum current to plan to drive them at. If driving multiple is series, sum the forward voltages. If driving different colours, this is equal to the LED with the highest forward voltage.</td>
