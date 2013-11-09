@@ -83,7 +83,7 @@
 			<td class="symbol">\(R_{fb2}\)</td>
 			<td><input data-bind="calcVar: rfb2" type="text" size="16" disabled="true" /></td>
 			<td><select data-bind="options: rfb2.units, optionsText: 'name', value: rfb2.selUnit" ></select></td>
-			<td class="equation">\(R_{fb1}*\left(\frac{V_{out(max)}}{1.205V} - 1\right)\)</td>
+			<td class="equation">\(R_{fb1}*\left(\dfrac{V_{out(max)}}{1.205V} - 1\right)\)</td>
 			<td></td>
 		</tr>
 		<tr></tr>
@@ -100,7 +100,7 @@
 			<td class="symbol">\(R_{sense}\)</td>
 			<td><input data-bind="calcVar: rSense" type="text" size="16" disabled="true" /></td>
 			<td><select data-bind="options: rSense.units, optionsText: 'name', value: rSense.selUnit" ></select></td>
-			<td class="equation">\(\frac{35mV}{I_{out(max)}}\)</td>
+			<td class="equation">\(\dfrac{35mV}{I_{out(max)}}\)</td>
 			<td></td>
 		</tr>
 		<tr>
@@ -125,7 +125,7 @@
 			<td class="symbol">\(R_{iset}\)</td>
 			<td><input data-bind="calcVar: riSet" type="text" size="16" disabled="true" /></td>
 			<td><select data-bind="options: riSet.units, optionsText: 'name', value: riSet.selUnit" ></select></td>
-			<td class="equation">\(2500*(\frac{1.205}{I_{led-pin(nom)}})\)</td>
+			<td class="equation">\(2500*(\dfrac{1.205}{I_{led-pin(nom)}})\)</td>
 			<td>The resistor sets the nominal LED current chosen above.</td>
 		</tr>
 		<tr></tr>
@@ -142,7 +142,7 @@
 			<td class="symbol">\(D_{min}\)</td>
 			<td><input data-bind="calcVar: dMin" type="text" size="16" disabled="true" /></td>
 			<td><select data-bind="options: dMin.units, optionsText: 'name', value: dMin.selUnit" ></select></td>
-			<td class="equation">\(\frac{V_{out(max)} + V_{d,f}}{V_{in(max)} + V_{d,f}}\)</td>
+			<td class="equation">\(\dfrac{V_{out(max)} + V_{d,f}}{V_{in(max)} + V_{d,f}}\)</td>
 			<td></td>
 		</tr>
 		<tr>
@@ -150,7 +150,7 @@
 			<td class="symbol">\(D_{max}\)</td>
 			<td><input data-bind="calcVar: dMax" type="text" size="16" disabled="true" /></td>
 			<td><select data-bind="options: dMax.units, optionsText: 'name', value: dMax.selUnit" ></select></td>
-			<td class="equation">\(\frac{V_{out(max)} + V_{d,f}}{V_{in(min)} + V_{d,f}}\)</td>
+			<td class="equation">\(\dfrac{V_{out(max)} + V_{d,f}}{V_{in(min)} + V_{d,f}}\)</td>
 			<td></td>
 		</tr>
 		<tr>
@@ -174,7 +174,7 @@
 			<td class="symbol">\(f_{sw(max)}\)</td>
 			<td><input data-bind="calcVar: fSwMax" type="text" size="16" disabled="true" /></td>
 			<td><select data-bind="options: fSwMax.units, optionsText: 'name', value: fSwMax.selUnit" ></select></td>
-			<td class="equation">\(min( \frac{D_{min}}{t_{on,min}}, \frac{1 - D_{max}}{t_{off(min)}})\)</td>
+			<td class="equation">\(min( \dfrac{D_{min}}{t_{on,min}}, \dfrac{1 - D_{max}}{t_{off(min)}})\)</td>
 			<td>This is the maximum switching frequency you could use. </td>
 		</tr>
 		<tr>
@@ -190,7 +190,7 @@
 			<td class="symbol">\(f_{ugf}\)</td>
 			<td><input data-bind="calcVar: fugf" type="text" size="16" disabled="true" /></td>
 			<td><select data-bind="options: fugf.units, optionsText: 'name', value: fugf.selUnit" ></select></td>
-			<td class="equation">\(\frac{f_{sw(act)}}{10}\)</td>
+			<td class="equation">\(\dfrac{f_{sw(act)}}{10}\)</td>
 			<td></td>
 		</tr>
 		<tr>
@@ -198,7 +198,7 @@
 			<td class="symbol">\(C_{out(min)}\)</td>
 			<td><input data-bind="calcVar: cOutMin" type="text" size="16" disabled="true" /></td>
 			<td><select data-bind="options: cOutMin.units, optionsText: 'name', value: cOutMin.selUnit" ></select></td>
-			<td class="equation">\(max( \frac{0.25}{R_{sense}*f_{ugf}}, \frac{1.5}{V_{buck,out}*R_{sense}*f_{ugf}})\)</td>
+			<td class="equation">\(max( \dfrac{0.25}{R_{sense}*f_{ugf}}, \dfrac{1.5}{V_{buck,out}*R_{sense}*f_{ugf}})\)</td>
 			<td></td>
 		</tr>
 		<tr>
@@ -214,7 +214,7 @@
 			<td class="symbol">\(L_{min}\)</td>
 			<td><input data-bind="calcVar: lMin" type="text" size="16" disabled="true" /></td>
 			<td><select data-bind="options: lMin.units, optionsText: 'name', value: lMin.selUnit" ></select></td>
-			<td class="equation">\( \frac{V_{buck,out} + V_{d,f}}{ V_{in(max) + V_{d,f}}} * \frac{ V_{in(max)} - V_{buck,out} }{ f_{sw(act)}*I_{L(delta)} } \)</td>
+			<td class="equation">\( \dfrac{V_{buck,out} + V_{d,f}}{ V_{in(max) + V_{d,f}}} * \dfrac{ V_{in(max)} - V_{buck,out} }{ f_{sw(act)}*I_{L(delta)} } \)</td>
 			<td>This is the minimum inductance required to satisfy the inductor ripple current specified above. If this inductance is too large, you could consider increasing the ripple current, or increasing the switching frequency.</td>
 		</tr>
 		<tr></tr>
@@ -231,7 +231,7 @@
 			<td class="symbol">\(C_{in(min)}\)</td>
 			<td><input data-bind="calcVar: cInMin" type="text" size="16" disabled="true" /></td>
 			<td><select data-bind="options: cInMin.units, optionsText: 'name', value: cInMin.selUnit" ></select></td>
-			<td class="equation">\( \frac{D_{max}*I_{out(max)}}{V_{in,ripple}*f_{sw(act)}} \)</td>
+			<td class="equation">\( \dfrac{D_{max}*I_{out(max)}}{V_{in,ripple}*f_{sw(act)}} \)</td>
 			<td>This is the minimum input capacitance required to satisfy the desired input voltage ripple chosen above.</td>
 		</tr>
 	</tbody>

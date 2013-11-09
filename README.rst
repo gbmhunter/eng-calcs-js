@@ -4,8 +4,8 @@ Engineering Calculators Written In Javascript
 
 - Author: gbmhunter <gbmhunter@gmail.com> (http://www.cladlab.com)
 - Created: 2013/06/06
-- Last Modified: 2013/11/09
-- Version: v3.5.4.2
+- Last Modified: 2013/11/10
+- Version: v3.5.5.0
 - Company: CladLabs
 - Project: Free Code Libraries	.
 - Language: HTML/JS/PHP
@@ -75,6 +75,7 @@ Changelog
 ========= ========== ============================================================================================================
 Version   Date       Comment
 ========= ========== ============================================================================================================
+v3.5.5.0  2013/11/10 Fixed too-small Latex equations in the LT3745 calculator by replacing the command \frac with \dfrac.
 v3.5.4.2  2013/11/09 Fixed incorrect rendering of code in README.
 v3.5.4.1  2013/11/09 Improved the usage section of the README, adding more detailed info on how to clone the repo onto a server, and then include a calculators PHP file.
 v3.5.4.0  2013/11/09 Removed all spaces from standard resistance finder and heat flow calculator folder names.
