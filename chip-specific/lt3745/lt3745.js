@@ -41,15 +41,28 @@ var calcInput = function(app, validatorFn, units, selUnit) {
 			// Holds all validator functions
 			this.validatorA = ko.observableArray();
 			
+			//this.triggeredValidator = ko.observable();
+			
+			this.trigIndex = ko.observable();
+			
 			// Default is to just return true.
 			this.isValid = ko.computed(
 				function()
 				{
+					console.log('Computing isValid.');
 					for (var i = 0; i < this.validatorA().length; i++) {
-						if(this.validatorA()[0].fn(this.validatorA()[0].app) == false)
-							return false;						
+						if(this.validatorA()[i].fn(this.validatorA()[i].app) == false)
+						{
+							// Remember the validator which returned false
+							//this.triggeredValidator(this.validatorA()[i]);
+							console.log('Setting index.');
+							this.trigIndex(i);
+							console.log('Returning false.');
+							return false;
+						}
 					}
 					// Only gets here if no validator function returned false
+					console.log('Returning true.');
 					return true;
 				},
 				this
@@ -103,7 +116,7 @@ function AppViewModel() {
 	
 	// Add validator
 	this.loadVoltage.AddValidator(
-		'Test validator',
+		'Voltage cannot be less than 0.',
 		function(app){
 			if(app.loadVoltage.val() < 0)
 				return false;
@@ -511,9 +524,10 @@ $(document).ready(
 				ko.bindingHandlers.value.init(element, function (){ return valueAccessor().dispVal } , allBindings, viewModel, bindingContext);
 				  
 				// Create Opentip (tooltip) for input box
+				console.log('Initialising calculator variable handlers');
 				$(element).qtip({ // Grab some elements to apply the tooltip to
 					content: {
-						text: 'Value too big.',
+						text: '',
 						title: 'Error!'
 					},
 					style: {
@@ -547,6 +561,36 @@ $(document).ready(
 						$(element).css('background-color', '#FF9999');
 						//console.log('Activating tooltip.');
 						$(element).qtip('disable', false);
+						// Update text
+						console.log('Qtip');
+						//$(element).qtip('option', 'content.text', 'BLAH');
+						$(element).qtip({ // Grab some elements to apply the tooltip to
+								content: {
+									text: valueAccessor().validatorA()[valueAccessor().trigIndex()].msg,
+									title: 'Error!'
+								},
+								style: {
+									classes: 'qtip-red qtip-rounded qtip-shadow'
+								},
+								show: {
+									effect: function(offset) {
+										$(this).slideDown(100); // "this" refers to the tooltip
+									}
+								},
+								hide: {
+									effect: function(offset) {
+										$(this).slideDown(100); // "this" refers to the tooltip
+									}
+								}
+							});
+						$(element).qtip('api').set('content.text', 'New content');
+						console.log($(element).qtip('option', 'content.text'));
+						$(element).qtip('disable', true);
+						$(element).qtip('disable', false);
+						$(element).qtip('api').reposition()
+						//var api = $(element).qtip();
+						//api.set('content.ajax.url', api.options.content.ajax.url);
+						
 					}
 					else
 					{

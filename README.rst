@@ -4,8 +4,8 @@ Engineering Calculators Written In Javascript
 
 - Author: gbmhunter <gbmhunter@gmail.com> (http://www.cladlab.com)
 - Created: 2013/06/06
-- Last Modified: 2013/11/10
-- Version: v3.6.1.0
+- Last Modified: 2013/11/11
+- Version: v3.6.2.0
 - Company: CladLabs
 - Project: Free Code Libraries	.
 - Language: HTML/JS/PHP
@@ -75,6 +75,7 @@ Changelog
 ========= ========== ============================================================================================================
 Version   Date       Comment
 ========= ========== ============================================================================================================
+v3.6.2.0  2013/11/11 Made tooltips red to look like errors. Tooltips now display errors message associated with failed validator. Had to create a new qTip everytime I wanted to change the text as the content text change code didn't work properly.
 v3.6.1.0  2013/11/10 Upgraded the tooltip styling (made it black with rounded corners). Began working on validator array functionality, in where multiple validators can be added for a single calculator variable. These are then automatically ran everytime the variable changes, and the red/green status and tooltip updated accordingly.
 v3.6.0.0  2013/11/10 Add qTip (jQuery tooltip library), and implemented basic tooltip functionality on non-valid inputs/outputs.
 v3.5.6.0  2013/11/10 Fixed the too-large 'Comments' column by add all cells in this column to the 'comment' class, and then applying 'text-size: small' to this class using CSS.
