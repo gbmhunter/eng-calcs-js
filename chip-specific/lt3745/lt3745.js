@@ -78,30 +78,62 @@ var calcInput = function(app, validatorFn, units, selUnit) {
 	
 var calcComp = function(app, compFn, validatorFn, units, selUnit) {
 			
-			this.units = ko.observableArray(units);
-			this.selUnit = ko.observable(this.units()[selUnit]);
-			
-			this.val = ko.computed(compFn, app);
-			
-			// Number of decimal places to round value to
-			this.roundTo = 1;
-			
-			// This is the displayed value
-			this.dispVal = ko.computed(function(){
-					var unroundedVal = this.val()/this.selUnit().multiplier;
-					// Round the value
-					var roundedVal = Math.round(unroundedVal*Math.pow(10, this.roundTo))/Math.pow(10, this.roundTo);
-					return roundedVal;
-				},
-				this);				
-			
-			this.lowerBound = 0; //ko.observable(lowerBound);
-			this.upperBound = 0; //ko.observable(upperBound);
+	this.units = ko.observableArray(units);
+	this.selUnit = ko.observable(this.units()[selUnit]);
+	
+	this.val = ko.computed(compFn, app);
+	
+	// Number of decimal places to round value to
+	this.roundTo = 1;
+	
+	// This is the displayed value
+	this.dispVal = ko.computed(function(){
+			var unroundedVal = this.val()/this.selUnit().multiplier;
+			// Round the value
+			var roundedVal = Math.round(unroundedVal*Math.pow(10, this.roundTo))/Math.pow(10, this.roundTo);
+			return roundedVal;
+		},
+		this);				
+	
+	this.lowerBound = 0; //ko.observable(lowerBound);
+	this.upperBound = 0; //ko.observable(upperBound);
 
-			// Default is to just return true.
-			this.isValid = ko.computed(validatorFn, app);
+	// Holds all validator functions
+	this.validatorA = ko.observableArray();
+	
+	this.trigIndex = ko.observable();
+	
+	// Default is to just return true.
+	this.isValid = ko.computed(
+		function()
+		{
+			console.log('Computing isValid.');
+			for (var i = 0; i < this.validatorA().length; i++) {
+				if(this.validatorA()[i].fn(this.validatorA()[i].app) == false)
+				{
+					// Remember the validator which returned false
+					//this.triggeredValidator(this.validatorA()[i]);
+					console.log('Setting index.');
+					this.trigIndex(i);
+					console.log('Returning false.');
+					return false;
+				}
+			}
+			// Only gets here if no validator function returned false
+			console.log('Returning true.');
+			return true;
+		},
+		this
+	);
 			
-   };
+	// Methods
+	this.AddValidator = function(msg, fn, app)
+	{
+		// Create new validator object and add to the end of the array
+		this.validatorA.push(new validator(msg, fn, app));
+	}
+			
+};
 
 function AppViewModel() {
 
@@ -136,7 +168,18 @@ function AppViewModel() {
 		function() { return true; },
 		[ new unit('V', 1.0) ],
 		0
-		);
+	);
+	
+	// Add validator
+	this.vBuckOut.AddValidator(
+		'Voltage cannot be less than 0.',
+		function(app){
+			if(app.vBuckOut.val() < 0)
+				return false;
+			return true;
+		},
+		this
+	);
 	
 	//=============== Vin(min) ===============//
 		
