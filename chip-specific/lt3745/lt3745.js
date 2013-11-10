@@ -18,13 +18,12 @@ var unit = function(name, multiplier) {
         this.multiplier = multiplier;
    };
 	
-	
-function calc()
+// "Class" for validator object, which holds both a message and validator function
+function validator(msg, fn, app)
 {
-	this.addValidator = function(calcVar, validatorFunc)
-	{
-		calcVar.validators.push(validatorFunc);
-	}
+	this.msg = msg;
+	this.fn = fn;
+	this.app = app;
 }
 	
 // "Class" for a calc variable
@@ -39,8 +38,29 @@ var calcInput = function(app, validatorFn, units, selUnit) {
 			},
 			this);
 
+			// Holds all validator functions
+			this.validatorA = ko.observableArray();
+			
 			// Default is to just return true.
-			this.isValid = ko.computed(validatorFn, app);
+			this.isValid = ko.computed(
+				function()
+				{
+					for (var i = 0; i < this.validatorA().length; i++) {
+						if(this.validatorA()[0].fn(this.validatorA()[0].app) == false)
+							return false;						
+					}
+					// Only gets here if no validator function returned false
+					return true;
+				},
+				this
+			);
+			
+			// Methods
+			this.AddValidator = function(msg, fn, app)
+			{
+				// Create new validator object and add to the end of the array
+				this.validatorA.push(new validator(msg, fn, app));
+			}
    };
 	
 var calcComp = function(app, compFn, validatorFn, units, selUnit) {
@@ -79,6 +99,17 @@ function AppViewModel() {
 		function() { return true; },
 		[ new unit('V', 1.0) ],
 		0
+	);
+	
+	// Add validator
+	this.loadVoltage.AddValidator(
+		'Test validator',
+		function(app){
+			if(app.loadVoltage.val() < 0)
+				return false;
+			return true;
+		},
+		this
 	);
 	
 	//============== Vbuck,out ===========//
@@ -481,10 +512,25 @@ $(document).ready(
 				  
 				// Create Opentip (tooltip) for input box
 				$(element).qtip({ // Grab some elements to apply the tooltip to
-					 content: {
-						  text: 'Error!'
-					 }
+					content: {
+						text: 'Value too big.',
+						title: 'Error!'
+					},
+					style: {
+						classes: 'qtip-red qtip-rounded qtip-shadow'
+					},
+					show: {
+						effect: function(offset) {
+							$(this).slideDown(100); // "this" refers to the tooltip
+						}
+					},
+					hide: {
+						effect: function(offset) {
+							$(this).slideDown(100); // "this" refers to the tooltip
+						}
+					}
 				})
+				// We want this disabled by default.
 				$(element).qtip('disable', true);
 								
 			 },
