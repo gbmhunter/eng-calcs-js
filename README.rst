@@ -75,6 +75,7 @@ Changelog
 ========= ========== ============================================================================================================
 Version   Date       Comment
 ========= ========== ============================================================================================================
+v3.7.1.0  2013/11/11 Moved CSS code into candy-calc repo and added link to it from lt3445.php file. Aim is to eventually move all 'calculator framework' code into the candy-calc repo, while leaving Js-EngCalcs for actual calculator implementations.
 v3.7.0.0  2013/11/11 Added glow to currently selected input box. Moved input/output background colour styling to CSS, and made input border reflect background colour.
 v3.6.3.0  2013/11/11 Added validator array support for computed variables. Changed outputs from disabled to readonly, which still allows tooltips to be displayed.
 v3.6.2.0  2013/11/11 Made tooltips red to look like errors. Tooltips now display errors message associated with failed validator. Had to create a new qTip everytime I wanted to change the text as the content text change code didn't work properly.

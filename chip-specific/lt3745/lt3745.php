@@ -8,45 +8,8 @@
 //				See the README in the root dir for more info.
 -->
 
-<style>
-	.name, .equation, .symbol {
-		text-align: center;
-	}
-	
-	.comment {
-		font-size: small;
-	}
-	
-	.input {
-		border: 3px solid #000000;
-		border-radius: 4px;
-		padding: 2px;
-		background-color: #99FF99;
-	}
-
-	.input:focus { 
-		outline: none;
-		border-color: #00ff00;
-		box-shadow: 0 0 10px #9ecaed;
-	}
-	
-	.input.notValid, .output.notValid {
-		background-color: #FF9999;
-	}
-	
-	.input.notValid:focus { 
-		outline: none;
-		border-color: #ff0000;
-		box-shadow: 0 0 10px #9ecaed;
-	}
-	
-	.output {
-		border: 3px solid #ffffff;
-		border-radius: 0px;
-		padding: 2px;
-		background-color: #99FF99;
-	}
-</style>
+<!-- candy-calc CSS file -->
+<link type="text/css" rel="stylesheet" href="candy-calc/css/candy-calc.css" />
 
 <!-- MathJax for Latex rendering -->
 <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
