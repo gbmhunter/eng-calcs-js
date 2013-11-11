@@ -601,7 +601,6 @@ $(document).ready(
 				  																				
 					if(valueAccessor().isValid() == false)
 					{
-						$(element).css('background-color', '#FF9999');
 						//console.log('Activating tooltip.');
 						$(element).qtip('disable', false);
 						// Update text
@@ -626,19 +625,14 @@ $(document).ready(
 									}
 								}
 							});
-						$(element).qtip('api').set('content.text', 'New content');
-						console.log($(element).qtip('option', 'content.text'));
-						$(element).qtip('disable', true);
-						$(element).qtip('disable', false);
-						$(element).qtip('api').reposition()
-						//var api = $(element).qtip();
-						//api.set('content.ajax.url', api.options.content.ajax.url);
-						
+							
+						// Add notValid class for CSS to render red
+						$(element).addClass("notValid"); 						
 					}
 					else
 					{
-						$(element).css('background-color', '#99FF99');
-						//console.log('Deactivating tooltip');
+						// Remove notValid class to make green again
+						$(element).removeClass("notValid");
 						$(element).qtip('disable', true);
 					}
 					
