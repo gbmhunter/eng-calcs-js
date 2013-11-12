@@ -7,7 +7,18 @@
 // @details
 //				See the README in the root dir for more info.
 -->
-
+<script>
+	console.log('Checking if jQuery is present.');
+	if(!window.jQuery)
+	{
+		console.log('Loading jQuery.');
+		var script = document.createElement('script');
+		script.type = "text/javascript";
+		script.src = "http://code.jquery.com/jquery-latest.min.js";
+		document.getElementsByTagName('head')[0].appendChild(script);
+	}
+</script>
+	
 <!-- candy-calc CSS file -->
 <link type="text/css" rel="stylesheet" href="/candy-calc/css/candy-calc.css" />
 
@@ -18,7 +29,7 @@
 <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/knockout/2.3.0/knockout-min.js"></script>
 
 <!-- Jquery -->
-<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+<!--<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>-->
 
 <!-- CSS file -->
 <link type="text/css" rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/qtip2/2.1.0/jquery.qtip.min.css" />

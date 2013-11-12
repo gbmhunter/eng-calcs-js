@@ -75,6 +75,7 @@ Changelog
 ========= ========== ============================================================================================================
 Version   Date       Comment
 ========= ========== ============================================================================================================
+v3.7.4.0  2013/11/12 Added check to see if jQuery has already been loaded before loading (conditional load) to avoid conflicts when running on Wordpress.
 v3.7.3.0  2013/11/12 Added a forward-slash to the front of the candy-calc CSS path to see if it will fix the 'resource not found' error.
 v3.7.2.0  2013/11/12 Moved more of the inline styles into the candy-calc repo.
 v3.7.1.0  2013/11/11 Moved CSS code into candy-calc repo and added link to it from lt3445.php file. Aim is to eventually move all 'calculator framework' code into the candy-calc repo, while leaving Js-EngCalcs for actual calculator implementations.
