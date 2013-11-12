@@ -554,7 +554,7 @@ function AppViewModel() {
 var app = new AppViewModel();
 
 // Start-up function
-$(document).ready(
+jQuery(document).ready(
 	function StartUp()
 	{	  		
 		// Create custom binding

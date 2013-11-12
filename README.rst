@@ -5,7 +5,7 @@ Engineering Calculators Written In Javascript
 - Author: gbmhunter <gbmhunter@gmail.com> (http://www.cladlab.com)
 - Created: 2013/06/06
 - Last Modified: 2013/11/12
-- Version: v3.7.5.0
+- Version: v3.7.6.0
 - Company: CladLabs
 - Project: Free Code Libraries	.
 - Language: HTML/JS/PHP
@@ -75,6 +75,7 @@ Changelog
 ========= ========== ============================================================================================================
 Version   Date       Comment
 ========= ========== ============================================================================================================
+v3.7.6.0  2013/11/12 Changed $ to jQuery to see if it will fix jQuery issues when running in Wordpress.
 v3.7.5.0  2013/11/12 Modified incorrect conditional jQuery load.
 v3.7.4.0  2013/11/12 Added check to see if jQuery has already been loaded before loading (conditional load) to avoid conflicts when running on Wordpress.
 v3.7.3.0  2013/11/12 Added a forward-slash to the front of the candy-calc CSS path to see if it will fix the 'resource not found' error.
