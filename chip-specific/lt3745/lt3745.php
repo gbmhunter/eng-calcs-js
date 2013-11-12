@@ -7,16 +7,10 @@
 // @details
 //				See the README in the root dir for more info.
 -->
-<script>
-	console.log('Checking if jQuery is present.');
-	if(!window.jQuery)
-	{
-		console.log('Loading jQuery.');
-		var script = document.createElement('script');
-		script.type = "text/javascript";
-		script.src = "http://code.jquery.com/jquery-latest.min.js";
-		document.getElementsByTagName('head')[0].appendChild(script);
-	}
+<script type="text/javascript">
+	
+	window.jQuery || document.write('<script src="http://code.jquery.com/jquery-latest.min.js"><\/script>')
+
 </script>
 	
 <!-- candy-calc CSS file -->
