@@ -568,7 +568,7 @@ jQuery(document).ready(
 				  
 				// Create Opentip (tooltip) for input box
 				console.log('Initialising calculator variable handlers');
-				$(element).qtip({ // Grab some elements to apply the tooltip to
+				jQuery(element).qtip({ // Grab some elements to apply the tooltip to
 					content: {
 						text: '',
 						title: 'Error!'
@@ -578,17 +578,17 @@ jQuery(document).ready(
 					},
 					show: {
 						effect: function(offset) {
-							$(this).slideDown(100); // "this" refers to the tooltip
+							jQuery(this).slideDown(100); // "this" refers to the tooltip
 						}
 					},
 					hide: {
 						effect: function(offset) {
-							$(this).slideDown(100); // "this" refers to the tooltip
+							jQuery(this).slideDown(100); // "this" refers to the tooltip
 						}
 					}
 				})
 				// We want this disabled by default.
-				$(element).qtip('disable', true);
+				jQuery(element).qtip('disable', true);
 								
 			 },
 			 update: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
@@ -602,11 +602,11 @@ jQuery(document).ready(
 					if(valueAccessor().isValid() == false)
 					{
 						//console.log('Activating tooltip.');
-						$(element).qtip('disable', false);
+						jQuery(element).qtip('disable', false);
 						// Update text
 						console.log('Qtip');
-						//$(element).qtip('option', 'content.text', 'BLAH');
-						$(element).qtip({ // Grab some elements to apply the tooltip to
+						//jQuery(element).qtip('option', 'content.text', 'BLAH');
+						jQuery(element).qtip({ // Grab some elements to apply the tooltip to
 								content: {
 									text: valueAccessor().validatorA()[valueAccessor().trigIndex()].msg,
 									title: 'Error!'
@@ -616,24 +616,24 @@ jQuery(document).ready(
 								},
 								show: {
 									effect: function(offset) {
-										$(this).slideDown(100); // "this" refers to the tooltip
+										jQuery(this).slideDown(100); // "this" refers to the tooltip
 									}
 								},
 								hide: {
 									effect: function(offset) {
-										$(this).slideDown(100); // "this" refers to the tooltip
+										jQuery(this).slideDown(100); // "this" refers to the tooltip
 									}
 								}
 							});
 							
 						// Add notValid class for CSS to render red
-						$(element).addClass("notValid"); 						
+						jQuery(element).addClass("notValid"); 						
 					}
 					else
 					{
 						// Remove notValid class to make green again
-						$(element).removeClass("notValid");
-						$(element).qtip('disable', true);
+						jQuery(element).removeClass("notValid");
+						jQuery(element).qtip('disable', true);
 					}
 					
 			 }
