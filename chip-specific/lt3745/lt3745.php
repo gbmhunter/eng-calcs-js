@@ -9,7 +9,7 @@
 -->
 
 <!-- candy-calc CSS file -->
-<link type="text/css" rel="stylesheet" href="candy-calc/css/candy-calc.css" />
+<link type="text/css" rel="stylesheet" href="/candy-calc/css/candy-calc.css" />
 
 <!-- MathJax for Latex rendering -->
 <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
