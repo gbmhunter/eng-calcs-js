@@ -10,6 +10,10 @@
 
 //var j = jQuery.noConflict();
 
+// Include candy calc script
+//document.write('<script src="/candy-calc/js/candy-calc.js"><\/script>')
+
+/*
 // Debug flag. Set to true to print debug information, otherwise false.
 var DEBUG = true;
 
@@ -134,7 +138,7 @@ var calcComp = function(app, compFn, validatorFn, units, selUnit) {
 	}
 			
 };
-
+*/
 function AppViewModel() {
 
 	//============= Vload ============//
@@ -551,12 +555,11 @@ function AppViewModel() {
 	
 }
 
-var app = new AppViewModel();
-
 // Start-up function
 jQuery(document).ready(
 	function StartUp()
 	{	  		
+		/*
 		// Create custom binding
 		ko.bindingHandlers.calcVar = {
 			init: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
@@ -638,13 +641,14 @@ jQuery(document).ready(
 					
 			 }
 		};
-		
-		// Activates knockout.js
-		
+		*/
+		var app = new AppViewModel();
+		// Activates knockout.js		
 		ko.applyBindings(app);	
 	}
 );
 
+/*
 // Logs error messages
 function Log(msg)
 {
@@ -652,4 +656,4 @@ function Log(msg)
 	if(DEBUG == true)
 		console.log(msg);
 }
-
+*/

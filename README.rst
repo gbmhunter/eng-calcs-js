@@ -4,8 +4,8 @@ Engineering Calculators Written In Javascript
 
 - Author: gbmhunter <gbmhunter@gmail.com> (http://www.cladlab.com)
 - Created: 2013/06/06
-- Last Modified: 2013/11/12
-- Version: v3.7.7.0
+- Last Modified: 2013/11/14
+- Version: v3.8.0.0
 - Company: CladLabs
 - Project: Free Code Libraries	.
 - Language: HTML/JS/PHP
@@ -75,6 +75,7 @@ Changelog
 ========= ========== ============================================================================================================
 Version   Date       Comment
 ========= ========== ============================================================================================================
+v3.8.0.0  2013/11/14 LT3745 calculator now calls candy-calc framework (code moved into candy-calc repo).
 v3.7.7.0  2013/11/12 Replaced all occurrences of $ with jQuery.
 v3.7.6.0  2013/11/12 Changed $ to jQuery to see if it will fix jQuery issues when running in Wordpress.
 v3.7.5.0  2013/11/12 Modified incorrect conditional jQuery load.

@@ -13,6 +13,8 @@
 
 </script>
 	
+<!-- candy-calc logic -->
+<script type="text/javascript" src="/candy-calc/js/candy-calc.js" ></script>
 <!-- candy-calc CSS file -->
 <link type="text/css" rel="stylesheet" href="/candy-calc/css/candy-calc.css" />
 
