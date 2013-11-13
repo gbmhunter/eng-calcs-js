@@ -7,10 +7,9 @@
 // @details
 //				See the README in the root dir for more info.
 -->
-<script type="text/javascript">
-	
-	window.jQuery || document.write('<script src="http://code.jquery.com/jquery-latest.min.js"><\/script>')
 
+<script type="text/javascript">
+	window.jQuery || document.write('<script src="http://code.jquery.com/jquery-latest.min.js"><\/script>')
 </script>
 	
 <!-- candy-calc logic -->
@@ -18,20 +17,6 @@
 <!-- candy-calc CSS file -->
 <link type="text/css" rel="stylesheet" href="/candy-calc/css/candy-calc.css" />
 
-<!-- MathJax for Latex rendering -->
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<!-- Include knockout for binding -->
-<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/knockout/2.3.0/knockout-min.js"></script>
-
-<!-- Jquery -->
-<!--<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>-->
-
-<!-- CSS file -->
-<link type="text/css" rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/qtip2/2.1.0/jquery.qtip.min.css" />
-
-<!-- Include either the minifed or production version, not both -->
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/qtip2/2.1.0/jquery.qtip.min.js"></script>
 
 <p>A calculator to help you choose the values of the supporting passive components for the Linear Technology LT3745 16-channel LED driver.</p>
 <p>The datasheet can be found <a href="http://cds.linear.com/docs/en/datasheet/3745f.pdf">here</a>.</p>
