@@ -193,7 +193,7 @@
 			<td class="symbol">\(C_{out(min)}\)</td>
 			<td><input class="output" data-bind="calcVar: cOutMin" type="text" size="16" readonly="readonly" /></td>
 			<td class="units"><select data-bind="options: cOutMin.units, optionsText: 'name', value: cOutMin.selUnit" ></select></td>
-			<td class="equation">\( \small max( \dfrac{0.25}{R_{sense}*f_{ugf}}, \dfrac{1.5}{V_{buck,out}*R_{sense}*f_{ugf}}) \)</td>
+			<td class="equation">\( \small \begin{split} max( \dfrac{0.25}{R_{sense}*f_{ugf}}, \\ \dfrac{1.5}{V_{buck,out}*R_{sense}*f_{ugf}}) \end{split} \)</td>
 			<td class="comment"></td>
 		</tr>
 		<tr>
@@ -209,7 +209,7 @@
 			<td class="symbol">\(L_{min}\)</td>
 			<td><input class="output" data-bind="calcVar: lMin" type="text" size="16" readonly="readonly" /></td>
 			<td class="units"><select data-bind="options: lMin.units, optionsText: 'name', value: lMin.selUnit" ></select></td>
-			<td class="equation">\( \dfrac{V_{buck,out} + V_{d,f}}{ V_{in(max) + V_{d,f}}} * \dfrac{ V_{in(max)} - V_{buck,out} }{ f_{sw(act)}*I_{L(delta)} } \)</td>
+			<td class="equation">\( \small \dfrac{V_{buck,out} + V_{d,f}}{ V_{in(max) + V_{d,f}}} * \dfrac{ V_{in(max)} - V_{buck,out} }{ f_{sw(act)}*I_{L(delta)} } \)</td>
 			<td class="comment">This is the minimum inductance required to satisfy the inductor ripple current specified above. If this inductance is too large, you could consider increasing the ripple current, or increasing the switching frequency.</td>
 		</tr>
 		<tr></tr>
