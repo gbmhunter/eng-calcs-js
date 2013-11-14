@@ -193,7 +193,7 @@
 			<td class="symbol">\(C_{out(min)}\)</td>
 			<td><input class="output" data-bind="calcVar: cOutMin" type="text" size="16" readonly="readonly" /></td>
 			<td class="units"><select data-bind="options: cOutMin.units, optionsText: 'name', value: cOutMin.selUnit" ></select></td>
-			<td class="equation">\(max( \dfrac{0.25}{R_{sense}*f_{ugf}}, \dfrac{1.5}{V_{buck,out}*R_{sense}*f_{ugf}})\)</td>
+			<td class="equation">\( \small max( \dfrac{0.25}{R_{sense}*f_{ugf}}, \dfrac{1.5}{V_{buck,out}*R_{sense}*f_{ugf}}) \)</td>
 			<td class="comment"></td>
 		</tr>
 		<tr>

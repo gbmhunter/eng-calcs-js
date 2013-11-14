@@ -5,7 +5,7 @@ Engineering Calculators Written In Javascript
 - Author: gbmhunter <gbmhunter@gmail.com> (http://www.cladlab.com)
 - Created: 2013/06/06
 - Last Modified: 2013/11/14
-- Version: v3.8.1.0
+- Version: v3.8.2.0
 - Company: CladLabs
 - Project: Free Code Libraries	.
 - Language: HTML/JS/PHP
@@ -75,6 +75,7 @@ Changelog
 ========= ========== ============================================================================================================
 Version   Date       Comment
 ========= ========== ============================================================================================================
+v3.8.2.0  2013/11/14 Made the 'Minimum Output Capacitance' equation on the LT3745 calculator smaller to allow more table column room for the description.
 v3.8.1.0  2013/11/14 Moved all the 3d-party library/framework inclusions into candy-calc.
 v3.8.0.0  2013/11/14 LT3745 calculator now calls candy-calc framework (code moved into candy-calc repo).
 v3.7.7.0  2013/11/12 Replaced all occurrences of $ with jQuery.
