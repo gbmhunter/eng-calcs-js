@@ -71,7 +71,7 @@
 			<td><input class="input" data-bind="calcVar: rfb1" type="text" size="16" /></td>
 			<td class="units"><select data-bind="options: rfb1.units, optionsText: 'name', value: rfb1.selUnit"></select></td>
 			<td class="equation">n/a</td>
-			<td class="comment"></td>
+			<td class="comment">This resistor along with \(R_{fb2}\) determines the output voltage of the buck converter.</td>
 		</tr>
 		<tr>
 			<td class="name">Feedback Resistor 2</td>
@@ -79,7 +79,7 @@
 			<td><input class="output" data-bind="calcVar: rfb2" type="text" size="16" readonly="readonly" /></td>
 			<td class="units"><select data-bind="options: rfb2.units, optionsText: 'name', value: rfb2.selUnit" ></select></td>
 			<td class="equation">\(R_{fb1}*\left(\dfrac{V_{out(max)}}{1.205V} - 1\right)\)</td>
-			<td class="comment"></td>
+			<td class="comment">This resistor along with \(R_{fb1}\) determines the output voltage of the buck converter.</td>
 		</tr>
 		<tr></tr>
 		<tr>
@@ -130,7 +130,7 @@
 			<td><input class="input" data-bind="calcVar: vdf" type="text" size="16" /></td>
 			<td class="units"><select data-bind="options: vdf.units, optionsText: 'name', value: vdf.selUnit"></select></td>
 			<td class="equation">n/a</td>
-			<td class="comment"></td>
+			<td class="comment">This is the forward voltage drop across the buck diode at the operating current. This value can be found in the diodes datasheet.</td>
 		</tr>
 		<tr>
 			<td class="name">Minimum Duty Cycle</td>
@@ -181,12 +181,12 @@
 			<td class="comment">This is the switching frequency you want to use, set by the resistor \( R_T \). It has to be between 100kHz and 1MHz, and also less than \(f_{sw(max)}\).</td>
 		</tr>
 		<tr>
-			<td class="name">fufg</td>
+			<td class="name">Unity-gain Frequency</td>
 			<td class="symbol">\(f_{ugf}\)</td>
 			<td><input class="output" data-bind="calcVar: fugf" type="text" size="16" readonly="readonly" /></td>
 			<td class="units"><select data-bind="options: fugf.units, optionsText: 'name', value: fugf.selUnit" ></select></td>
 			<td class="equation">\(\dfrac{f_{sw(act)}}{10}\)</td>
-			<td class="comment"></td>
+			<td class="comment">This is the switching frequency which would give unity voltage gain between input and output.</td>
 		</tr>
 		<tr>
 			<td class="name">Minimum Output Capacitance</td>
@@ -194,7 +194,7 @@
 			<td><input class="output" data-bind="calcVar: cOutMin" type="text" size="16" readonly="readonly" /></td>
 			<td class="units"><select data-bind="options: cOutMin.units, optionsText: 'name', value: cOutMin.selUnit" ></select></td>
 			<td class="equation">\( \small \begin{split} max( \dfrac{0.25}{R_{sense}*f_{ugf}}, \\ \dfrac{1.5}{V_{buck,out}*R_{sense}*f_{ugf}}) \end{split} \)</td>
-			<td class="comment"></td>
+			<td class="comment">The output capacitance smooths the output voltage, and also stores energy to satisfy load transients.</td>
 		</tr>
 		<tr>
 			<td class="name">Inductor Ripple Current</td>
@@ -202,7 +202,7 @@
 			<td><input class="input" data-bind="calcVar: iLDelta" type="text" size="16" /></td>
 			<td class="units"><select data-bind="options: iLDelta.units, optionsText: 'name', value: iLDelta.selUnit"></select></td>
 			<td class="equation">n/a</td>
-			<td class="comment"></td>
+			<td class="comment">This is the maximum desired ripple current through the inductor.</td>
 		</tr>
 		<tr>
 			<td class="name">Minimum Inductance</td>
