@@ -75,6 +75,7 @@ Changelog
 ========= ========== ============================================================================================================
 Version   Date       Comment
 ========= ========== ============================================================================================================
+v3.10.0.0 2013/11/18 Added 'IsNumber' validators to all inputs of the LT3745 calculator.
 v3.9.0.0  2013/11/18 Replaced fugf with correct variable name. Added more comments to the LT3745 calculator.
 v3.8.5.0  2013/11/18 Removed all commented calculator code which is now in candy-calc. Updated candy-calc API calls to match new cc namespace (using cc.input and cc.output).
 v3.8.4.0  2013/11/14 Splitted the 'Minimum Inductance' equation in another attempt to allow more column room for the description.

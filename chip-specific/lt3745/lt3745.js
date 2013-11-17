@@ -17,9 +17,11 @@ function AppViewModel() {
 		[ new unit('V', 1.0) ],
 		0
 	);
+			
+	this.loadVoltage.AddValidator(cc.validatorEnum.IS_NUMBER);
 	
 	// Add validator
-	this.loadVoltage.AddValidator(
+	this.loadVoltage.AddCustomValidator(
 		'Voltage cannot be less than 0.',
 		function(app){
 			if(app.loadVoltage.val() < 0)
@@ -43,7 +45,7 @@ function AppViewModel() {
 	);
 	
 	// Add validator
-	this.vBuckOut.AddValidator(
+	this.vBuckOut.AddCustomValidator(
 		'Voltage cannot be less than 0.',
 		function(app){
 			if(app.vBuckOut.val() < 0)
@@ -78,7 +80,9 @@ function AppViewModel() {
 		},
 		[ new unit('V', 1.0) ],
 		0);
-		
+	
+	this.vInMax.AddValidator(cc.validatorEnum.IS_NUMBER);
+	
 	this.vInMax.isValid = ko.computed(
 		function()
 		{
@@ -101,6 +105,8 @@ function AppViewModel() {
 		],
 		1
 	);
+	
+	this.rfb1.AddValidator(cc.validatorEnum.IS_NUMBER);
 	
 	//============== Rfb2 ==============//
 		
@@ -131,6 +137,8 @@ function AppViewModel() {
 		],
 		0
 	);
+	
+	this.iOutMax.AddValidator(cc.validatorEnum.IS_NUMBER);
 	
 	//=========== Rsense ============//
 	
@@ -181,6 +189,8 @@ function AppViewModel() {
 		0
 	);
 	
+	this.iLedPinNom.AddValidator(cc.validatorEnum.IS_NUMBER);
+	
 	//======= Riset =========//
 
 	// Riset = 2500*(1.205/Iled-pin(nom))
@@ -210,6 +220,8 @@ function AppViewModel() {
 		],
 		0
 	);
+	
+	this.vdf.AddValidator(cc.validatorEnum.IS_NUMBER);
 	
 	//======= Dmin =========//
 	
@@ -263,6 +275,8 @@ function AppViewModel() {
 		0
 	);
 	
+	this.tOnMin.AddValidator(cc.validatorEnum.IS_NUMBER);
+	
 	//================ toff(min) ============//
 	
 	this.tOffMin = new cc.input(
@@ -274,6 +288,8 @@ function AppViewModel() {
 		],
 		0
 	);
+	
+	this.tOffMin.AddValidator(cc.validatorEnum.IS_NUMBER);
 	
 	//================ fsw(max) ==============//
 	
@@ -306,17 +322,7 @@ function AppViewModel() {
 		[ new unit('kHz', 1000.0) ],
 		0);
 	
-	this.fSwAct.validator = ko.computed(
-		function(){
-			if(this.fSwAct.val() > 1000000)
-			{
-				return false;
-				}
-			else 
-				return true;
-		},
-		this
-	);
+	this.fSwAct.AddValidator(cc.validatorEnum.IS_NUMBER);
 	
 	//================ fugf ==============//
 	
@@ -367,6 +373,8 @@ function AppViewModel() {
 		0
 	);
 	
+	this.iLDelta.AddValidator(cc.validatorEnum.IS_NUMBER);
+	
 	//================ L(min) ==============//
 	
 	// Lmin = [ (Vbuck,out + Vd,f) / (Vin(max) + Vd,f) ] * [ (Vin(max) - Vbuck,out) / (fsw(act)*Il(delta)) ]
@@ -399,6 +407,8 @@ function AppViewModel() {
 		],
 		0
 	);
+	
+	this.vInRipple.AddValidator(cc.validatorEnum.IS_NUMBER);
 	
 	//================ Cin(min) ==============//
 	
