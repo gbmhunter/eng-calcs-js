@@ -7,143 +7,11 @@
 // @details
 //				See the README in the root dir for more info.
 
-
-//var j = jQuery.noConflict();
-
-// Include candy calc script
-//document.write('<script src="/candy-calc/js/candy-calc.js"><\/script>')
-
-/*
-// Debug flag. Set to true to print debug information, otherwise false.
-var DEBUG = true;
-
-var unit = function(name, multiplier) {
-        this.name = name;
-        this.multiplier = multiplier;
-   };
-	
-// "Class" for validator object, which holds both a message and validator function
-function validator(msg, fn, app)
-{
-	this.msg = msg;
-	this.fn = fn;
-	this.app = app;
-}
-	
-// "Class" for a calc variable
-var calcInput = function(app, validatorFn, units, selUnit) {
-			this.dispVal = ko.observable();
-			this.units = ko.observableArray(units);
-			this.selUnit = ko.observable(this.units()[selUnit]);
-			
-			// Scaled value, taking into account the units
-			this.val = ko.computed( function(){
-				return parseFloat(this.dispVal())*parseFloat(this.selUnit().multiplier);
-			},
-			this);
-
-			// Holds all validator functions
-			this.validatorA = ko.observableArray();
-			
-			//this.triggeredValidator = ko.observable();
-			
-			this.trigIndex = ko.observable();
-			
-			// Default is to just return true.
-			this.isValid = ko.computed(
-				function()
-				{
-					console.log('Computing isValid.');
-					for (var i = 0; i < this.validatorA().length; i++) {
-						if(this.validatorA()[i].fn(this.validatorA()[i].app) == false)
-						{
-							// Remember the validator which returned false
-							//this.triggeredValidator(this.validatorA()[i]);
-							console.log('Setting index.');
-							this.trigIndex(i);
-							console.log('Returning false.');
-							return false;
-						}
-					}
-					// Only gets here if no validator function returned false
-					console.log('Returning true.');
-					return true;
-				},
-				this
-			);
-			
-			// Methods
-			this.AddValidator = function(msg, fn, app)
-			{
-				// Create new validator object and add to the end of the array
-				this.validatorA.push(new validator(msg, fn, app));
-			}
-   };
-	
-var calcComp = function(app, compFn, validatorFn, units, selUnit) {
-			
-	this.units = ko.observableArray(units);
-	this.selUnit = ko.observable(this.units()[selUnit]);
-	
-	this.val = ko.computed(compFn, app);
-	
-	// Number of decimal places to round value to
-	this.roundTo = 1;
-	
-	// This is the displayed value
-	this.dispVal = ko.computed(function(){
-			var unroundedVal = this.val()/this.selUnit().multiplier;
-			// Round the value
-			var roundedVal = Math.round(unroundedVal*Math.pow(10, this.roundTo))/Math.pow(10, this.roundTo);
-			return roundedVal;
-		},
-		this);				
-	
-	this.lowerBound = 0; //ko.observable(lowerBound);
-	this.upperBound = 0; //ko.observable(upperBound);
-
-	// Holds all validator functions
-	this.validatorA = ko.observableArray();
-	
-	this.trigIndex = ko.observable();
-	
-	// Default is to just return true.
-	this.isValid = ko.computed(
-		function()
-		{
-			console.log('Computing isValid.');
-			for (var i = 0; i < this.validatorA().length; i++) {
-				if(this.validatorA()[i].fn(this.validatorA()[i].app) == false)
-				{
-					// Remember the validator which returned false
-					//this.triggeredValidator(this.validatorA()[i]);
-					console.log('Setting index.');
-					this.trigIndex(i);
-					console.log('Returning false.');
-					return false;
-				}
-			}
-			// Only gets here if no validator function returned false
-			console.log('Returning true.');
-			return true;
-		},
-		this
-	);
-			
-	// Methods
-	this.AddValidator = function(msg, fn, app)
-	{
-		// Create new validator object and add to the end of the array
-		this.validatorA.push(new validator(msg, fn, app));
-	}
-			
-};
-*/
 function AppViewModel() {
 
 	//============= Vload ============//
 	
-   this.loadVoltage = new calcInput(
+   this.loadVoltage = new cc.input(
 		this,
 		function() { return true; },
 		[ new unit('V', 1.0) ],
@@ -163,7 +31,7 @@ function AppViewModel() {
 	
 	//============== Vbuck,out ===========//
 		
-	this.vBuckOut = new calcComp(
+	this.vBuckOut = new cc.output(
 		this,
 		function() 
 		{
@@ -187,7 +55,7 @@ function AppViewModel() {
 	
 	//=============== Vin(min) ===============//
 		
-	this.vInMin = new calcComp(
+	this.vInMin = new cc.output(
 		this,
 		function() 
 		{
@@ -202,7 +70,7 @@ function AppViewModel() {
 	
 	//================= Vin(max) ================//
 
-	this.vInMax = new calcInput(
+	this.vInMax = new cc.input(
 		this,
 		function()
 		{
@@ -224,7 +92,7 @@ function AppViewModel() {
 	
 	//========== Rfb1 =============//
 	
-	this.rfb1 = new calcInput(
+	this.rfb1 = new cc.input(
 		this,
 		function() { return true; },
 		[ 
@@ -236,7 +104,7 @@ function AppViewModel() {
 	
 	//============== Rfb2 ==============//
 		
-	this.rfb2 = new calcComp(
+	this.rfb2 = new cc.output(
 		this,
 		function() 
 		{
@@ -254,7 +122,7 @@ function AppViewModel() {
 		
 	//=============== Iout(max) =================//
 	
-	this.iOutMax = new calcInput(
+	this.iOutMax = new cc.input(
 		this,
 		function() { return true; },
 		[
@@ -267,7 +135,7 @@ function AppViewModel() {
 	//=========== Rsense ============//
 	
 	// Rsense = 35mV/Iout(max)
-	this.rSense = new calcComp(
+	this.rSense = new cc.output(
 		this,
 		function() 
 		{	
@@ -284,7 +152,7 @@ function AppViewModel() {
 	//======= Prsense =========//
 	
 	// Prsense = Iout(max)^2*Rsense
-	this.prsense = new calcComp(
+	this.prsense = new cc.output(
 		this,
 		function() 
 		{			
@@ -303,7 +171,7 @@ function AppViewModel() {
 		
 	//================ iLedPinNom ================//
 		
-	this.iLedPinNom = new calcInput(
+	this.iLedPinNom = new cc.input(
 		this,
 		function() { return true; },
 		[
@@ -316,7 +184,7 @@ function AppViewModel() {
 	//======= Riset =========//
 
 	// Riset = 2500*(1.205/Iled-pin(nom))
-	this.riSet = new calcComp(
+	this.riSet = new cc.output(
 		this,
 		function() 
 		{
@@ -334,7 +202,7 @@ function AppViewModel() {
 		
 	//============= Vd,f =============//
 		
-	this.vdf = new calcInput(
+	this.vdf = new cc.input(
 		this,
 		function() { return true; },
 		[
@@ -346,7 +214,7 @@ function AppViewModel() {
 	//======= Dmin =========//
 	
 	// Dmin = (Vout(max) + Vd,f) / (Vin(max) + Vd,f)
-	this.dMin = new calcComp(
+	this.dMin = new cc.output(
 		this,
 		function() 
 		{		
@@ -366,7 +234,7 @@ function AppViewModel() {
 	//======= Dmax =========//
 	
 	// Dmax = (Vout(max) + Vd,f) / (Vin(min) + Vd,f)
-	this.dMax = new calcComp(
+	this.dMax = new cc.output(
 		this,
 		function() 
 		{			
@@ -385,7 +253,7 @@ function AppViewModel() {
 	
 	//================ ton(min)==============//
 	
-	this.tOnMin = new calcInput(
+	this.tOnMin = new cc.input(
 		this,
 		function() { return true; },
 		[
@@ -397,7 +265,7 @@ function AppViewModel() {
 	
 	//================ toff(min) ============//
 	
-	this.tOffMin = new calcInput(
+	this.tOffMin = new cc.input(
 		this,
 		function () { return true; },
 		[
@@ -410,7 +278,7 @@ function AppViewModel() {
 	//================ fsw(max) ==============//
 	
 	// fsw(max) = min( Dmin/ton(min) , (1 - Dmax)/toff(min) )
-	this.fSwMax = new calcComp(
+	this.fSwMax = new cc.output(
 		this,
 		function() 
 		{			
@@ -430,7 +298,7 @@ function AppViewModel() {
 	
 	//================ fsw(act) ============//
 	
-	this.fSwAct = new calcInput(
+	this.fSwAct = new cc.input(
 		this,
 		function(){
 			return true;
@@ -453,7 +321,7 @@ function AppViewModel() {
 	//================ fugf ==============//
 	
 	// fugf = fsw(act)/10
-	this.fugf = new calcComp(
+	this.fugf = new cc.output(
 		this,
 		function() 
 		{			
@@ -471,7 +339,7 @@ function AppViewModel() {
 	//================ Cout(min) ==============//
 	
 	// Cout(min) = max( 0.25/(Rsense*fugf) , 1.5/(Rsense*Vbuck,out*fugf) )
-	this.cOutMin = new calcComp(
+	this.cOutMin = new cc.output(
 		this,
 		function() 
 		{
@@ -490,7 +358,7 @@ function AppViewModel() {
 	
 	//================ Il(delta) ============//
 	
-	this.iLDelta = new calcInput(
+	this.iLDelta = new cc.input(
 		this,
 		function() { return true; },
 		[
@@ -502,7 +370,7 @@ function AppViewModel() {
 	//================ L(min) ==============//
 	
 	// Lmin = [ (Vbuck,out + Vd,f) / (Vin(max) + Vd,f) ] * [ (Vin(max) - Vbuck,out) / (fsw(act)*Il(delta)) ]
-	this.lMin = new calcComp(
+	this.lMin = new cc.output(
 		this,
 		function() 
 		{
@@ -523,7 +391,7 @@ function AppViewModel() {
 		
 	//================ Vin(ripple) ============//
 	
-	this.vInRipple = new calcInput(
+	this.vInRipple = new cc.input(
 		this,
 		function() { return true; },
 		[
@@ -535,7 +403,7 @@ function AppViewModel() {
 	//================ Cin(min) ==============//
 	
 	// Cin(min) = (Dmax*Iout(max)) / (Vin,ripple*fsw(act))
-	this.cInMin = new calcComp(
+	this.cInMin = new cc.output(
 		this,
 		function() 
 		{

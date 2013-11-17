@@ -4,8 +4,8 @@ Engineering Calculators Written In Javascript
 
 - Author: gbmhunter <gbmhunter@gmail.com> (http://www.cladlab.com)
 - Created: 2013/06/06
-- Last Modified: 2013/11/14
-- Version: v3.8.4.0
+- Last Modified: 2013/11/18
+- Version: v3.8.5.0
 - Company: CladLabs
 - Project: Free Code Libraries	.
 - Language: HTML/JS/PHP
@@ -75,6 +75,7 @@ Changelog
 ========= ========== ============================================================================================================
 Version   Date       Comment
 ========= ========== ============================================================================================================
+v3.8.5.0  2013/11/18 Removed all commented calculator code which is now in candy-calc. Updated candy-calc API calls to match new cc namespace (using cc.input and cc.output).
 v3.8.4.0  2013/11/14 Splitted the 'Minimum Inductance' equation in another attempt to allow more column room for the description.
 v3.8.3.0  2013/11/14 Splitted the 'Minimum Output Capacitance' equation into two lines, and made the 'Minimum Inductance' equation smaller in another attempt to allow more column room for the description.
 v3.8.2.0  2013/11/14 Made the 'Minimum Output Capacitance' equation on the LT3745 calculator smaller to allow more table column room for the description.
