@@ -23,17 +23,18 @@ function AppViewModel() {
 			0
 		);
 				
-		this.loadVoltage.AddValidator(cc.validatorEnum.IS_NUMBER);
+		this.loadVoltage.AddValidator(cc.validatorEnum.IS_NUMBER, cc.severityEnum.error);
 		
 		// Add validator
 		this.loadVoltage.AddCustomValidator(
+			this,
 			'Voltage cannot be less than 0.',
 			function(app){
 				if(app.loadVoltage.val() < 0)
 					return false;
 				return true;
 			},
-			this,
+			cc.severityEnum.warning
 		);
 		
 		//============== Vbuck,out ===========//
@@ -50,15 +51,7 @@ function AppViewModel() {
 		);
 		
 		// Add validator
-		this.vBuckOut.AddCustomValidator(
-			'Voltage cannot be less than 0.',
-			function(app){
-				if(app.vBuckOut.val() < 0)
-					return false;
-				return true;
-			},
-			this
-		);
+		//this.vBuckOut.AddValidator(cc.validatorEnum.IS_NUMBER, cc.severityEnum.error);
 		
 		//=============== Vin(min) ===============//
 			
@@ -86,18 +79,7 @@ function AppViewModel() {
 			[ new unit('V', 1.0) ],
 			0);
 		
-		this.vInMax.AddValidator(cc.validatorEnum.IS_NUMBER);
-		
-		this.vInMax.isValid = ko.computed(
-			function()
-			{
-				if(this.vInMax.val() < this.vInMin.val())
-					return false;
-				else
-					return true;
-			},
-			this
-		);
+		this.vInMax.AddValidator(cc.validatorEnum.IS_NUMBER, cc.severityEnum.error);
 		
 		//========== Rfb1 =============//
 		
@@ -111,7 +93,7 @@ function AppViewModel() {
 			1
 		);
 		
-		this.rfb1.AddValidator(cc.validatorEnum.IS_NUMBER);
+		this.rfb1.AddValidator(cc.validatorEnum.IS_NUMBER, cc.severityEnum.error);
 		
 		//============== Rfb2 ==============//
 			
@@ -143,7 +125,7 @@ function AppViewModel() {
 			0
 		);
 		
-		this.iOutMax.AddValidator(cc.validatorEnum.IS_NUMBER);
+		this.iOutMax.AddValidator(cc.validatorEnum.IS_NUMBER, cc.severityEnum.error);
 		
 		//=========== Rsense ============//
 		
@@ -194,7 +176,7 @@ function AppViewModel() {
 			0
 		);
 		
-		this.iLedPinNom.AddValidator(cc.validatorEnum.IS_NUMBER);
+		this.iLedPinNom.AddValidator(cc.validatorEnum.IS_NUMBER, cc.severityEnum.error);
 		
 		//======= Riset =========//
 
@@ -226,7 +208,7 @@ function AppViewModel() {
 			0
 		);
 		
-		this.vdf.AddValidator(cc.validatorEnum.IS_NUMBER);
+		this.vdf.AddValidator(cc.validatorEnum.IS_NUMBER, cc.severityEnum.error);
 		
 		//======= Dmin =========//
 		
@@ -280,7 +262,7 @@ function AppViewModel() {
 			0
 		);
 		
-		this.tOnMin.AddValidator(cc.validatorEnum.IS_NUMBER);
+		this.tOnMin.AddValidator(cc.validatorEnum.IS_NUMBER, cc.severityEnum.error);
 		
 		//================ toff(min) ============//
 		
@@ -294,7 +276,7 @@ function AppViewModel() {
 			0
 		);
 		
-		this.tOffMin.AddValidator(cc.validatorEnum.IS_NUMBER);
+		this.tOffMin.AddValidator(cc.validatorEnum.IS_NUMBER, cc.severityEnum.error);
 		
 		//================ fsw(max) ==============//
 		
@@ -327,7 +309,7 @@ function AppViewModel() {
 			[ new unit('kHz', 1000.0) ],
 			0);
 		
-		this.fSwAct.AddValidator(cc.validatorEnum.IS_NUMBER);
+		this.fSwAct.AddValidator(cc.validatorEnum.IS_NUMBER, cc.severityEnum.error);
 		
 		//================ fugf ==============//
 		
@@ -336,7 +318,6 @@ function AppViewModel() {
 			this,
 			function() 
 			{			
-				//var fSwAct = parseFloat(this.fSwAct().value())*this.fSwAct().selUnit().multiplier;
 				var fSwAct = this.fSwAct.val();
 				return (fSwAct/10.0);
 			}, 
@@ -378,7 +359,7 @@ function AppViewModel() {
 			0
 		);
 		
-		this.iLDelta.AddValidator(cc.validatorEnum.IS_NUMBER);
+		this.iLDelta.AddValidator(cc.validatorEnum.IS_NUMBER, cc.severityEnum.error);
 		
 		//================ L(min) ==============//
 		
@@ -413,7 +394,7 @@ function AppViewModel() {
 			0
 		);
 		
-		this.vInRipple.AddValidator(cc.validatorEnum.IS_NUMBER);
+		this.vInRipple.AddValidator(cc.validatorEnum.IS_NUMBER, cc.severityEnum.error);
 		
 		//================ Cin(min) ==============//
 		
