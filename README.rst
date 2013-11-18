@@ -5,7 +5,7 @@ Engineering Calculators Written In Javascript
 - Author: gbmhunter <gbmhunter@gmail.com> (http://www.cladlab.com)
 - Created: 2013/06/06
 - Last Modified: 2013/11/18
-- Version: v3.9.0.0
+- Version: v3.10.1.0
 - Company: CladLabs
 - Project: Free Code Libraries	.
 - Language: HTML/JS/PHP
@@ -75,6 +75,7 @@ Changelog
 ========= ========== ============================================================================================================
 Version   Date       Comment
 ========= ========== ============================================================================================================
+v3.10.1.0 2013/11/18 Added a namespace for the LT3745 calculator so that other calculators can run on the same page. This uses the knockout data-bind 'with' command.
 v3.10.0.0 2013/11/18 Added 'IsNumber' validators to all inputs of the LT3745 calculator.
 v3.9.0.0  2013/11/18 Replaced fugf with correct variable name. Added more comments to the LT3745 calculator.
 v3.8.5.0  2013/11/18 Removed all commented calculator code which is now in candy-calc. Updated candy-calc API calls to match new cc namespace (using cc.input and cc.output).
