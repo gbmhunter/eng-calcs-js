@@ -33,7 +33,7 @@ function AppViewModel() {
 					return false;
 				return true;
 			},
-			this
+			this,
 		);
 		
 		//============== Vbuck,out ===========//
@@ -444,89 +444,6 @@ function AppViewModel() {
 jQuery(document).ready(
 	function StartUp()
 	{	  		
-		/*
-		// Create custom binding
-		ko.bindingHandlers.calcVar = {
-			init: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
-				// This will be called when the binding is first applied to an element
-				// Set up any initial state, event handlers, etc. here
-				//console.log(valueAccessor()().rawVal());
-				// Call value binding (child binding)
-				ko.bindingHandlers.value.init(element, function (){ return valueAccessor().dispVal } , allBindings, viewModel, bindingContext);
-				  
-				// Create Opentip (tooltip) for input box
-				console.log('Initialising calculator variable handlers');
-				jQuery(element).qtip({ // Grab some elements to apply the tooltip to
-					content: {
-						text: '',
-						title: 'Error!'
-					},
-					style: {
-						classes: 'qtip-red qtip-rounded qtip-shadow'
-					},
-					show: {
-						effect: function(offset) {
-							jQuery(this).slideDown(100); // "this" refers to the tooltip
-						}
-					},
-					hide: {
-						effect: function(offset) {
-							jQuery(this).slideDown(100); // "this" refers to the tooltip
-						}
-					}
-				})
-				// We want this disabled by default.
-				jQuery(element).qtip('disable', true);
-								
-			 },
-			 update: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
-				  // This will be called once when the binding is first applied to an element,
-				  // and again whenever the associated observable changes value.
-				  // Update the DOM element based on the supplied values here.
-		
-				  // Call value binding (child binding)
-				  ko.bindingHandlers.value.update(element, function (){ return valueAccessor().dispVal } , allBindings, viewModel, bindingContext);
-				  																				
-					if(valueAccessor().isValid() == false)
-					{
-						//console.log('Activating tooltip.');
-						jQuery(element).qtip('disable', false);
-						// Update text
-						console.log('Qtip');
-						//jQuery(element).qtip('option', 'content.text', 'BLAH');
-						jQuery(element).qtip({ // Grab some elements to apply the tooltip to
-								content: {
-									text: valueAccessor().validatorA()[valueAccessor().trigIndex()].msg,
-									title: 'Error!'
-								},
-								style: {
-									classes: 'qtip-red qtip-rounded qtip-shadow'
-								},
-								show: {
-									effect: function(offset) {
-										jQuery(this).slideDown(100); // "this" refers to the tooltip
-									}
-								},
-								hide: {
-									effect: function(offset) {
-										jQuery(this).slideDown(100); // "this" refers to the tooltip
-									}
-								}
-							});
-							
-						// Add notValid class for CSS to render red
-						jQuery(element).addClass("notValid"); 						
-					}
-					else
-					{
-						// Remove notValid class to make green again
-						jQuery(element).removeClass("notValid");
-						jQuery(element).qtip('disable', true);
-					}
-					
-			 }
-		};
-		*/
 		var app = new AppViewModel();
 		// Activates knockout.js		
 		ko.applyBindings(app);	

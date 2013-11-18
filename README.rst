@@ -75,6 +75,7 @@ Changelog
 ========= ========== ============================================================================================================
 Version   Date       Comment
 ========= ========== ============================================================================================================
+v3.10.3.0 2013/11/18 Deleted commented custom binding code which is now in candy-calc from lt3745.js. 
 v3.10.2.0 2013/11/18 Removed unnecessary HTML form element from the LT3745 calculator. 
 v3.10.1.0 2013/11/18 Added a namespace for the LT3745 calculator so that other calculators can run on the same page. This uses the knockout data-bind 'with' command.
 v3.10.0.0 2013/11/18 Added 'IsNumber' validators to all inputs of the LT3745 calculator.
