@@ -416,9 +416,7 @@ function AppViewModel() {
 			],
 			0
 		);
-	
 	}
-	
 }
 
 // Start-up function
@@ -430,13 +428,3 @@ jQuery(document).ready(
 		ko.applyBindings(app);	
 	}
 );
-
-/*
-// Logs error messages
-function Log(msg)
-{
-	// Only print if DEBUG variable has been set to true
-	if(DEBUG == true)
-		console.log(msg);
-}
-*/

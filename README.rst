@@ -75,6 +75,7 @@ cd ../Js
 ========= ========== ============================================================================================================
 Version   Date       Comment
 ========= ========== ============================================================================================================
+v3.12.0.0 2013/11/21 Converted standard-resistance-calculator to candy-calc framework.
 v3.11.1.0 2013/11/20 Modified bindings in LT3745 calculator so that variables update on 'key down' rather than 'change', which makes the UI more responsive and 'live'.
 v3.11.0.0 2013/11/18 Added validator severity to the LT3745 calculator.
 v3.10.3.0 2013/11/18 Deleted commented custom binding code which is now in candy-calc from lt3745.js. 
