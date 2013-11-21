@@ -7,7 +7,7 @@
 // @details
 //				See the README in the root dir for more info.
 
-function AppViewModel() {
+function AppViewModel0() {
 
 	// Adding the lt3745 "namespace" for LT3745 calculator, so that multiple calculators can work
 	// on the same page. Use the data-bind="with: lt3745" command within the HTML to access the child variables.
@@ -419,12 +419,5 @@ function AppViewModel() {
 	}
 }
 
-// Start-up function
-jQuery(document).ready(
-	function StartUp()
-	{	  		
-		var app = new AppViewModel();
-		// Activates knockout.js		
-		ko.applyBindings(app);	
-	}
-);
+// Register the calculator
+cc.registerCalc(AppViewModel0, 'lt3745');

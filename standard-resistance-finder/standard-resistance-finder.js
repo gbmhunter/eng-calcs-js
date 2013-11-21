@@ -7,7 +7,7 @@
 // @details
 //				See the README in the root dir for more info.
 	
-function AppViewModel() {
+function AppViewModel1() {
 
 	// Adding the standardResistanceFinder "namespace" for the calculator, so that multiple calculators can work
 	// on the same page. Use the data-bind="with: standardResistanceCalculator" command within the HTML to access the child variables.
@@ -194,12 +194,6 @@ function AppViewModel() {
 	}
 }
 
-// Start-up function
-jQuery(document).ready(
-	function StartUp()
-	{	  		
-		var app = new AppViewModel();
-		// Activates knockout.js		
-		ko.applyBindings(app);	
-	}
-);
+// Register the calculator
+cc.registerCalc(AppViewModel1, 'standardResistanceFinder');
+
