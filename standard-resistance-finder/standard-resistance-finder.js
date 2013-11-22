@@ -7,11 +7,10 @@
 // @details
 //				See the README in the root dir for more info.
 	
-function AppViewModel1() {
 
 	// Adding the standardResistanceFinder "namespace" for the calculator, so that multiple calculators can work
 	// on the same page. Use the data-bind="with: standardResistanceCalculator" command within the HTML to access the child variables.
-	this.standardResistanceFinder = new function()
+	standardResistanceFinder = function()
 	{
 
 		// E12 resistance array
@@ -192,8 +191,7 @@ function AppViewModel1() {
 				};
 		}
 	}
-}
 
 // Register the calculator
-cc.registerCalc(AppViewModel1, 'standardResistanceFinder');
+cc.registerCalc(standardResistanceFinder, 'standardResistanceFinder');
 

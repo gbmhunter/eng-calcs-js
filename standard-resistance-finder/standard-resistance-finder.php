@@ -18,7 +18,7 @@
 <link type="text/css" rel="stylesheet" href="/candy-calc/css/candy-calc.css" />
 
 <p>This calculator finds a standard resistance value(s) that will best match the resistance \(R_{desired}\) you specify.</p>
-<table id="standardResistanceFinder" class="candy-calc" data-bind="with: standardResistanceFinder" border="4" style="width: 500px;">
+<table id="standardResistanceFinder" class="candy-calc" border="4" style="width: 500px;">
 	<tbody>
 		<tr>
 			<td><strong>Variable:</strong></td>

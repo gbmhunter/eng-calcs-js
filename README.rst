@@ -5,7 +5,7 @@ Engineering Calculators Written In Javascript
 - Author: gbmhunter <gbmhunter@gmail.com> (http://www.cladlab.com)
 - Created: 2013/06/06
 - Last Modified: 2013/11/22
-- Version: v3.13.0.0
+- Version: v3.13.1.0
 - Company: CladLabs
 - Project: Free Code Libraries	.
 - Language: HTML/JS/PHP
@@ -75,6 +75,7 @@ Changelog
 ========= ========== ============================================================================================================
 Version   Date       Comment
 ========= ========== ============================================================================================================
+v3.13.1.0 2013/11/22 Removed the unneeded 'AppViewModel' objects, which meant that the ``data-bid with`` statement in the php files was also unneeded.
 v3.13.0.0 2013/11/22 Multiple calculators can now run in the same page, using the ``cc.registerCalc()`` API call. Closes #42.
 v3.12.0.0 2013/11/21 Converted standard-resistance-calculator to candy-calc framework.
 v3.11.1.0 2013/11/20 Modified bindings in LT3745 calculator so that variables update on 'key down' rather than 'change', which makes the UI more responsive and 'live'.

@@ -17,11 +17,10 @@
 <!-- candy-calc CSS file -->
 <link type="text/css" rel="stylesheet" href="/candy-calc/css/candy-calc.css" />
 
-
 <p>A calculator to help you choose the values of the supporting passive components for the Linear Technology LT3745 16-channel LED driver.</p>
 <p>The datasheet can be found <a href="http://cds.linear.com/docs/en/datasheet/3745f.pdf">here</a>.</p>
 <p>For more information you can check out the Linear Technology Demonstration Circuit 1608A.</p>
-<table id="lt3745" class="candy-calc" data-bind="with: lt3745" border="4">
+<table id="lt3745" class="candy-calc" border="4">
 	<tbody>
 		<tr>
 			<td><strong>Variable Name:</strong></td>
