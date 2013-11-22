@@ -17,7 +17,7 @@ this.lt3745 = function()
 	this.loadVoltage = new cc.input(
 		this,
 		function() { return true; },
-		[ new unit('V', 1.0) ],
+		[ new cc.unit('V', 1.0) ],
 		0
 	);
 			
@@ -44,7 +44,7 @@ this.lt3745 = function()
 			return this.loadVoltage.val() + 0.8;
 		}, 
 		function() { return true; },
-		[ new unit('V', 1.0) ],
+		[ new cc.unit('V', 1.0) ],
 		0
 	);
 	
@@ -63,7 +63,7 @@ this.lt3745 = function()
 		{
 			return true;
 		},
-		[ new unit('V', 1.0) ],
+		[ new cc.unit('V', 1.0) ],
 		0);
 	
 	//================= Vin(max) ================//
@@ -74,7 +74,7 @@ this.lt3745 = function()
 		{
 			return true;
 		},
-		[ new unit('V', 1.0) ],
+		[ new cc.unit('V', 1.0) ],
 		0);
 	
 	this.vInMax.AddValidator(cc.validatorEnum.IS_NUMBER, cc.severityEnum.error);
@@ -85,8 +85,8 @@ this.lt3745 = function()
 		this,
 		function() { return true; },
 		[ 
-			new unit('\u2126', 1.0),
-			new unit('k\u2126', 1000.0) 
+			new cc.unit('\u2126', 1.0),
+			new cc.unit('k\u2126', 1000.0) 
 		],
 		1
 	);
@@ -106,8 +106,8 @@ this.lt3745 = function()
 			return true;
 		},
 		[ 
-			new unit('\u2126', 1.0), 
-			new unit('k\u2126', 1000.0)
+			new cc.unit('\u2126', 1.0), 
+			new cc.unit('k\u2126', 1000.0)
 		],
 		1);
 		
@@ -117,8 +117,8 @@ this.lt3745 = function()
 		this,
 		function() { return true; },
 		[
-			new unit('mA', 0.001),
-			new unit('A', 1.0)
+			new cc.unit('mA', 0.001),
+			new cc.unit('A', 1.0)
 		],
 		0
 	);
@@ -136,8 +136,8 @@ this.lt3745 = function()
 		}, 
 		function() { return true; },
 		[
-			new unit('m\u2126', 0.001),
-			new unit('\u2126', 1.0)
+			new cc.unit('m\u2126', 0.001),
+			new cc.unit('\u2126', 1.0)
 		],
 		0
 	);
@@ -156,8 +156,8 @@ this.lt3745 = function()
 		},
 		function() { return this; },
 		[
-			new unit('mW', 0.001),
-			new unit('W', 1)
+			new cc.unit('mW', 0.001),
+			new cc.unit('W', 1)
 		],
 		0
 	);
@@ -168,8 +168,8 @@ this.lt3745 = function()
 		this,
 		function() { return true; },
 		[
-			new unit('mA', 0.001),
-			new unit('A', 1.0),
+			new cc.unit('mA', 0.001),
+			new cc.unit('A', 1.0),
 		],
 		0
 	);
@@ -189,8 +189,8 @@ this.lt3745 = function()
 		},
 		function() { return true; },
 		[
-			new unit('\u2126', 1.0),
-			new unit('k\u2126', 1000.0)
+			new cc.unit('\u2126', 1.0),
+			new cc.unit('k\u2126', 1000.0)
 		],
 		1
 	);
@@ -201,7 +201,7 @@ this.lt3745 = function()
 		this,
 		function() { return true; },
 		[
-			new unit('V', 1.0)
+			new cc.unit('V', 1.0)
 		],
 		0
 	);
@@ -223,7 +223,7 @@ this.lt3745 = function()
 		}, 
 		function() { return true; },
 		[
-			new unit('%', 1.0),
+			new cc.unit('%', 1.0),
 		],
 		0
 	);
@@ -243,7 +243,7 @@ this.lt3745 = function()
 		}, 
 		function() { return true; },
 		[
-			new unit('%', 1.0)
+			new cc.unit('%', 1.0)
 		],
 		0
 	);
@@ -254,8 +254,8 @@ this.lt3745 = function()
 		this,
 		function() { return true; },
 		[
-			new unit('ns', 0.000000001),
-			new unit('us', 0.000001)
+			new cc.unit('ns', 0.000000001),
+			new cc.unit('us', 0.000001)
 		],
 		0
 	);
@@ -268,8 +268,8 @@ this.lt3745 = function()
 		this,
 		function () { return true; },
 		[
-			new unit('ns', 0.000000001),
-			new unit('us', 0.000001)
+			new cc.unit('ns', 0.000000001),
+			new cc.unit('us', 0.000001)
 		],
 		0
 	);
@@ -292,7 +292,7 @@ this.lt3745 = function()
 		}, 
 		function() { return true; },
 		[
-			new unit('kHz', 1000.0),
+			new cc.unit('kHz', 1000.0),
 		],
 		0
 	);
@@ -304,7 +304,7 @@ this.lt3745 = function()
 		function(){
 			return true;
 		},
-		[ new unit('kHz', 1000.0) ],
+		[ new cc.unit('kHz', 1000.0) ],
 		0);
 	
 	this.fSwAct.AddValidator(cc.validatorEnum.IS_NUMBER, cc.severityEnum.error);
@@ -321,7 +321,7 @@ this.lt3745 = function()
 		}, 
 		function() { return true; },
 		[
-			new unit('kHz', 1000.0)
+			new cc.unit('kHz', 1000.0)
 		],
 		0
 	);
@@ -341,7 +341,7 @@ this.lt3745 = function()
 		}, 
 		function() { return true; },
 		[
-			new unit('uF', 0.000001),
+			new cc.unit('uF', 0.000001),
 		],
 		0
 	);
@@ -352,7 +352,7 @@ this.lt3745 = function()
 		this,
 		function() { return true; },
 		[
-			new unit('%', 0.01)
+			new cc.unit('%', 0.01)
 		],
 		0
 	);
@@ -376,7 +376,7 @@ this.lt3745 = function()
 		}, 
 		function() { return true; },
 		[
-			new unit('uH', 0.000001),
+			new cc.unit('uH', 0.000001),
 		],
 		0
 	);
@@ -387,7 +387,7 @@ this.lt3745 = function()
 		this,
 		function() { return true; },
 		[
-			new unit('mV', 0.001)
+			new cc.unit('mV', 0.001)
 		],
 		0
 	);
@@ -410,7 +410,7 @@ this.lt3745 = function()
 		}, 
 		function() { return true; },
 		[
-			new unit('uF', 0.000001),
+			new cc.unit('uF', 0.000001),
 		],
 		0
 	);
