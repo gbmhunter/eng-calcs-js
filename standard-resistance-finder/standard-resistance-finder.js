@@ -10,7 +10,7 @@
 
 // Adding the standardResistanceFinder "namespace" for the calculator, so that multiple calculators can work
 // on the same page. Use the data-bind="with: standardResistanceCalculator" command within the HTML to access the child variables.
-standardResistanceFinder = function()
+this.standardResistanceFinder = function()
 {
 
 	// E12 resistance array

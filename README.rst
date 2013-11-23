@@ -4,8 +4,8 @@ Engineering Calculators Written In Javascript
 
 - Author: gbmhunter <gbmhunter@gmail.com> (http://www.cladlab.com)
 - Created: 2013/06/06
-- Last Modified: 2013/11/22
-- Version: v3.13.2.0
+- Last Modified: 2013/11/23
+- Version: v4.0.0.0
 - Company: CladLabs
 - Project: Free Code Libraries	.
 - Language: HTML/JS/PHP
@@ -75,6 +75,7 @@ Changelog
 ========= ========== ============================================================================================================
 Version   Date       Comment
 ========= ========== ============================================================================================================
+v4.0.0.0  2013/11/23 Added ohms law calculator to repo. Uses separate read/write functions and shadow variables to support the dynamic changing of what is calculated.
 v3.13.2.0 2013/11/22 Modified candy-calc API to work with ``unit`` and ``validator`` objects being part of the ``cc`` object.
 v3.13.1.0 2013/11/22 Removed the unneeded 'AppViewModel' objects, which meant that the ``data-bid with`` statement in the php files was also unneeded.
 v3.13.0.0 2013/11/22 Multiple calculators can now run in the same page, using the ``cc.registerCalc()`` API call. Closes #42.
