@@ -18,25 +18,24 @@ function ohmsLaw()
 	
 	this.voltage = ko.computed({
 		read: function () {
-			console.log('Maybe reading from voltage');
 			if(this.calcWhat() == 'voltage')
 			{
+				console.log('Calculating voltage');
+				if(this.currentS == null)
+					return;
+				if(this.resistanceS == null)
+					return;
+				this.voltageS(this.currentS()*this.resistanceS());
+				return(this.currentS()*this.resistanceS());
+			}
+			else
+			{
 				console.log('Reading from voltage');
-				if(this.calcWhat() == 'voltage')
-				{
-					console.log('Writing to voltage');
-					if(this.currentS == null)
-						return;
-					if(this.resistanceS == null)
-						return;
-					return(this.currentS()*this.resistanceS());
-				}
-				else
-					return this.voltageS();
+				return this.voltageS();
 			}
 		},
 		write: function (value) {
-			console.log('Maybe writing to voltage');
+			console.log('Writing to voltage');
 			this.voltageS(value)
 		},
 		owner: this
@@ -46,21 +45,23 @@ function ohmsLaw()
 	
 	this.current = ko.computed({
 		read: function () {
-			console.log('Maybe reading from current');
 			if(this.calcWhat() == 'current')
 			{
-				console.log('Reading from current');
+				console.log('Calculating current');
 				if(this.voltageS == null)
 					return;
 				if(this.resistanceS == null)
-					return;				
+					return;	
+				this.currentS(this.voltageS()/this.resistanceS())
 				return(this.voltageS()/this.resistanceS());
 			}
 			else
+			{
+				console.log('Reading from current');
 				return this.currentS();
+			}
 		},
 		write: function (value) {
-			console.log('Maybe writing to current');
 			console.log('Writing to current');
 			this.currentS(value);
 		},
@@ -71,21 +72,23 @@ function ohmsLaw()
 	
 	this.resistance = ko.computed({
 		read: function () {
-			console.log('Maybe reading from resistance');
 			if(this.calcWhat() == 'resistance')
 			{
-				console.log('Reading from resistance');
+				console.log('Calculating resistance');
 				if(this.currentS == null)
 					return;
 				if(this.voltageS == null)
 					return;
+				this.resistanceS(this.voltageS()/this.currentS())
 				return(this.voltageS()/this.currentS());
 			}
 			else
+			{
+				console.log('Reading from resistance');
 				return this.resistanceS();
+			}
 		},
 		write: function (value) {
-			console.log('Maybe writing to resistance');
 			console.log('Writing to resistance');
 			this.resistanceS(value);
 		},

@@ -13,7 +13,7 @@
 </script>
 	
 <!-- candy-calc logic -->
-<script type="text/javascript" src="/candy-calc/js/candy-calc-v2.js" ></script>
+<script type="text/javascript" src="/candy-calc/js/candy-calc.js" ></script>
 <!-- candy-calc CSS file -->
 <link type="text/css" rel="stylesheet" href="/candy-calc/css/candy-calc.css" />
 
@@ -24,6 +24,13 @@
 <table id="ohmsLaw" class="candy-calc" border="4" style="width: 500px;">
 	<tbody>
 		<tr>
+			<td colspan="3" style="text-align: center;">
+				<input data-bind="checked: calcWhat" type="radio" name="range" value="voltage">Voltage</input>
+				<input data-bind="checked: calcWhat" type="radio" name="range" value="current">Current</input>
+				<input data-bind="checked: calcWhat" type="radio" name="range" value="resistance">Resistance</input>
+			</td>
+		</tr>
+		<tr>
 			<td><strong>Variable:</strong></td>
 			<td><strong>Value:</strong></td>
 			<td><strong>Units:</strong></td>	
@@ -33,14 +40,7 @@
 			<td>
 				<input class="input" data-bind="value: voltage" ></input>
 			</td>		
-		</tr>		
-		<tr>
-			<td colspan="3" style="text-align: center;">
-				<input data-bind="checked: calcWhat" type="radio" name="range" value="voltage">Voltage</input>
-				<input data-bind="checked: calcWhat" type="radio" name="range" value="current">Current</input>
-				<input data-bind="checked: calcWhat" type="radio" name="range" value="resistance">Resistance</input>
-			</td>
-		</tr>
+		</tr>				
 		<tr>
 			<td class="symbol">\(I\)</td>
 			<td>
