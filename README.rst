@@ -75,6 +75,7 @@ Changelog
 ========= ========== ============================================================================================================
 Version   Date       Comment
 ========= ========== ============================================================================================================
+v4.1.0.0  2013/11/24 Added image to Ohm's law calculator. Added and fixed units in Ohm's law calculator. Added 'Clear Values' button to Ohm's law calculator, although it doesn't work yet.
 v4.0.1.0  2013/11/24 The mysteriously disappearing values in the Ohms law calculator bug has been fixed. Closes #43.
 v4.0.0.0  2013/11/23 Added ohms law calculator to repo. Uses separate read/write functions and shadow variables to support the dynamic changing of what is calculated.
 v3.13.2.0 2013/11/22 Modified candy-calc API to work with ``unit`` and ``validator`` objects being part of the ``cc`` object.

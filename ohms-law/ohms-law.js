@@ -14,6 +14,7 @@ function ohmsLaw()
 {
 	this.calcWhat = ko.observable('resistance');
 		
+	/*
 	this.voltageS = ko.observable();
 	
 	this.voltage = ko.computed({
@@ -94,26 +95,22 @@ function ohmsLaw()
 		},
 		owner: this
 	});
+	*/
 	
-	/*
 	this.voltage = new cc.variable(
 		this,
 		function()
 		{
 			console.log('Calculating voltage...');
-			if(this.current == null) 
-				return;
-			if(this.resistance == null)
-				return;
-			return this.current.val()*this.resistance.val();
+			return this.current.shadowVal()*this.resistance.shadowVal();
 		},
 		function() { return true; },
 		[
-			new cc.unit('m\u2126', 0.001),
-			new cc.unit('\u2126', 1.0),
-			new cc.unit('k\u2126', 1000.0)
+			new cc.unit('mV', 0.001),
+			new cc.unit('V', 1.0),
+			new cc.unit('kV', 1000.0)
 		],
-		0,
+		1,
 		2,
 		// state function to set as input/output
 		function()
@@ -132,19 +129,12 @@ function ohmsLaw()
 		}
 	);
 	
-	this.voltage.val = 2;
-	
-	/*
 	this.current = new cc.variable(
 		this,
 		function()
 		{
 			console.log('Calculating current...');
-			if(this.voltage == null) 
-				return;
-			if(this.resistance == null)
-				return;
-			return this.voltage.val()/this.resistance.val();
+			return this.voltage.shadowVal()/this.resistance.shadowVal();
 		},
 		function() { return true; },
 		[
@@ -152,7 +142,7 @@ function ohmsLaw()
 			new cc.unit('A', 1.0),
 			new cc.unit('kA', 1000.0)
 		],
-		0,
+		1,
 		2,
 		// state function to set as input/output
 		function()
@@ -169,10 +159,8 @@ function ohmsLaw()
 		function()
 		{
 			console.log('Calculating resistance...');
-			if(this.voltage == null) 
-				return;
-			if(this.current == null)
-				return;
+			console.log('voltage.shadowVal() = ' + this.voltage.val());
+			console.log('current.shadowVal() = ' + this.current.val());
 			return this.voltage.val()/this.current.val();
 		},
 		function() { return true; },
@@ -181,7 +169,7 @@ function ohmsLaw()
 			new cc.unit('\u2126', 1.0),
 			new cc.unit('k\u2126', 1000.0)
 		],
-		0,
+		1,
 		2,
 		// state function to set as input/output
 		function()
@@ -192,11 +180,9 @@ function ohmsLaw()
 				return cc.stateEnum.input;
 		}
 	);	
-	*/
+	
 }
 
-ko.applyBindings(new ohmsLaw());
-
 // Register the calculator
-//cc.registerCalc(ohmsLaw, 'ohmsLaw');
+cc.registerCalc(ohmsLaw, 'ohmsLaw');
 
