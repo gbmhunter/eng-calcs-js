@@ -20,7 +20,7 @@
 <p>A calculator to help you choose the values of the supporting passive components for the Linear Technology LT3745 16-channel LED driver.</p>
 <p>The datasheet can be found <a href="http://cds.linear.com/docs/en/datasheet/3745f.pdf">here</a>.</p>
 <p>For more information you can check out the Linear Technology Demonstration Circuit 1608A.</p>
-<table id="lt3745" class="candy-calc" border="4">
+<table id="lt3745" class="candy-calc" border="4" style="border-collapse: collapse;" >
 	<tbody>
 		<tr>
 			<td><strong>Variable Name:</strong></td>
@@ -88,7 +88,7 @@
 			<td class="comment">This resistor along with \(R_{fb1}\) determines the output voltage of the buck converter.</td>
 		</tr>
 		<tr></tr>
-		<tr>
+		<tr style="border-bottom: 4px solid #000;">
 			<td class="name">Maximum Output Current</td>
 			<td class="symbol">\(I_{out(max)}\)</td>
 			<td><input class="input" data-bind="calcVar: iOutMax, valueUpdate: 'afterkeydown'" type="text" size="16" /></td>
@@ -121,7 +121,7 @@
 			<td class="equation">n/a</td>
 			<td class="comment">This is the "nominal" current each LED will see. It has to be between 10-50mA. Note that the current for each channel can be individually controlled down to 50% and up to 150% of this nominal current, and then further modulated with PWM from 0 to 100%.</td>
 		</tr>
-		<tr>
+		<tr style="border-bottom: 4px solid #000;">
 			<td class="name">Current Set Resistance</td>
 			<td class="symbol">\(R_{iset}\)</td>
 			<td><input class="output" data-bind="calcVar: riSet, valueUpdate: 'afterkeydown'" type="text" size="16" readonly="readonly" /></td>
@@ -186,7 +186,7 @@
 			<td class="equation">n/a</td>
 			<td class="comment">This is the switching frequency you want to use, set by the resistor \( R_T \). It has to be between 100kHz and 1MHz, and also less than \(f_{sw(max)}\).</td>
 		</tr>
-		<tr>
+		<tr style="border-bottom: 4px solid #000;">
 			<td class="name">Unity-gain Frequency</td>
 			<td class="symbol">\(f_{ugf}\)</td>
 			<td><input class="output" data-bind="calcVar: fugf, valueUpdate: 'afterkeydown'" type="text" size="16" readonly="readonly" /></td>
