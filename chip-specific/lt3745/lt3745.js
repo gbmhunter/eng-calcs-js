@@ -12,6 +12,29 @@
 this.lt3745 = function()
 {
 
+	//============= Vcc ============//
+	
+	this.supplyVoltage = new cc.input(
+		this,
+		function() { return true; },
+		[ new cc.unit('V', 1.0) ],
+		0
+	);
+			
+	this.supplyVoltage.AddValidator(cc.validatorEnum.IS_NUMBER, cc.severityEnum.error);
+	
+	// Add validator
+	this.supplyVoltage.AddCustomValidator(
+		this,
+		'Supply voltage must be between 3.0 and 5.5V.',
+		function(app){
+			if(app.supplyVoltage.val() < 3.0 || app.supplyVoltage.val() > 5.5)
+				return false;
+			return true;
+		},
+		cc.severityEnum.error
+	);
+
 	//============= Vload ============//
 	
 	this.loadVoltage = new cc.input(
@@ -32,24 +55,32 @@ this.lt3745 = function()
 				return false;
 			return true;
 		},
-		cc.severityEnum.warning
+		cc.severityEnum.error
 	);
 	
-	//============== Vbuck,out ===========//
+	//============== vOutMax ===========//
 		
-	this.vBuckOut = new cc.output(
+	this.vOutMax = new cc.input(
 		this,
-		function() 
-		{
-			return this.loadVoltage.val() + 0.8;
-		}, 
 		function() { return true; },
 		[ new cc.unit('V', 1.0) ],
 		0
 	);
 	
-	// Add validator
-	//this.vBuckOut.AddValidator(cc.validatorEnum.IS_NUMBER, cc.severityEnum.error);
+	// Make sure it is a number
+	this.vOutMax.AddValidator(cc.validatorEnum.IS_NUMBER, cc.severityEnum.error);
+	
+	// Recommend that it be between 0.8 and 3.0V higher than Vload
+	this.vOutMax.AddCustomValidator(
+		this,
+		'vOutMax is recommended to be between 0.8-3.0V higher than Vload for the best current regulation.',
+		function(app){
+			if( (app.vOutMax.val() < app.loadVoltage.val() + 0.8) || (app.vOutMax.val() > app.loadVoltage.val() + 3.0))
+				return false;
+			return true;
+		},
+		cc.severityEnum.warning
+	);
 	
 	//=============== Vin(min) ===============//
 		
@@ -57,7 +88,13 @@ this.lt3745 = function()
 		this,
 		function() 
 		{
-			return parseFloat(this.vBuckOut.val()) + 2.1;
+			var tempVal = this.vOutMax.val() + 2.1;
+			
+			// Vin(min) cannot be less than 6.0V
+			if(tempVal < 6.0)
+				return 6.0;
+				
+			return tempVal;
 		}, 
 		function()
 		{
@@ -79,6 +116,30 @@ this.lt3745 = function()
 	
 	this.vInMax.AddValidator(cc.validatorEnum.IS_NUMBER, cc.severityEnum.error);
 	
+	// Add max voltage validator
+	this.vInMax.AddCustomValidator(
+		this,
+		'Voltage cannot be greater than 55V.',
+		function(app){
+			if(app.vInMax.val() > 55)
+				return false;
+			return true;
+		},
+		cc.severityEnum.error
+	);
+	
+	// Make sure Vin(max) is not less than Vin(min)
+	this.vInMax.AddCustomValidator(
+		this,
+		'Vin(max) must be greater or equal to Vin(min).',
+		function(app){
+			if(app.vInMax.val() < app.vInMin.val())
+				return false;
+			return true;
+		},
+		cc.severityEnum.error
+	);
+	
 	//========== Rfb1 =============//
 	
 	this.rfb1 = new cc.input(
@@ -93,13 +154,25 @@ this.lt3745 = function()
 	
 	this.rfb1.AddValidator(cc.validatorEnum.IS_NUMBER, cc.severityEnum.error);
 	
+	// Recommended that this should be 10k
+	this.rfb1.AddCustomValidator(
+		this,
+		'Rfb1 is recommended to be 10kR.',
+		function(app){
+			if(app.rfb1.val() != 10000.0)
+				return false;
+			return true;
+		},
+		cc.severityEnum.warning
+	);
+	
 	//============== Rfb2 ==============//
 		
 	this.rfb2 = new cc.output(
 		this,
 		function() 
 		{
-			return (this.rfb1.val()*(this.vBuckOut.val()/1.205 - 1));
+			return (this.rfb1.val()*(this.vOutMax.val()/1.205 - 1));
 		},
 		function()
 		{
@@ -174,7 +247,20 @@ this.lt3745 = function()
 		0
 	);
 	
+	// Make sure it is a number
 	this.iLedPinNom.AddValidator(cc.validatorEnum.IS_NUMBER, cc.severityEnum.error);
+	
+	// Make sure it is between 10-50mA
+	this.iLedPinNom.AddCustomValidator(
+		this,
+		'iLedPin(nom) must be between 10-50mA.',
+		function(app){
+			if(app.iLedPinNom.val() < 0.01 || app.iLedPinNom.val() > 0.05)
+				return false;
+			return true;
+		},
+		cc.severityEnum.error
+	);
 	
 	//======= Riset =========//
 
@@ -210,40 +296,40 @@ this.lt3745 = function()
 	
 	//======= Dmin =========//
 	
-	// Dmin = (Vout(max) + Vd,f) / (Vin(max) + Vd,f)
+	// Dmin = (vOutMax(max) + Vd,f) / (Vin(max) + Vd,f)
 	this.dMin = new cc.output(
 		this,
 		function() 
 		{		
-			var vBuckOut = this.vBuckOut.val();
+			var vOutMax = this.vOutMax.val();
 			var vdf = this.vdf.val();
 			var vInMax = this.vInMax.val();
 			
-			return ((vBuckOut + vdf) / (vInMax + vdf));
+			return ((vOutMax + vdf) / (vInMax + vdf));
 		}, 
 		function() { return true; },
 		[
-			new cc.unit('%', 1.0),
+			new cc.unit('%', 0.01),
 		],
 		0
 	);
 		
 	//======= Dmax =========//
 	
-	// Dmax = (Vout(max) + Vd,f) / (Vin(min) + Vd,f)
+	// Dmax = (vOutMax(max) + Vd,f) / (Vin(min) + Vd,f)
 	this.dMax = new cc.output(
 		this,
 		function() 
 		{			
-			var vBuckOut = this.vBuckOut.val();
+			var vOutMax = this.vOutMax.val();
 			var vdf = this.vdf.val();
 			var vInMin = this.vInMin.val();
 			
-			return ((vBuckOut + vdf) / (vInMin + vdf));
+			return ((vOutMax + vdf) / (vInMin + vdf));
 		}, 
 		function() { return true; },
 		[
-			new cc.unit('%', 1.0)
+			new cc.unit('%', 0.01)
 		],
 		0
 	);
@@ -254,13 +340,24 @@ this.lt3745 = function()
 		this,
 		function() { return true; },
 		[
-			new cc.unit('ns', 0.000000001),
-			new cc.unit('us', 0.000001)
+			new cc.unit('ns', 0.000000001)
 		],
 		0
 	);
 	
 	this.tOnMin.AddValidator(cc.validatorEnum.IS_NUMBER, cc.severityEnum.error);
+	
+	// Should be greater than 1ns and less than 500ns
+	this.tOnMin.AddCustomValidator(
+		this,
+		'ton(min) should be between 1-500ns.',
+		function(app){
+			if(app.tOnMin.val() < 0.000000001 || app.tOnMin.val() > 0.0000005)
+				return false;
+			return true;
+		},
+		cc.severityEnum.warning
+	);
 	
 	//================ toff(min) ============//
 	
@@ -268,13 +365,24 @@ this.lt3745 = function()
 		this,
 		function () { return true; },
 		[
-			new cc.unit('ns', 0.000000001),
-			new cc.unit('us', 0.000001)
+			new cc.unit('ns', 0.000000001)
 		],
 		0
 	);
 	
 	this.tOffMin.AddValidator(cc.validatorEnum.IS_NUMBER, cc.severityEnum.error);
+	
+	// Should be greater than 1ns and less than 500ns
+	this.tOffMin.AddCustomValidator(
+		this,
+		'toff(min) should be between 1-500ns.',
+		function(app){
+			if(app.tOffMin.val() < 0.000000001 || app.tOffMin.val() > 0.0000005)
+				return false;
+			return true;
+		},
+		cc.severityEnum.warning
+	);
 	
 	//================ fsw(max) ==============//
 	
@@ -309,6 +417,30 @@ this.lt3745 = function()
 	
 	this.fSwAct.AddValidator(cc.validatorEnum.IS_NUMBER, cc.severityEnum.error);
 	
+	// Has to be between 100kHz-1MHz
+	this.fSwAct.AddCustomValidator(
+		this,
+		'fsw(act) has to be between 100kHz-1MHz.',
+		function(app){
+			if(app.fSwAct.val() < 100000 || app.fSwAct.val() > 1000000)
+				return false;
+			return true;
+		},
+		cc.severityEnum.error
+	);
+	
+	// Has to be less than fsw(max)
+	this.fSwAct.AddCustomValidator(
+		this,
+		'fsw(act) has to be less than fsw(max).',
+		function(app){
+			if(app.fSwAct.val() > app.fSwMax.val())
+				return false;
+			return true;
+		},
+		cc.severityEnum.error
+	);
+	
 	//================ fugf ==============//
 	
 	// fugf = fsw(act)/10
@@ -335,9 +467,9 @@ this.lt3745 = function()
 		{
 			var rSense = this.rSense.val();
 			var fugf = this.fugf.val();
-			var vBuckOut = this.vBuckOut.val();
+			var vOutMax = this.vOutMax.val();
 			
-			return (Math.max( 0.25/(rSense*fugf), 1.5/(vBuckOut*rSense*fugf)));
+			return (Math.max( 0.25/(rSense*fugf), 1.5/(vOutMax*rSense*fugf)));
 		}, 
 		function() { return true; },
 		[
@@ -357,7 +489,20 @@ this.lt3745 = function()
 		0
 	);
 	
+	// Make sure it is a number
 	this.iLDelta.AddValidator(cc.validatorEnum.IS_NUMBER, cc.severityEnum.error);
+	
+	// Recommend that it is between 10-50%
+	this.iLDelta.AddCustomValidator(
+		this,
+		'iLDelta should be between 10-50%.',
+		function(app){
+			if(app.iLDelta.val() < 0.1 || app.iLDelta.val() > 0.5)
+				return false;
+			return true;
+		},
+		cc.severityEnum.warning
+	);
 	
 	//================ L(min) ==============//
 	
@@ -366,20 +511,20 @@ this.lt3745 = function()
 		this,
 		function() 
 		{
-			var vBuckOut = this.vBuckOut.val();
+			var vOutMax = this.vOutMax.val();
 			var vdf = this.vdf.val();
 			var vInMax = this.vInMax.val();
 			var fSwAct = this.fSwAct.val();
 			var iLDelta = this.iLDelta.val();
 			
-			return ( ((vBuckOut + vdf)/(vInMax + vdf))*((vInMax - vBuckOut)/(fSwAct*iLDelta)));
+			return ( ((vOutMax + vdf)/(vInMax + vdf))*((vInMax - vOutMax)/(fSwAct*iLDelta)));
 		}, 
 		function() { return true; },
 		[
 			new cc.unit('uH', 0.000001),
 		],
 		0
-	);
+	);	
 		
 	//================ Vin(ripple) ============//
 	
@@ -393,6 +538,18 @@ this.lt3745 = function()
 	);
 	
 	this.vInRipple.AddValidator(cc.validatorEnum.IS_NUMBER, cc.severityEnum.error);
+	
+	// Recommend that it is between 20mv-2.0V
+	this.vInRipple.AddCustomValidator(
+		this,
+		'vInRipple should be between 20mV-2.0V.',
+		function(app){
+			if(app.vInRipple.val() < 0.020 || app.vInRipple.val() > 2.0)
+				return false;
+			return true;
+		},
+		cc.severityEnum.warning
+	);
 	
 	//================ Cin(min) ==============//
 	

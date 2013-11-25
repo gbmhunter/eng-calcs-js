@@ -31,6 +31,14 @@
 			<td><strong>Comments:</strong></td>
 		</tr>
 		<tr>
+			<td class="name">Supply Voltage</td>
+			<td class="symbol">\(V_{cc}\)</td>
+			<td><input class="input" data-bind="calcVar: supplyVoltage, valueUpdate: 'afterkeydown'" size="16"></input></td>
+			<td class="units"><select data-bind="options: supplyVoltage.units, optionsText: 'name', value: supplyVoltage.selUnit"></select></td>	
+			<td class="equation">n/a</td>
+			<td class="comment">The supply voltage for the logic. Must be between 3.0 and 5.5V.</td>
+		</tr>	
+		<tr>
 			<td class="name">Load Voltage</td>
 			<td class="symbol">\(V_{load}\)</td>
 			<td><input class="input" data-bind="calcVar: loadVoltage, valueUpdate: 'afterkeydown'" size="16"></input></td>
@@ -39,12 +47,12 @@
 			<td class="comment">This is the maximum voltage that the load will ever see. If driving LEDs, this is equal to the forward voltage of the LED at the maximum current to plan to drive them at. If driving multiple is series, sum the forward voltages. If driving different colours, this is equal to the LED with the highest forward voltage.</td>
 		</tr>		
 		<tr>
-			<td class="name">Buck Output Voltage</td>
-			<td class="symbol">\(V_{buck,out}\)</td>
-			<td><input class="output" data-bind="calcVar: vBuckOut, valueUpdate: 'afterkeydown'" size="16" readonly="readonly"></input></td>
-			<td class="units"><select data-bind="options: vBuckOut.units, optionsText: 'name', value: vBuckOut.selUnit"></select></td>	
-			<td class="equation">\(V_{load} + 0.8V\)</td>
-			<td class="comment">This is simply equal to the maximum load voltage, \( V_{load} \), plus the dropout voltage of the "linear regulator" of each channel used to fine-tune the current.</td>
+			<td class="name">Output Voltage</td>
+			<td class="symbol">\(V_{out(max)}\)</td>
+			<td><input class="input" data-bind="calcVar: vOutMax, valueUpdate: 'afterkeydown'" size="16" ></input></td>
+			<td class="units"><select data-bind="options: vOutMax.units, optionsText: 'name', value: vOutMax.selUnit"></select></td>	
+			<td class="equation">n/a</td>
+			<td class="comment">This must be equal or higher than \( V_{load} \). It is recommended to be set between 0.8V and 3.0V above \( V_{load} \) for the best current regulation.</td>
 		</tr>
 		<tr>
 			<td class="name">Minimum Input Voltage</td>
@@ -52,7 +60,7 @@
 			<td><input class="output" data-bind="calcVar: vInMin, valueUpdate: 'afterkeydown'" type="text" size="16" readonly="readonly" /></td>
 			<td class="units"><select data-bind="options: vInMin.units, optionsText: 'name', value: vInMin.selUnit" ></select></td>
 			<td class="equation">\(V_{out(max)} + 2.1V\)</td>
-			<td class="comment">The is a minimum input voltage allowed to sustain current regulation. It also cannot be less than 6V.</td>
+			<td class="comment">The is a minimum input voltage allowed to sustain current regulation. It cannot be less than 6V. The \(2.1V\) is the minimum dropout voltage between the \(V_{in}\) and ISN pins.</td>
 		</tr>
 		<tr>
 			<td class="name">Maximum Input Voltage</td>
@@ -69,7 +77,7 @@
 			<td><input class="input" data-bind="calcVar: rfb1, valueUpdate: 'afterkeydown'" type="text" size="16" /></td>
 			<td class="units"><select data-bind="options: rfb1.units, optionsText: 'name', value: rfb1.selUnit"></select></td>
 			<td class="equation">n/a</td>
-			<td class="comment">This resistor along with \(R_{fb2}\) determines the output voltage of the buck converter.</td>
+			<td class="comment">This resistor along with \(R_{fb2}\) determines the output voltage of the buck converter. This is recommended to be \(10k\Omega\)</td>
 		</tr>
 		<tr>
 			<td class="name">Feedback Resistor 2</td>
@@ -86,7 +94,7 @@
 			<td><input class="input" data-bind="calcVar: iOutMax, valueUpdate: 'afterkeydown'" type="text" size="16" /></td>
 			<td class="units"><select data-bind="options: iOutMax.units, optionsText: 'name', value: iOutMax.selUnit"></select></td>
 			<td class="equation">n/a</td>
-			<td class="comment"></td>
+			<td class="comment">This is the maximum output current for all channels, i.e. maximum current going through MOSFET and current sense resistor.</td>
 		</tr>
 		<tr>
 			<td class="name">Sense Resistance</td>
@@ -94,7 +102,7 @@
 			<td><input class="output" data-bind="calcVar: rSense, valueUpdate: 'afterkeydown'" type="text" size="16" readonly="readonly" /></td>
 			<td class="units"><select data-bind="options: rSense.units, optionsText: 'name', value: rSense.selUnit" ></select></td>
 			<td class="equation">\(\dfrac{35mV}{I_{out(max)}}\)</td>
-			<td class="comment"></td>
+			<td class="comment">The value for the current-sense resistor which will give you the \( I_{out(max)}\) you want.</td>
 		</tr>
 		<tr>
 			<td class="name">Sense Resistance Power Dissipation</td>
@@ -102,7 +110,7 @@
 			<td><input class="output" data-bind="calcVar: prsense, valueUpdate: 'afterkeydown'" type="text" size="16" readonly="readonly" /></td>
 			<td class="units"><select data-bind="options: prsense.units, optionsText: 'name', value: prsense.selUnit" ></select></td>
 			<td class="equation">\(I_{out(max)}^2 * R_{sense}\)</td>
-			<td class="comment"></td>
+			<td class="comment">This is the power that will dissipated through the current-sense resistor at maximum current output. Make sure the resistor is rated to handle this power.</td>
 		</tr>
 		<tr></tr>
 		<tr>
@@ -111,7 +119,7 @@
 			<td><input class="input" data-bind="calcVar: iLedPinNom, valueUpdate: 'afterkeydown'" type="text" size="16" /></td>
 			<td class="units"><select data-bind="options: iLedPinNom.units, optionsText: 'name', value: iLedPinNom.selUnit"></select></td>
 			<td class="equation">n/a</td>
-			<td class="comment">This is the "average" current each LED will see. Note that the current for each channel can be individually controlled down to 50% and up to 150% of this nominal current, and then further modulated with PWM from 0 to 100%.</td>
+			<td class="comment">This is the "nominal" current each LED will see. It has to be between 10-50mA. Note that the current for each channel can be individually controlled down to 50% and up to 150% of this nominal current, and then further modulated with PWM from 0 to 100%.</td>
 		</tr>
 		<tr>
 			<td class="name">Current Set Resistance</td>
@@ -128,7 +136,7 @@
 			<td><input class="input" data-bind="calcVar: vdf, valueUpdate: 'afterkeydown'" type="text" size="16" /></td>
 			<td class="units"><select data-bind="options: vdf.units, optionsText: 'name', value: vdf.selUnit"></select></td>
 			<td class="equation">n/a</td>
-			<td class="comment">This is the forward voltage drop across the buck diode at the operating current. This value can be found in the diodes datasheet.</td>
+			<td class="comment">This is the forward voltage drop across the buck diode at the operating current. This value can be found in the diodes datasheet. Should be around 0.5V.</td>
 		</tr>
 		<tr>
 			<td class="name">Minimum Duty Cycle</td>
@@ -136,7 +144,7 @@
 			<td><input class="output" data-bind="calcVar: dMin, valueUpdate: 'afterkeydown'" type="text" size="16" readonly="readonly" /></td>
 			<td class="units"><select data-bind="options: dMin.units, optionsText: 'name', value: dMin.selUnit" ></select></td>
 			<td class="equation">\(\dfrac{V_{out(max)} + V_{d,f}}{V_{in(max)} + V_{d,f}}\)</td>
-			<td class="comment"></td>
+			<td class="comment">The minimum duty cycle of the buck converter. This limits the maximum switching frequency.</td>
 		</tr>
 		<tr>
 			<td class="name">Maximum Duty Cycle</td>
@@ -144,23 +152,23 @@
 			<td><input class="output" data-bind="calcVar: dMax, valueUpdate: 'afterkeydown'" type="text" size="16" readonly="readonly" /></td>
 			<td class="units"><select data-bind="options: dMax.units, optionsText: 'name', value: dMax.selUnit" ></select></td>
 			<td class="equation">\(\dfrac{V_{out(max)} + V_{d,f}}{V_{in(min)} + V_{d,f}}\)</td>
-			<td class="comment"></td>
+			<td class="comment">The maximum duty cycle of the buck converter. This limits the maximum switching frequency.</td>
 		</tr>
 		<tr>
-			<td class="name">Minimum On Time</td>
+			<td class="name">Minimum Switch-On Time</td>
 			<td class="symbol">\(t_{on(min)}\)</td>
 			<td><input class="input" data-bind="calcVar: tOnMin, valueUpdate: 'afterkeydown'" type="text" size="16" /></td>
 			<td class="units"><select data-bind="options: tOnMin.units, optionsText: 'name', value: tOnMin.selUnit"></select></td>
 			<td class="equation">n/a</td>
-			<td class="comment"></td>
+			<td class="comment">This is the minimum switch-on time of the MOSFET. Sometimes called the turn-on delay time ( \( t_{d(on)} \) ). Check the MOSFET's datasheet for this value. Should be greater than 1ns and less than 500ns.</td>
 		</tr>
 		<tr>
-			<td class="name">Minimum Off Time</td>
+			<td class="name">Minimum Switch-Off Time</td>
 			<td class="symbol">\(t_{off(min)}\)</td>
 			<td><input class="input" data-bind="calcVar: tOffMin, valueUpdate: 'afterkeydown'" type="text" size="16" /></td>
 			<td class="units"><select data-bind="options: tOffMin.units, optionsText: 'name', value: tOffMin.selUnit"></select></td>
 			<td class="equation">n/a</td>
-			<td class="comment"></td>
+			<td class="comment">This is the minimum switch-off time of the MOSFET. Sometimes called the turn-off delay time ( \( t_{d(off)} \) ). Check the MOSFET's datasheet for this value. Should be greater than 1ns and less than 500ns.</td>
 		</tr>
 		<tr>
 			<td class="name">Maximum Switching Frequency</td>
@@ -200,7 +208,7 @@
 			<td><input class="input" data-bind="calcVar: iLDelta, valueUpdate: 'afterkeydown'" type="text" size="16" /></td>
 			<td class="units"><select data-bind="options: iLDelta.units, optionsText: 'name', value: iLDelta.selUnit"></select></td>
 			<td class="equation">n/a</td>
-			<td class="comment">This is the maximum desired ripple current through the inductor.</td>
+			<td class="comment">This is the maximum desired ripple current through the inductor. A value between 10-50% is recommended.</td>
 		</tr>
 		<tr>
 			<td class="name">Minimum Inductance</td>
@@ -217,7 +225,7 @@
 			<td><input class="input" data-bind="calcVar: vInRipple, valueUpdate: 'afterkeydown'" type="text" size="16" /></td>
 			<td class="units"><select data-bind="options: vInRipple.units, optionsText: 'name', value: vInRipple.selUnit"></select></td>
 			<td class="equation">n/a</td>
-			<td class="comment"></td>
+			<td class="comment">The desired maximum input voltage ripple. A value around 100mV is normal.</td>
 		</tr>
 		<tr>
 			<td class="name">Minimum Input Capacitance</td>
