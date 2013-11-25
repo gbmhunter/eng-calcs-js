@@ -458,6 +458,24 @@ this.lt3745 = function()
 		0
 	);
 	
+	//================ Rt ==============//
+	
+	// Rt = 2.25167^11 / fSwAct^1.114
+	this.rt = new cc.output(
+		this,
+		function() 
+		{			
+			var fSwAct = this.fSwAct.val();
+			return ((2.25167*Math.pow(10, 11))/(Math.pow(fSwAct, 1.114)));
+		}, 
+		function() { return true; },
+		[
+			new cc.unit('\u2126', 1.0),
+			new cc.unit('k\u2126', 1000.0)
+		],
+		0
+	);
+	
 	//================ tj(max) ============//
 	
 	this.tjMax = new cc.input(

@@ -186,13 +186,21 @@
 			<td class="equation">n/a</td>
 			<td class="comment">This is the switching frequency you want to use, set by the resistor \( R_T \). It has to be between 100kHz and 1MHz, and also less than \(f_{sw(max)}\).</td>
 		</tr>
-		<tr style="border-bottom: 4px solid #000;">
+		<tr>
 			<td class="name">Unity-gain Frequency</td>
 			<td class="symbol">\(f_{ugf}\)</td>
 			<td><input class="output" data-bind="calcVar: fugf, valueUpdate: 'afterkeydown'" type="text" size="16" readonly="readonly" /></td>
 			<td class="units"><select data-bind="options: fugf.units, optionsText: 'name', value: fugf.selUnit" ></select></td>
 			<td class="equation">\(\dfrac{f_{sw(act)}}{10}\)</td>
 			<td class="comment">This is the switching frequency which would give unity voltage gain between input and output.</td>
+		</tr>
+		<tr style="border-bottom: 4px solid #000;">
+			<td class="name">Frequency-setting Resistance</td>
+			<td class="symbol">\(R_{T}\)</td>
+			<td><input class="output" data-bind="calcVar: rt, valueUpdate: 'afterkeydown'" type="text" size="16" readonly="readonly" /></td>
+			<td class="units"><select data-bind="options: rt.units, optionsText: 'name', value: rt.selUnit" ></select></td>
+			<td class="equation">\( R_T = \dfrac{2.25167e^{11}}{f_{sw(act)^{1.114}}} \)</td>
+			<td class="comment">This is the resistance required to set the frequency at \( f_{sw(act)} \) chosen above.</td>
 		</tr>
 		<!-- Temperature stuff -->
 		<tr>
