@@ -5,7 +5,7 @@ Engineering Calculators Written In Javascript
 - Author: gbmhunter <gbmhunter@gmail.com> (http://www.cladlab.com)
 - Created: 2013/06/06
 - Last Modified: 2013/11/25
-- Version: v4.3.0.0
+- Version: v4.4.0.0
 - Company: CladLabs
 - Project: Free Code Libraries	.
 - Language: HTML/JS/PHP
@@ -75,6 +75,7 @@ Changelog
 ========= ========== ============================================================================================================
 Version   Date       Comment
 ========= ========== ============================================================================================================
+v4.4.0.0  2013/11/25 Added temperature calculations for the LT3745 calculator, closes #53.
 v4.3.0.0  2013/11/25 Added separators (horizontal dividers) to the LT3745 calculator.
 v4.2.0.0  2013/11/25 All of the following changes apply to the LT3745 calculator: Added 55V limit to Vin(max), closes #45. Added rule that maximum input voltage has to be greater or equal to minimum input voltage, closes #46. Made sure Vin(min) cannot go less than 6V, fixes #47. Added Vcc variable, closes #48. Rfb1 is now recommended to be 10k, closes #49. Added more comments. Changed Vbuck,out to just Vout, and changed it from an output to an input, closes #50. Made sure Iled(nom) is between 10 and 50mA, closes #51. Made sure fsw(act) was between 100kHz-1MHz and less than fsw(max), closes #52.
 v4.1.0.0  2013/11/24 Added image to Ohm's law calculator. Added and fixed units in Ohm's law calculator. Added 'Clear Values' button to Ohm's law calculator, although it doesn't work yet.

@@ -457,6 +457,63 @@ this.lt3745 = function()
 		],
 		0
 	);
+	
+	//================ tj(max) ============//
+	
+	this.tjMax = new cc.input(
+		this,
+		function(){
+			return true;
+		},
+		[ new cc.unit('\xB0C', 1.0) ],
+		0);
+	
+	this.tjMax.AddValidator(cc.validatorEnum.IS_NUMBER, cc.severityEnum.error);
+		
+	// tj(max) should be above room temperature
+	this.tjMax.AddCustomValidator(
+		this,
+		'tjMax should really be higher than standard room temperature.',
+		function(app){
+			if(app.tjMax.val() < 25.0)
+				return false;
+			return true;
+		},
+		cc.severityEnum.warning
+	);
+	
+	// Make sure tj(max) is below abs max temp set by IC
+	this.tjMax.AddCustomValidator(
+		this,
+		'tjMax cannot be higher than the internally set maximum temperature.',
+		function(app){
+			if(app.tjMax.val() > 165.0)
+				return false;
+			return true;
+		},
+		cc.severityEnum.error
+	);
+		
+	//================ Rtset ==============//
+	
+	this.rtSet = new cc.output(
+		this,
+		function() 
+		{			
+			
+			var riSet = this.riSet.val();
+			var tjMax = this.tjMax.val();
+			console.log(riSet);
+			
+			return (0.00172*(tjMax + 273.15)*riSet)/1.205;
+		}, 
+		function() { return true; },
+		[
+			new cc.unit('\u2126', 1.0),
+			new cc.unit('k\u2126', 1000.0)
+		],
+		1
+	);
 		
 	//================ Cout(min) ==============//
 	

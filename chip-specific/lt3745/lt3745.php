@@ -194,6 +194,23 @@
 			<td class="equation">\(\dfrac{f_{sw(act)}}{10}\)</td>
 			<td class="comment">This is the switching frequency which would give unity voltage gain between input and output.</td>
 		</tr>
+		<!-- Temperature stuff -->
+		<tr>
+			<td class="name">Maximum Junction Temperature</td>
+			<td class="symbol">\(T_{J(max)}\)</td>
+			<td><input class="input" data-bind="calcVar: tjMax, valueUpdate: 'afterkeydown'" type="text" size="16" /></td>
+			<td class="units"><select data-bind="options: tjMax.units, optionsText: 'name', value: tjMax.selUnit"></select></td>
+			<td class="equation">n/a</td>
+			<td class="comment">This is the desired maximum junction temperature of the LT3745 IC. The IC will begin to reduce \( I_{led-pin(nom)} \) above this to prevent any further increase on temperature. The LT3745 also has an absolute maximum junction temperature of \( 165^{\circ}C \), at which point it will switch off until it drops to \( 155^{\circ}C \).</td>
+		</tr>
+		<tr style="border-bottom: 4px solid #000;">
+			<td class="name">Temperature Set Resistance</td>
+			<td class="symbol">\(R_{TSET}\)</td>
+			<td><input class="output" data-bind="calcVar: rtSet, valueUpdate: 'afterkeydown'" type="text" size="16" readonly="readonly" /></td>
+			<td class="units"><select data-bind="options: rtSet.units, optionsText: 'name', value: rtSet.selUnit" ></select></td>
+			<td class="equation">\( \frac{1.72mV*(T_J + 273.15)*R_{ISET}}{1.205V} \)</td>
+			<td class="comment">The resistance required to be connected between pin \( T_{SET} \) and ground on the LT3745 to limit the junction temperature to \( T_{J(max)} \).</td>
+		</tr>
 		<tr>
 			<td class="name">Minimum Output Capacitance</td>
 			<td class="symbol">\(C_{out(min)}\)</td>
