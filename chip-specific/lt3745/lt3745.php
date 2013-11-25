@@ -200,7 +200,7 @@
 			<td><input class="output" data-bind="calcVar: rt, valueUpdate: 'afterkeydown'" type="text" size="16" readonly="readonly" /></td>
 			<td class="units"><select data-bind="options: rt.units, optionsText: 'name', value: rt.selUnit" ></select></td>
 			<td class="equation">\( R_T = \dfrac{2.25167e^{11}}{f_{sw(act)^{1.114}}} \)</td>
-			<td class="comment">This is the resistance required to set the frequency at \( f_{sw(act)} \) chosen above.</td>
+			<td class="comment">This is the resistance required to set the frequency at \( f_{sw(act)} \) chosen above. Equation was worked out by fitting a power equation to the frequency-resistance values given in the datahseet. This equation fits the data well, with a regression coefficient of \( r^2 = 0.9994 \) within the valid range.</td>
 		</tr>
 		<!-- Temperature stuff -->
 		<tr>

@@ -5,7 +5,7 @@ Engineering Calculators Written In Javascript
 - Author: gbmhunter <gbmhunter@gmail.com> (http://www.cladlab.com)
 - Created: 2013/06/06
 - Last Modified: 2013/11/25
-- Version: v4.5.0.0
+- Version: v4.5.1.0
 - Company: CladLabs
 - Project: Free Code Libraries	.
 - Language: HTML/JS/PHP
@@ -75,6 +75,7 @@ Changelog
 ========= ========== ============================================================================================================
 Version   Date       Comment
 ========= ========== ============================================================================================================
+v4.5.1.0  2013/11/25 Added info about the Rt equation to the LT3745 calculator.
 v4.5.0.0  2013/11/25 Added fw(act) and Rt calculations to the LT3745 calculator, closes #54.
 v4.4.0.0  2013/11/25 Added temperature calculations for the LT3745 calculator, closes #53.
 v4.3.0.0  2013/11/25 Added separators (horizontal dividers) to the LT3745 calculator.
