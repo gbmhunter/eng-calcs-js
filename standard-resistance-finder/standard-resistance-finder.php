@@ -11,7 +11,7 @@
 <script type="text/javascript">
 	window.jQuery || document.write('<script src="http://code.jquery.com/jquery-latest.min.js"><\/script>')
 </script>
-	
+
 <!-- candy-calc logic -->
 <script type="text/javascript" src="/candy-calc/js/candy-calc.js" ></script>
 <!-- candy-calc CSS file -->

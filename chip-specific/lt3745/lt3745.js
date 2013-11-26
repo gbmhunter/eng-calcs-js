@@ -93,6 +93,7 @@ this.lt3745 = function()
 			// Vin(min) cannot be less than 6.0V
 			if(tempVal < 6.0)
 				return 6.0;
+			//jQuery.jStorage.set('test', 2);
 				
 			return tempVal;
 		}, 
@@ -102,6 +103,8 @@ this.lt3745 = function()
 		},
 		[ new cc.unit('V', 1.0) ],
 		0);
+		
+	console.log(jQuery.jStorage.get('test'));
 	
 	//================= Vin(max) ================//
 
@@ -460,7 +463,7 @@ this.lt3745 = function()
 	
 	//================ Rt ==============//
 	
-	// Rt = 2.25167^11 / fSwAct^1.114
+	// Rt = 2.25167*10^11 / fSwAct^1.114
 	this.rt = new cc.output(
 		this,
 		function() 
@@ -473,7 +476,7 @@ this.lt3745 = function()
 			new cc.unit('\u2126', 1.0),
 			new cc.unit('k\u2126', 1000.0)
 		],
-		0
+		1
 	);
 	
 	//================ tj(max) ============//
