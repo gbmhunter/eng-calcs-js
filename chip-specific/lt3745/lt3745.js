@@ -93,7 +93,6 @@ this.lt3745 = function()
 			// Vin(min) cannot be less than 6.0V
 			if(tempVal < 6.0)
 				return 6.0;
-			//jQuery.jStorage.set('test', 2);
 				
 			return tempVal;
 		}, 
@@ -103,8 +102,6 @@ this.lt3745 = function()
 		},
 		[ new cc.unit('V', 1.0) ],
 		0);
-		
-	console.log(jQuery.jStorage.get('test'));
 	
 	//================= Vin(max) ================//
 
