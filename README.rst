@@ -5,7 +5,7 @@ Engineering Calculators Written In Javascript
 - Author: gbmhunter <gbmhunter@gmail.com> (http://www.cladlab.com)
 - Created: 2013/06/06
 - Last Modified: 2013/11/26
-- Version: v4.5.2.0
+- Version: v4.5.3.0
 - Company: CladLabs
 - Project: Free Code Libraries	.
 - Language: HTML/JS/PHP
@@ -75,6 +75,7 @@ Changelog
 ========= ========== ============================================================================================================
 Version   Date       Comment
 ========= ========== ============================================================================================================
+v4.5.3.0  2013/11/26 Removed references to jStorage in lt3745.php.
 v4.5.2.0  2013/11/26 Added jStorage as a submodule into lib/jStorage, but then removed it after deciding it would be better in the candy-calc repo. Default unit is now kOhms for RT in the LT3745 calculator.
 v4.5.1.0  2013/11/25 Added info about the Rt equation to the LT3745 calculator.
 v4.5.0.0  2013/11/25 Added fw(act) and Rt calculations to the LT3745 calculator, closes #54.

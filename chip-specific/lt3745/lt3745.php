@@ -12,10 +12,6 @@
 	window.jQuery || document.write('<script src="http://code.jquery.com/jquery-latest.min.js"><\/script>')
 </script>
 	
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/json2/20110223/json2.js"></script>
-<!-- jStorage, for saving calculator state to user's computer -->
-<script type="text/javascript" src="Js-EngCalcs/lib/jStorage/jstorage.js"></script>
-	
 <!-- candy-calc logic -->
 <script type="text/javascript" src="/candy-calc/js/candy-calc.js" ></script>
 <!-- candy-calc CSS file -->
