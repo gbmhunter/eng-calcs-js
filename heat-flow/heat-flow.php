@@ -36,7 +36,15 @@
 				<input id="rbVar1" type="radio" name="input" />
 			</td>
 			<td rowspan="20">
-				<img src="three-thermal-resistance-diagram-with-power-and-temp.png" width="150" height="200"/>
+				<?php
+					// Get full path
+					$cur_file = str_replace('\\','/', realpath(dirname(__FILE__)));
+					// Remove everything up to public_html (Apache) or htdocs (xampp)
+					$cur_file = preg_replace('/(.*?)\/public_html/', '', $cur_file);
+					$cur_file = preg_replace('/(.*?)\/htdocs/', '', $cur_file);
+					// Output HTML
+					echo '<img src="' . $cur_file . '/three-thermal-resistance-diagram-with-power-and-temp.png" width="150" height="200" />';
+				?>
 			</td>
 		</tr>
 		<tr>
