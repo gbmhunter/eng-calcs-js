@@ -36,11 +36,11 @@
 		</tr>		
 		<tr>
 			<td colspan="3" style="text-align: center;">
-				<input data-bind="checked: series" type="radio" name="range" value="e12">E12</input>
-				<input data-bind="checked: series" type="radio" name="range" value="e24">E24</input>
-				<input data-bind="checked: series" type="radio" name="range" value="e48">E48</input>
-				<input data-bind="checked: series" type="radio" name="range" value="e96">E96</input>
-				<input data-bind="checked: series" type="radio" name="range" value="e192">E192</input>
+				<input data-bind="checked: series" type="radio" name="range" value="e12">E12   </input>
+				<input data-bind="checked: series" type="radio" name="range" value="e24">E24   </input>
+				<input data-bind="checked: series" type="radio" name="range" value="e48">E48   </input>
+				<input data-bind="checked: series" type="radio" name="range" value="e96">E96   </input>
+				<input data-bind="checked: series" type="radio" name="range" value="e192">E192   </input>
 			</td>
 		</tr>
 		<tr>
@@ -56,6 +56,9 @@
 			<td class="symbol">\(\%_{diff}\)</td>
 			<td>
 				<input class="output" data-bind="calcVar: percDiff, valueUpdate: 'afterkeydown'" type="text" size="16" disabled="true"/>
+			</td>
+			<td>
+				<select data-bind="options: percDiff.units, optionsText: 'name', value: percDiff.selUnit"></select>
 			</td>
 		<tr>
 	</tbody>

@@ -102,7 +102,7 @@ function ohmsLaw()
 		function()
 		{
 			console.log('Calculating voltage...');
-			return this.current.shadowVal()*this.resistance.shadowVal();
+			return this.current.val()*this.resistance.val();
 		},
 		function() { return true; },
 		[
@@ -134,7 +134,7 @@ function ohmsLaw()
 		function()
 		{
 			console.log('Calculating current...');
-			return this.voltage.shadowVal()/this.resistance.shadowVal();
+			return this.voltage.val()/this.resistance.val();
 		},
 		function() { return true; },
 		[
@@ -159,8 +159,8 @@ function ohmsLaw()
 		function()
 		{
 			console.log('Calculating resistance...');
-			console.log('voltage.shadowVal() = ' + this.voltage.val());
-			console.log('current.shadowVal() = ' + this.current.val());
+			console.log('voltage.val() = ' + this.voltage.val());
+			console.log('current.val() = ' + this.current.val());
 			return this.voltage.val()/this.current.val();
 		},
 		function() { return true; },
