@@ -1,7 +1,11 @@
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript">
+	window.jQuery || document.write('<script src="http://code.jquery.com/jquery-latest.min.js"><\/script>')
+</script>
+
 <script type="text/javascript"
   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
+
 <p>The calculator works out either \(P_D\), \(\Delta T\), or \(R_{\theta}\), given the other two parameters, using the heat flow equation:</p>
 <p style="text-align: center;">$$P_D = \frac{\Delta T}{R_{\theta}}$$</p>
 <p style="text-align: center;">
