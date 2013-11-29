@@ -5,7 +5,7 @@ Engineering Calculators Written In Javascript
 - Author: gbmhunter <gbmhunter@gmail.com> (http://www.cladlab.com)
 - Created: 2013/06/06
 - Last Modified: 2013/11/29
-- Version: v6.0.0.0
+- Version: v6.0.1.0
 - Company: CladLabs
 - Project: Free Code Libraries	.
 - Language: HTML/JS/PHP
@@ -75,6 +75,7 @@ Changelog
 ========= ========== ============================================================================================================
 Version   Date       Comment
 ========= ========== ============================================================================================================
+v6.0.1.0  2013/11/29 Changed console.log() function calls to Log() so that they can be deactivated by setting DEBUG to false.
 v6.0.0.0  2013/11/29 Added Capacitor Energy calculator to repo, closes #2.
 v5.0.0.0  2013/11/28 Added Capacitor Charge calculator to repo, closes #3.
 v4.5.7.0  2013/11/28 Make Heat Flow calculator jQuery safe, closes #58.

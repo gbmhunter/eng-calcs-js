@@ -16,6 +16,7 @@ function capacitorEnergy()
 		function()
 		{
 			// E = CV^2
+			Log('Calculating energy');
 			return 0.5*this.capacitance.val()*Math.pow(this.voltage.val(), 2);
 		},
 		function() { return true; },
@@ -47,6 +48,7 @@ function capacitorEnergy()
 		function()
 		{
 			// C = 2E/V^2
+			Log('Calculating capacitance.');
 			return (2.0*this.energy.val())/(Math.pow(this.voltage.val(), 2));
 		},
 		function() { return true; },
@@ -73,6 +75,7 @@ function capacitorEnergy()
 		function()
 		{
 			// V = sqrt(2E/C)
+			Log('Calculating voltage.');
 			return Math.sqrt((2.0*this.energy.val())/this.capacitance.val());
 		},
 		function() { return true; },
