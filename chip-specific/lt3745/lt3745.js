@@ -518,10 +518,8 @@ this.lt3745 = function()
 		this,
 		function() 
 		{			
-			
 			var riSet = this.riSet.val();
 			var tjMax = this.tjMax.val();
-			console.log(riSet);
 			
 			return (0.00172*(tjMax + 273.15)*riSet)/1.205;
 		}, 
