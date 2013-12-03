@@ -49,7 +49,7 @@
 				<input class="output" data-bind="calcVar: actualRes, valueUpdate: 'afterkeydown'" type="text" size="16" />
 			</td>
 			<td>
-				<select data-bind="options: actualRes.units, optionsText: 'name', value: desiredRes.selUnit"></select>
+				<select data-bind="options: actualRes.units, optionsText: 'name', value: actualRes.selUnit"></select>
 			</td>
 		</tr>
 		<tr>
@@ -65,6 +65,7 @@
 </table>
 <!-- Include Javascript file for calculator. Path is built from this scripts path, using __FILE__ variable. -->
 <?php
+
 	// Get full path
 	$cur_file = str_replace('\\','/', realpath(dirname(__FILE__)));
 	// Remove everything up to public_html (Apache) or htdocs (xampp)
@@ -72,8 +73,10 @@
 	$cur_file = preg_replace('/(.*?)\/htdocs/', '', $cur_file);
 	// Output HTML
 	echo '<script type="text/javascript" src="' . $cur_file . '\standard-resistance-finder.js"></script>';
-?>
 
+	?>
+
+<!--
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-
+-->
 

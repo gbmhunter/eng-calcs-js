@@ -10,32 +10,36 @@
 
 // Adding the standardResistanceFinder "namespace" for the calculator, so that multiple calculators can work
 // on the same page. Use the data-bind="with: standardResistanceCalculator" command within the HTML to access the child variables.
-this.standardResistanceFinder = function()
+function standardResistanceFinder()
 {
-
+	
 	// E12 resistance array
 	var e12 = new Array(1.0, 1.2, 1.5, 1.8, 2.2, 2.7, 3.3, 3.9, 4.7, 5.6, 6.8, 8.2, 10.0); 
 
 	// E24 resistance array
 	var e24 = new Array(1.0, 1.1, 1.2, 1.3, 1.5, 1.6, 1.8, 2.0, 2.2, 2.4, 2.7, 3.0, 3.3, 3.6, 3.9, 4.3, 4.7, 5.1, 5.6, 6.2, 6.8, 7.5, 8.2, 9.1, 10.0);
-
-	this.desiredRes = new cc.input(
+	
+	this.desiredRes = new cc.variable(
 		this,
+		function() { return; },
 		function() { return true; },
 		[
 			new cc.unit('m\u2126', 0.001),
 			new cc.unit('\u2126', 1.0),
 			new cc.unit('k\u2126', 1000.0)
 		],
-		0
+		1,
+		2,
+		function() { return cc.stateEnum.input; }
 	);
-			
+	
 	this.series = ko.observable("e12");
 	
-	this.actualRes = new cc.output(
+	this.actualRes = new cc.variable(
 		this,
 		function() 
 		{
+			
 			Log('Calculating...');
 			
 			// Quit if units have not been initialised
@@ -90,6 +94,7 @@ this.standardResistanceFinder = function()
 			
 			// Return the actual resistance
 			return (closestMatch.val*Math.pow(10, order));
+			
 		},
 		function() { return true; },
 		[
@@ -97,16 +102,17 @@ this.standardResistanceFinder = function()
 			new cc.unit('\u2126', 1.0),
 			new cc.unit('k\u2126', 1000.0)
 		],
-		0,
-		2
+		1,
+		2,
+		function() { return cc.stateEnum.output; }
 	);
 	
 	// Link the desired and actual resistance units together
-	cc.linkUnits(this.desiredRes, this.actualRes);
+	//cc.linkUnits(this.desiredRes, this.actualRes);
 	
 	// Change actualRes selUnit so it is calculated from 
 	
-	this.percDiff = new cc.output(
+	this.percDiff = new cc.variable(
 		this,
 		function(){
 			Log('desRes = ' + this.desiredRes.val());
@@ -118,7 +124,8 @@ this.standardResistanceFinder = function()
 			new cc.unit('%', 0.01)
 		],
 		0,
-		3
+		3,
+		function() { return cc.stateEnum.output; }
 	);
 	
 	function BuildResArray(numElements)
