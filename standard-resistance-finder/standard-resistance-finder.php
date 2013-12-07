@@ -31,7 +31,7 @@
 				<input class="input" data-bind="calcVar: desiredRes, valueUpdate: 'afterkeydown'" size="16" ></input>
 			</td>
 			<td>
-				<select data-bind="options: desiredRes.units, optionsText: 'name', value: desiredRes.selUnit"></select>
+				<select data-bind="options: desiredRes.units, optionsText: 'name', value: desiredRes.dispSelUnit"></select>
 			</td>			
 		</tr>		
 		<tr>
@@ -49,7 +49,7 @@
 				<input class="output" data-bind="calcVar: actualRes, valueUpdate: 'afterkeydown'" type="text" size="16" />
 			</td>
 			<td>
-				<select data-bind="options: actualRes.units, optionsText: 'name', value: actualRes.selUnit"></select>
+				<select data-bind="options: actualRes.units, optionsText: 'name', value: actualRes.dispSelUnit"></select>
 			</td>
 		</tr>
 		<tr>

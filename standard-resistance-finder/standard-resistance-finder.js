@@ -19,15 +19,17 @@ function standardResistanceFinder()
 	// E24 resistance array
 	var e24 = new Array(1.0, 1.1, 1.2, 1.3, 1.5, 1.6, 1.8, 2.0, 2.2, 2.4, 2.7, 3.0, 3.3, 3.6, 3.9, 4.3, 4.7, 5.1, 5.6, 6.2, 6.8, 7.5, 8.2, 9.1, 10.0);
 	
+	var resistenceUnits = [
+		new cc.unit('m\u2126', 0.001),
+		new cc.unit('\u2126', 1.0),
+		new cc.unit('k\u2126', 1000.0)
+	];
+	
 	this.desiredRes = new cc.variable(
 		this,
 		function() { return; },
 		function() { return true; },
-		[
-			new cc.unit('m\u2126', 0.001),
-			new cc.unit('\u2126', 1.0),
-			new cc.unit('k\u2126', 1000.0)
-		],
+		resistenceUnits,
 		1,
 		2,
 		function() { return cc.stateEnum.input; }
@@ -97,18 +99,14 @@ function standardResistanceFinder()
 			
 		},
 		function() { return true; },
-		[
-			new cc.unit('m\u2126', 0.001),
-			new cc.unit('\u2126', 1.0),
-			new cc.unit('k\u2126', 1000.0)
-		],
+		resistenceUnits,
 		1,
 		2,
 		function() { return cc.stateEnum.output; }
 	);
 	
 	// Link the desired and actual resistance units together
-	//cc.linkUnits(this.desiredRes, this.actualRes);
+	cc.linkUnits(this.desiredRes, this.actualRes);
 	
 	// Change actualRes selUnit so it is calculated from 
 	
