@@ -106,7 +106,8 @@ function standardResistanceFinder()
 	);
 	
 	// Link the desired and actual resistance units together
-	cc.linkUnits(this.desiredRes, this.actualRes);
+	cc.linkUnits(this.desiredRes, 'standardResUnits');
+	cc.linkUnits(this.actualRes, 'standardResUnits');
 	
 	// Change actualRes selUnit so it is calculated from 
 	

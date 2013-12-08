@@ -4,8 +4,8 @@ Engineering Calculators Written In Javascript
 
 - Author: gbmhunter <gbmhunter@gmail.com> (http://www.cladlab.com)
 - Created: 2013/06/06
-- Last Modified: 2013/12/07
-- Version: v6.0.4.0
+- Last Modified: 2013/12/08
+- Version: v6.0.5.0
 - Company: CladLabs
 - Project: Free Code Libraries	.
 - Language: HTML/JS/PHP
@@ -75,6 +75,7 @@ Changelog
 ========= ========== ============================================================================================================
 Version   Date       Comment
 ========= ========== ============================================================================================================
+v6.0.5.0  2013/12/08 Changed 'cc.linkUnits()' call to match candy-calc API change.
 v6.0.4.0  2013/12/07 Fixed infinite recursion issue for linked units in 'Standard Resistance Calculator'.
 v6.0.3.0  2013/12/04 Converted 'Standard Resistance Calculator' to use new ``cc.variable()`` object. Fixed Chrome freeze issue by separating the desired and actual resistance units.
 v6.0.2.0  2013/11/29 Deleted unneeded, commented code, and replaced all console.log() calls with Log() in the Ohm's Law calculator and LT3745 calculator.
