@@ -35,7 +35,7 @@ The following calculator works out either \( V_{in} \), \( R_1 \)$, \( R_2 \), o
 </p>
 <p style="text-align: center;">\( I_q = \frac{V_{in}}{R_1+R_2} \)</p>
 
-<table class="candy-calc" style="width: 400px;">
+<table id="resistorDivider" class="candy-calc" style="width: 400px;">
 	<tbody>
 		<tr>
 			<td><strong>Variables:</strong></td>
