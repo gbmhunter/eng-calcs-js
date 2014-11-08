@@ -4,8 +4,8 @@ Engineering Calculators Written In Javascript
 
 - Author: gbmhunter <gbmhunter@gmail.com> (www.mbedded.ninja)
 - Created: 2013-06-06
-- Last Modified: 2014-11-08
-- Version: v7.0.1.1
+- Last Modified: 2014-11-09
+- Version: v7.0.2.0
 - Company: mbedded.ninja
 - Project: n/a
 - Language: HTML/JS/PHP
@@ -75,6 +75,7 @@ Changelog
 ========= ========== ==============================================================================
 Version   Date       Comment
 ========= ========== ==============================================================================
+v7.0.2.0  2014-11-09 Added percentages next to series selection in the 'Standard Resistance' calculator, closes #69. Added validator for the input in the 'Standard Resistance' calculator, closes #70.
 v7.0.1.1  2014-11-08 Changed references to cladlab.com to mbedded.ninja in the README, closes #67.
 v7.0.1.0  2013-12-15 Added id field to resistor divider calculator HTML table.
 v7.0.0.0  2013-12-15 Added the 'resistor divider' calculator. Created Aptana Studio (eclipse) project for entire repo. Renamed repo to 'eng-calcs-js'.

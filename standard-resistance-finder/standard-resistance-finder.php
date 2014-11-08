@@ -1,11 +1,12 @@
 <!--
-// @file 		standard-resistance-finder.php
-// @author 		Geoffrey Hunter <gbmhunter@gmail.com> (www.cladlabs.com)
-// @edited 		n/a
-// @date 		2013/09/17
-// @brief 		Given an input resistance, finds the closest resistance in a specified series.
+// @file 			standard-resistance-finder.php
+// @author 			Geoffrey Hunter <gbmhunter@gmail.com> (www.mbedded.ninja)
+// @edited 			n/a
+// @date 			2013/09/17
+// @last-modified	2014-11-08
+// @brief 			Given an input resistance, finds the closest resistance in a specified series.
 // @details
-//				See the README in the root dir for more info.
+//		See the README in the root dir for more info.
 -->
 
 <script type="text/javascript">
@@ -17,7 +18,7 @@
 <!-- candy-calc CSS file -->
 <link type="text/css" rel="stylesheet" href="/candy-calc/css/candy-calc.css" />
 
-<p>This calculator finds a standard resistance value(s) that will best match the resistance \(R_{desired}\) you specify.</p>
+<p>This calculator finds a standard resistance value \(R_{actual}\) that best matches the desired resistance \(R_{desired}\) and resistance series you specify.</p>
 <table id="standardResistanceFinder" class="candy-calc" border="4" style="width: 500px;">
 	<tbody>
 		<tr>
@@ -36,11 +37,11 @@
 		</tr>		
 		<tr>
 			<td colspan="3" style="text-align: center;">
-				<input data-bind="checked: series" type="radio" name="range" value="e12">E12   </input>
-				<input data-bind="checked: series" type="radio" name="range" value="e24">E24   </input>
-				<input data-bind="checked: series" type="radio" name="range" value="e48">E48   </input>
-				<input data-bind="checked: series" type="radio" name="range" value="e96">E96   </input>
-				<input data-bind="checked: series" type="radio" name="range" value="e192">E192   </input>
+				<input data-bind="checked: series" type="radio" name="range" value="e12">E12 (10%)   </input>
+				<input data-bind="checked: series" type="radio" name="range" value="e24">E24 (5%)   </input>
+				<input data-bind="checked: series" type="radio" name="range" value="e48">E48 (2%)  </input>
+				<input data-bind="checked: series" type="radio" name="range" value="e96">E96 (1%)   </input>
+				<input data-bind="checked: series" type="radio" name="range" value="e192">E192 (0.5%)  </input>
 			</td>
 		</tr>
 		<tr>

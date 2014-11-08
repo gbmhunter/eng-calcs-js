@@ -3,7 +3,7 @@
 // @author 				Geoffrey Hunter <gbmhunter@gmail.com> (www.mbedded.ninja)
 // @edited 				n/a
 // @created				2013-09-17
-// @last-modified		2014-11-08
+// @last-modified		2014-11-09
 // @brief 				Given an input resistance, finds the closest resistance in a specified series.
 // @details
 //		See the README in the root dir for more info.
@@ -26,7 +26,9 @@ function standardResistanceFinder()
 		new cc.unit('k\u2126', 1000.0)
 	];
 
+	//! @brief		The desired resistance (input).
 	this.desiredRes = new cc.variable({
+		name: 'desiredRes',
 		app: this,
 		eqFn: function() { return; },
 		validatorFn: function() { return true; },
@@ -35,23 +37,28 @@ function standardResistanceFinder()
 		roundTo: 2,
 		stateFn: function() { return cc.stateEnum.input; }
 	});
+
+	// Add validator
+	this.desiredRes.AddValidator(cc.validatorEnum.IS_NUMBER, cc.severityEnum.error);
 	
 	this.series = ko.observable("e12");
 	
 	this.actualRes = new cc.variable({
+		name: 'actualRes',
 		app: this,
 		eqFn: function() 
 		{
 			
-			Log('Calculating...');
+			Log('this.actualRes.eqFn() called...');
 			
 			// Quit if units have not been initialised
 			if(this.desiredRes.selUnit() === undefined)
 			{
+				Log('this.desiredRes.selUnit() has not been defined, returning...');
 				return;
 			}
 			
-			Log('Val = ' + this.desiredRes.selUnit().multiplier);
+			Log('Mulitplier = ' + this.desiredRes.selUnit().multiplier);
 			
 			// Get desired resistance  
 			var desRes = this.desiredRes.val();
@@ -89,13 +96,14 @@ function standardResistanceFinder()
 			var scaledDesRes = ScaleWrtOrder(desRes, order);
 			Log('Scaled resistance = ' + scaledDesRes);
 			var closestMatch = FindClosestMatch(scaledDesRes, selectedRange);
-			Log(closestMatch);
-			Log(closestMatch.val*Math.pow(10, order));
+			Log('Closest match 1 = ' + closestMatch);
+			Log('Closes match 2 = ' + closestMatch.val*Math.pow(10, order));
 			
 			// Update percentage error
 			//this.percDiff(Math.round(closestMatch.diff*100)/100); 
 			
 			// Return the actual resistance
+			Log('Returning closest resistance = ' + scaledDesRes);
 			return (closestMatch.val*Math.pow(10, order));
 			
 		},
@@ -113,10 +121,13 @@ function standardResistanceFinder()
 	// Change actualRes selUnit so it is calculated from 
 	
 	this.percDiff = new cc.variable({
+		name: 'percDiff',
 		app: this,
 		eqFn: function(){
+			Log('this.precDiff.eqFn() called.');
 			Log('desRes = ' + this.desiredRes.val());
 			Log('actRes = ' + this.actualRes.val());
+			Log('Returning...');
 			return (this.actualRes.val() - this.desiredRes.val())/this.actualRes.val();
 		},
 		validatorFn: function(){ return true; },
