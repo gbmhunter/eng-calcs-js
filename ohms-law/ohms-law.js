@@ -1,11 +1,12 @@
-//
-// @file 		ohms-law.js
-// @author 		Geoffrey Hunter <gbmhunter@gmail.com> (www.cladlabs.com)
-// @edited 		n/a
-// @date 		2013/11/23
-// @brief 		Given an input resistance, finds the closest resistance in a specified series.
-// @details
-//				See the README in the repo's root dir for more info.
+//!
+//! @file 			ohms-law.js
+//! @author 		Geoffrey Hunter <gbmhunter@gmail.com> (www.mbedded.ninja)
+//! @edited 		n/a
+//! @date 			2013-11-23
+//! @last-modified	2014-11-08
+//! @brief 			Ohms law calculator.
+//! @details
+//!		See the README in the repo's root dir for more info.
 
 function ohmsLaw()
 {

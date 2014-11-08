@@ -1,15 +1,13 @@
-//
-// @file 		ohms-law.js
-// @author 		Geoffrey Hunter <gbmhunter@gmail.com> (www.cladlabs.com)
-// @edited 		n/a
-// @date 		2013/11/23
-// @brief 		Given an input resistance, finds the closest resistance in a specified series.
-// @details
-//				See the README in the root dir for more info.
+//!
+//! @file 			capacitor-charge.js
+//! @author 		Geoffrey Hunter <gbmhunter@gmail.com> (www.mbedded.ninja)
+//! @edited 		n/a
+//! @date 			2013-11-23
+//! @last-modified	2014-11-08
+//! @brief 			Given an input resistance, finds the closest resistance in a specified series.
+//! @details
+//!		See the README in the root dir for more info.
 	
-// Adding the standardResistanceFinder "namespace" for the calculator, so that multiple calculators can work
-// on the same page. Use the data-bind="with: standardResistanceCalculator" command within the HTML to access the child variables.
-
 function capacitorCharge()
 {
 	this.calcWhat = ko.observable('voltage');

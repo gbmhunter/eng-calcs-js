@@ -1,11 +1,12 @@
 <!--
-// @file 		capacitor-charge.php
-// @author 		Geoffrey Hunter <gbmhunter@gmail.com> (www.cladlabs.com)
-// @edited 		n/a
-// @date 		2013/11/28
-// @brief 		
-// @details
-//				See the README in the root dir for more info.
+//! @file 			capacitor-charge.php
+//! @author 		Geoffrey Hunter <gbmhunter@gmail.com> (www.mbedded.ninja)
+//! @edited 		n/a
+//! @date 			2013-11-28
+//! @last-modified	2014-11-08
+//! @brief 		
+//! @details
+//		See the README in the root dir for more info.
 -->
 
 <script type="text/javascript">

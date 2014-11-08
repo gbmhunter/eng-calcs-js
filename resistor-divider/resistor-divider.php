@@ -1,12 +1,13 @@
 <!--
-// @file 			resistor-divider.php
-// @author 			Geoffrey Hunter <gbmhunter@gmail.com> (www.cladlabs.com)
-// @edited 			n/a
-// @date 			2013/11/29
-// @last-modified	2013/12/15
-// @brief 		
-// @details
-//				See the README in the root dir for more info.
+//!
+//! @file 			resistor-divider.php
+//! @author 		Geoffrey Hunter <gbmhunter@gmail.com> (www.mbedded.ninja)
+//! @edited 		n/a
+//! @created		2012-11-26
+//! @last-modified 	2014-11-08
+//! @brief 		
+//! @details
+//!		See the README in the root dir for more info.
 -->
 
 <script type="text/javascript">

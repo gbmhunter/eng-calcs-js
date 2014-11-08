@@ -1,11 +1,12 @@
 <!--
-// @file 		lt3745.php
-// @author 		Geoffrey Hunter <gbmhunter@gmail.com> (www.cladlabs.com)
-// @edited 		n/a
-// @date 		2013/11/01
-// @brief 		PHP and HTML for the LT3745 calculator. Binding/calculating code is in lt3745.js.
-// @details
-//				See the README in the root dir for more info.
+//! @file 			lt3745.php
+//! @author 		Geoffrey Hunter <gbmhunter@gmail.com> (www.mbedded.ninja)
+//! @edited 		n/a
+//! @date 			2013-11-01
+//! @last-modified	2014-11-08
+//! @brief 			PHP and HTML for the LT3745 calculator. Binding/calculating code is in lt3745.js.
+//! @details
+//!		See the README in the root dir for more info.
 -->
 
 <script type="text/javascript">

@@ -1,11 +1,12 @@
 //
-// @file 		standard-resistance-finder.js
-// @author 		Geoffrey Hunter <gbmhunter@gmail.com> (www.cladlabs.com)
-// @edited 		n/a
-// @date 		2013/09/17
-// @brief 		Given an input resistance, finds the closest resistance in a specified series.
+// @file 				standard-resistance-finder.js
+// @author 				Geoffrey Hunter <gbmhunter@gmail.com> (www.mbedded.ninja)
+// @edited 				n/a
+// @created				2013-09-17
+// @last-modified		2014-11-08
+// @brief 				Given an input resistance, finds the closest resistance in a specified series.
 // @details
-//				See the README in the root dir for more info.
+//		See the README in the root dir for more info.
 	
 
 // Adding the standardResistanceFinder "namespace" for the calculator, so that multiple calculators can work
@@ -36,7 +37,6 @@ function standardResistanceFinder()
 	});
 	
 	this.series = ko.observable("e12");
-	
 	
 	this.actualRes = new cc.variable({
 		app: this,

@@ -1,11 +1,12 @@
-//
-// @file 		lt3745.js
-// @author 		Geoffrey Hunter <gbmhunter@gmail.com> (www.cladlabs.com)
-// @edited 		n/a
-// @date 		2013/11/01
-// @brief 		Binding/calculating code for the LT3745 calculator. PHP/HTML code is in lt3745.php.
-// @details
-//				See the README in the root dir for more info.
+//!
+//! @file 			lt3745.js
+//! @author 		Geoffrey Hunter <gbmhunter@gmail.com> (www.cladlabs.com)
+//! @edited 		n/a
+//! @date 			2013-11-01
+//! @last-modified	2014-11-08
+//! @brief 			Binding/calculating code for the LT3745 calculator. PHP/HTML code is in lt3745.php.
+//! @details
+//!		See the README in the root dir for more info.
 
 // Adding the lt3745 "namespace" for LT3745 calculator, so that multiple calculators can work
 // on the same page. Use the data-bind="with: lt3745" command within the HTML to access the child variables.

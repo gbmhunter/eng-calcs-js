@@ -1,11 +1,12 @@
-//
-// @file 		capacitor-energy.js
-// @author 		Geoffrey Hunter <gbmhunter@gmail.com> (www.cladlabs.com)
-// @edited 		n/a
-// @date 		2013/11/29
-// @brief 		
-// @details
-//				See the README in the root dir for more info.
+//!
+//! @file 			capacitor-energy.js
+//! @author 		Geoffrey Hunter <gbmhunter@gmail.com> (www.mbedded.ninja)
+//! @edited 		n/a
+//! @date 			2013-11-29
+//! @last-modified	2014-11-08
+//! @brief 		
+//! @details
+//!		See the README in the root dir for more info.
 	
 function capacitorEnergy()
 {
