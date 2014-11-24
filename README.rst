@@ -4,8 +4,8 @@ Engineering Calculators Written In Javascript
 
 - Author: gbmhunter <gbmhunter@gmail.com> (www.mbedded.ninja)
 - Created: 2013-06-06
-- Last Modified: 2014-11-20
-- Version: v8.0.0.0
+- Last Modified: 2014-11-24
+- Version: v8.1.0.0
 - Company: mbedded.ninja
 - Project: n/a
 - Language: HTML/JS/PHP
@@ -75,6 +75,7 @@ Changelog
 ========= ========== ==============================================================================
 Version   Date       Comment
 ========= ========== ==============================================================================
+v8.1.0.0  2014-11-24 Added 'readmore.js' library module and collapsale infomation to the PCB track size calculator, closes #72.
 v8.0.0.0  2014-11-20 Added PCB track size calculator, closes #73.
 v7.0.2.0  2014-11-09 Added percentages next to series selection in the 'Standard Resistance' calculator, closes #69. Added validator for the input in the 'Standard Resistance' calculator, closes #70.
 v7.0.1.1  2014-11-08 Changed references to cladlab.com to mbedded.ninja in the README, closes #67.

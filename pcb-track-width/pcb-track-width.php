@@ -3,7 +3,7 @@
 // @author 			Geoffrey Hunter <gbmhunter@gmail.com> (www.mbedded.ninja)
 // @edited 			n/a
 // @date 			2014-11-19
-// @last-modified	2014-11-19
+// @last-modified	2014-11-24
 // @brief 			This calculator can find the minimum PCB track width (external or internal layer) given the track current, the allowed temperatur rise, and copper layer thickness. Calculated in accordance with IPC-2221A.
 // @details
 //		See the README in the root dir for more info.
@@ -18,7 +18,13 @@
 <!-- candy-calc CSS file -->
 <link type="text/css" rel="stylesheet" href="/candy-calc/css/candy-calc.css" />
 
-<p>This calculator can find the minimum PCB track width (external or internal layer) given the track current, the allowed temperatur rise, and copper layer thickness.</p>
+<!-- readmore.js Library -->
+<script type="text/javascript" src="lib/readmore.js/readmore.js" ></script>
+
+<article>
+
+	<p>This calculator can find the minimum PCB track width (external or internal layer) given the track current, the allowed temperatur rise, and copper layer thickness.</p>
+
 
 <p>Calculated in accordance with the equations in IPC-2221A Section 6.2 (formerly IPC-D-275, the equation has not changed between these two standards amd you can get similar values by curve-fitting to the graphs provided in IPC-D-275, drawn in 1954, woah!).</p>
 
@@ -41,6 +47,16 @@
 <p>The temperature of the PCB material should NEVER exceed the relative thermal index (RTI) of the material. This is defined in UL746B as the temperature at which 50% of the materials properties are retained after 100,000 hours.</p>
 
 <p>Remember this calculator does not take into account other nearby heat sources.</p>
+
+</article>
+
+<script type="text/javascript">
+jQuery(function($) {
+
+        $('article').readmore({maxHeight: 100, speed: 200}); // This function applies good for the first tab, but when navigated to the next tab, the text is not trimmed..
+
+        });
+</script>
 
 <table id="pcbTrackWidth" class="candy-calc" border="4" style="width: 500px;">
 	<tbody>
