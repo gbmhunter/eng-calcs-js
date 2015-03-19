@@ -13,9 +13,9 @@
 </script>
 	
 <!-- candy-calc logic -->
-<script type="text/javascript" src="/candy-calc/js/candy-calc.js" ></script>
+<script type="text/javascript" src="/lib/candy-calc/js/candy-calc.js" ></script>
 <!-- candy-calc CSS file -->
-<link type="text/css" rel="stylesheet" href="/candy-calc/css/candy-calc.css" />
+<link type="text/css" rel="stylesheet" href="/lib/candy-calc/css/candy-calc.css" />
 
 <p>
 	The following calculator works out either \(E\), \(C\), or \(V\), given the other two parameters, using the capacitor energy equation:
@@ -50,13 +50,7 @@
 			</td>
 			<td rowspan="4">
 				<?php
-					// Get full path
-					$cur_file = str_replace('\\','/', realpath(dirname(__FILE__)));
-					// Remove everything up to public_html (Apache) or htdocs (xampp)
-					$cur_file = preg_replace('/(.*?)\/public_html/', '', $cur_file);
-					$cur_file = preg_replace('/(.*?)\/htdocs/', '', $cur_file);
-					// Output HTML
-					echo '<img src="' . $cur_file . '/capacitor-energy-calculator-variable-diagram.png" width="200" height="150" />';
+					echo '<img src="/lib/eng-calcs-js//capacitor-energy/capacitor-energy-calculator-variable-diagram.png" width="200" height="150" />';
 				?>
 				
 			</td>
@@ -98,11 +92,5 @@
 
 <!-- Include Javascript file for calculator. Path is built from this scripts path, using __FILE__ variable. -->
 <?php
-	// Get full path
-	$cur_file = str_replace('\\','/', realpath(dirname(__FILE__)));
-	// Remove everything up to public_html (Apache) or htdocs (xampp)
-	$cur_file = preg_replace('/(.*?)\/public_html/', '', $cur_file);
-	$cur_file = preg_replace('/(.*?)\/htdocs/', '', $cur_file);
-	// Output HTML
-	echo '<script type="text/javascript" src="' . $cur_file . '\capacitor-energy.js"></script>';
+	echo '<script type="text/javascript" src="/lib/eng-calcs-js/capacitor-energy/capacitor-energy.js"></script>';
 ?>

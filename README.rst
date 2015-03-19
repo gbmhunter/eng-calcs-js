@@ -4,8 +4,8 @@ Engineering Calculators Written In Javascript
 
 - Author: gbmhunter <gbmhunter@gmail.com> (www.mbedded.ninja)
 - Created: 2013-06-06
-- Last Modified: 2014-11-24
-- Version: v8.1.0.0
+- Last Modified: 2015-03-19
+- Version: v8.2.0.0
 - Company: mbedded.ninja
 - Project: n/a
 - Language: HTML/JS/PHP
@@ -48,6 +48,8 @@ MathJax (delivered through MathJax CDN) for latex rendering of equations.
 
 knockout.js (delivered through CDN) for MVVM framework.
 
+candy-calc 
+
 Issues
 ======
 
@@ -61,13 +63,13 @@ None documented.
 Usage
 =====
 
-This repo is designed so that you can clone it directly (using SSH) into a web servers ``public_html`` folder (or any sub-folder). Then using PHP on a web page, include the php file of the specific calculator you wish to use, e.g.
+This repo is designed so that you can clone it directly (using SSH) into a folder on the web server called ``public_html/lib/eng-calcs-js/``. Then using PHP on a web page (including Wordpress, if you have a plugin which allows php on a page), include the php file of the specific calculator you wish to use, e.g.
 
 ::
 
-	include $_SERVER['DOCUMENT_ROOT'] . '/eng-calcs-js/chip-specific/lt3745/lt3745.php';
+	include 'lib/eng-calcs-js/chip-specific/lt3745/lt3745.php';
 	
-(assuming you cloned the repo directly into ``public_html``). The PHP file will automatically include it's respective Javascript file that resides in the same directory. All dependencies are automatically included via CDNs.
+The PHP file will automatically include it's respective Javascript file that resides in the same directory. All dependencies are automatically included via CDNs.
 	
 Changelog
 =========
@@ -75,6 +77,7 @@ Changelog
 ========= ========== ==============================================================================
 Version   Date       Comment
 ========= ========== ==============================================================================
+v8.2.0.0  2015-03-19 Reconfigured code to access all external dependencies through the folder '/lib', closes #76. Updated README accordingly.
 v8.1.0.0  2014-11-24 Added 'readmore.js' library module and collapsale infomation to the PCB track size calculator, closes #72.
 v8.0.0.0  2014-11-20 Added PCB track size calculator, closes #73.
 v7.0.2.0  2014-11-09 Added percentages next to series selection in the 'Standard Resistance' calculator, closes #69. Added validator for the input in the 'Standard Resistance' calculator, closes #70.

@@ -2,8 +2,8 @@
 // @file 			standard-resistance-finder.php
 // @author 			Geoffrey Hunter <gbmhunter@gmail.com> (www.mbedded.ninja)
 // @edited 			n/a
-// @date 			2013/09/17
-// @last-modified	2014-11-08
+// @date 			2013-09-17
+// @last-modified	2015-03-18
 // @brief 			Given an input resistance, finds the closest resistance in a specified series.
 // @details
 //		See the README in the root dir for more info.
@@ -14,9 +14,9 @@
 </script>
 
 <!-- candy-calc logic -->
-<script type="text/javascript" src="/candy-calc/js/candy-calc.js" ></script>
+<script type="text/javascript" src="/lib/candy-calc/js/candy-calc.js" ></script>
 <!-- candy-calc CSS file -->
-<link type="text/css" rel="stylesheet" href="/candy-calc/css/candy-calc.css" />
+<link type="text/css" rel="stylesheet" href="/lib/candy-calc/css/candy-calc.css" />
 
 <p>This calculator finds a standard resistance value \(R_{actual}\) that best matches the desired resistance \(R_{desired}\) and resistance series you specify.</p>
 <table id="standardResistanceFinder" class="candy-calc" border="4" style="width: 500px;">
@@ -64,20 +64,9 @@
 		<tr>
 	</tbody>
 </table>
+
 <!-- Include Javascript file for calculator. Path is built from this scripts path, using __FILE__ variable. -->
 <?php
-
-	// Get full path
-	$cur_file = str_replace('\\','/', realpath(dirname(__FILE__)));
-	// Remove everything up to public_html (Apache) or htdocs (xampp)
-	$cur_file = preg_replace('/(.*?)\/public_html/', '', $cur_file);
-	$cur_file = preg_replace('/(.*?)\/htdocs/', '', $cur_file);
-	// Output HTML
-	echo '<script type="text/javascript" src="' . $cur_file . '\standard-resistance-finder.js"></script>';
-
-	?>
-
-<!--
-<script type="text/javascript" src="https://www.google.com/jsapi"></script>
--->
+	echo '<script type="text/javascript" src="/lib/eng-calcs-js/standard-resistance-finder/standard-resistance-finder.js"></script>';
+?>
 

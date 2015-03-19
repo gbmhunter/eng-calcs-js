@@ -3,7 +3,7 @@
 //! @author 		Geoffrey Hunter <gbmhunter@gmail.com> (www.mbedded.ninja)
 //! @edited 		n/a
 //! @date 			2013-11-01
-//! @last-modified	2014-11-08
+//! @last-modified	2015-03-18
 //! @brief 			PHP and HTML for the LT3745 calculator. Binding/calculating code is in lt3745.js.
 //! @details
 //!		See the README in the root dir for more info.
@@ -14,9 +14,9 @@
 </script>
 	
 <!-- candy-calc logic -->
-<script type="text/javascript" src="/candy-calc/js/candy-calc.js" ></script>
+<script type="text/javascript" src="/lib/candy-calc/js/candy-calc.js" ></script>
 <!-- candy-calc CSS file -->
-<link type="text/css" rel="stylesheet" href="/candy-calc/css/candy-calc.css" />
+<link type="text/css" rel="stylesheet" href="/lib/candy-calc/css/candy-calc.css" />
 
 <p>A calculator to help you choose the values of the supporting passive components for the Linear Technology LT3745 16-channel LED driver.</p>
 <p>The datasheet can be found <a href="http://cds.linear.com/docs/en/datasheet/3745f.pdf">here</a>.</p>
@@ -265,12 +265,7 @@
 </table>
 <!-- Include Javascript file for calculator. Path is built from this scripts path, using __FILE__ variable. -->
 <?php
-	// Get full path
-	$cur_file=str_replace('\\','/', realpath(dirname(__FILE__)));
-	// Remove everything up to public_html
-	$cur_file=preg_replace('/(.*?)\/(.*?)\/(public_html|htdocs)/', '', $cur_file);
-	// Output HTML
-	echo '<script type="text/javascript" src="' . $cur_file . '\lt3745.js"></script>';
+	echo '<script type="text/javascript" src="/lib/eng-calcs-js/chip-specific/lt3745/lt3745.js"></script>';
 ?>
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>

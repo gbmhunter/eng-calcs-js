@@ -4,7 +4,7 @@
 //! @author 		Geoffrey Hunter <gbmhunter@gmail.com> (www.mbedded.ninja)
 //! @edited 		n/a
 //! @created		2012-11-26
-//! @last-modified 	2014-11-08
+//! @last-modified 	2015-03-18
 //! @brief 		
 //! @details
 //!		See the README in the root dir for more info.
@@ -15,9 +15,9 @@
 </script>
 	
 <!-- candy-calc logic -->
-<script type="text/javascript" src="/candy-calc/js/candy-calc.js" ></script>
+<script type="text/javascript" src="/lib/candy-calc/js/candy-calc.js" ></script>
 <!-- candy-calc CSS file -->
-<link type="text/css" rel="stylesheet" href="/candy-calc/css/candy-calc.css" />
+<link type="text/css" rel="stylesheet" href="/lib/candy-calc/css/candy-calc.css" />
 
 The following calculator works out either \( V_{in} \), \( R_1 \)$, \( R_2 \), or \( V_{out}\), given the other three parameters, using the resistive voltage divider equation:
 <p style="text-align: center;">\( V_{out}=\frac{R_2}{R_1+R_2}V_{in} \)</p>
@@ -58,13 +58,7 @@ The following calculator works out either \( V_{in} \), \( R_1 \)$, \( R_2 \), o
 			</td>
 			<td rowspan="6">
 				<?php
-					// Get full path
-					$cur_file = str_replace('\\','/', realpath(dirname(__FILE__)));
-					// Remove everything up to public_html (Apache) or htdocs (xampp)
-					$cur_file = preg_replace('/(.*?)\/public_html/', '', $cur_file);
-					$cur_file = preg_replace('/(.*?)\/htdocs/', '', $cur_file);
-					// Output HTML
-					echo '<img src="' . $cur_file . '/resistor-divider-calculator-variable-diagram.png" width="150" height="150" />';
+					echo '<img src="/lib/eng-calcs-js/resistor-divider/resistor-divider-calculator-variable-diagram.png" width="150" height="150" />';
 				?>
 			</td>
 		</tr>
@@ -127,11 +121,5 @@ The following calculator works out either \( V_{in} \), \( R_1 \)$, \( R_2 \), o
 
 <!-- Include Javascript file for calculator. Path is built from this scripts path, using __FILE__ variable. -->
 <?php
-	// Get full path
-	$cur_file = str_replace('\\','/', realpath(dirname(__FILE__)));
-	// Remove everything up to public_html (Apache) or htdocs (xampp)
-	$cur_file = preg_replace('/(.*?)\/public_html/', '', $cur_file);
-	$cur_file = preg_replace('/(.*?)\/htdocs/', '', $cur_file);
-	// Output HTML
-	echo '<script type="text/javascript" src="' . $cur_file . '\resistor-divider.js"></script>';
+	echo '<script type="text/javascript" src="/lib/eng-calcs-js/resistor-divider/resistor-divider.js"></script>';
 ?>
