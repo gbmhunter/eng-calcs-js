@@ -32,7 +32,7 @@
 	</ol>
 
 	<div class="calc-image">
-		<img src="lib/eng-calcs-js/smps-buck-converter/smps-buck-converter-calculator.png" />
+		<img src="/lib/eng-calcs-js/smps-buck-converter/smps-buck-converter-calculator.png" />
 	</div>
 
 </article>

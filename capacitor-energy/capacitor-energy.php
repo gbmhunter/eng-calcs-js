@@ -3,7 +3,7 @@
 //! @author 		Geoffrey Hunter <gbmhunter@gmail.com> (www.mbedded.ninja)
 //! @edited 		n/a
 //! @date 			2013-11-29
-//! @last-modified	2014-11-08
+//! @last-modified	2015-06-14
 //! @details
 //!		See the README in the root dir for more info.
 -->
@@ -50,7 +50,7 @@
 			</td>
 			<td rowspan="4">
 				<?php
-					echo '<img src="/lib/eng-calcs-js//capacitor-energy/capacitor-energy-calculator-variable-diagram.png" width="200" height="150" />';
+					echo '<img src="/lib/eng-calcs-js/capacitor-energy/capacitor-energy-calculator-variable-diagram.png" width="200" height="150" />';
 				?>
 				
 			</td>
