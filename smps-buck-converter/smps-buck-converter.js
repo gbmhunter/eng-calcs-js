@@ -82,14 +82,14 @@ function smpsBuckConverter()
 		stateFn: function() { return cc.stateEnum.input; }	// Always an input
 	});
 
-	// Add validator
+	// Add validator(s)
 	this.diodeVoltageDrop.AddValidator(cc.validatorEnum.IS_NUMBER, cc.severityEnum.error);
 	this.diodeVoltageDrop.AddValidator(cc.validatorEnum.IS_POSITIVE_OR_ZERO, cc.severityEnum.error);
 
-	//===== TRANSISTOR VOLTAGE DROP (input) =====//
+	//===== SWITCHING ELEMENT VOLTAGE DROP (input) =====//
 		
-	this.transistorVoltageDrop = new cc.variable({
-		name: 'transistorVoltageDrop',						// Debugging name
+	this.switchingElementVoltageDrop = new cc.variable({
+		name: 'switchingElementVoltageDrop',						// Debugging name
 		app: this,
 		eqFn: function() { return; },				// Is input so don't need an equation function	
 		units: [
@@ -102,8 +102,8 @@ function smpsBuckConverter()
 	});
 
 	// Add validator
-	this.transistorVoltageDrop.AddValidator(cc.validatorEnum.IS_NUMBER, cc.severityEnum.error);
-	this.transistorVoltageDrop.AddValidator(cc.validatorEnum.IS_POSITIVE_OR_ZERO, cc.severityEnum.error);
+	this.switchingElementVoltageDrop.AddValidator(cc.validatorEnum.IS_NUMBER, cc.severityEnum.error);
+	this.switchingElementVoltageDrop.AddValidator(cc.validatorEnum.IS_POSITIVE_OR_ZERO, cc.severityEnum.error);
 
 	//===== DUTY CYCLE (output) =====//
 
@@ -129,9 +129,9 @@ function smpsBuckConverter()
 			//Log('tempRise = ' + tempRise);
 			//og('avgOutputCurrent = ' + this.avgOutputCurrent.val())
 			var diodeVoltageDrop = this.diodeVoltageDrop.val();
-			var transistorVoltageDrop = this.transistorVoltageDrop.val();
+			var switchingElementVoltageDrop = this.switchingElementVoltageDrop.val();
 			
-			var dutyCycle = (outputVoltage - diodeVoltageDrop) / (inputVoltage - transistorVoltageDrop - diodeVoltageDrop);
+			var dutyCycle = (outputVoltage - diodeVoltageDrop) / (inputVoltage - switchingElementVoltageDrop - diodeVoltageDrop);
 
 			return dutyCycle;				
 			
@@ -224,7 +224,7 @@ function smpsBuckConverter()
 			var outputCurrentRippleA = this.percOutputCurrentRipple.val()*this.avgOutputCurrentA.val();
 			Log('outputCurrentRippleA = ' + outputCurrentRippleA);
 
-			var inductance = ((this.inputVoltage.val() - this.transistorVoltageDrop.val() - this.outputVoltage.val())*ton) / (outputCurrentRippleA);	
+			var inductance = ((this.inputVoltage.val() - this.switchingElementVoltageDrop.val() - this.outputVoltage.val())*ton) / (outputCurrentRippleA);	
 			Log('inductance = ' + inductance);		
 
 			return inductance;				

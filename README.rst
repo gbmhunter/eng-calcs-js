@@ -5,7 +5,7 @@ Engineering Calculators Written In Javascript
 - Author: gbmhunter <gbmhunter@gmail.com> (www.mbedded.ninja)
 - Created: 2013-06-06
 - Last Modified: 2015-06-14
-- Version: v9.0.0.0
+- Version: v9.0.1.0
 - Company: mbedded.ninja
 - Project: n/a
 - Language: HTML/JS/PHP
@@ -20,21 +20,6 @@ Description
 ===========
 
 Contains engineering calculators designed to be viewed with a browser.
-
-Heat Flow Calculator
---------------------
-
-Calculates power dissipation, thermal resistance, or temperature change, given the other two parameters. You can dynamically add more thermal components (having both a thermal resistance and temperature change) to the equation.
-
-Standard Resistance Calculator
-------------------------------
-
-Given an input resistance, finds the closest resistance in a specified standard resistance series (an E series, e.g. E12 or E24).
-
-LT3745 Calculator
------------------
-
-Calculates values of the supporting passive components for the LT3745 LED driver by Linear Technology. Uses equations given in the datasheet.
 
 Internal Dependencies
 =====================
@@ -55,11 +40,6 @@ Issues
 
 See GitHub Issues.
 
-Limitations
-===========
-
-None documented.
-
 Usage
 =====
 
@@ -77,6 +57,7 @@ Changelog
 ========= ========== ==============================================================================
 Version   Date       Comment
 ========= ========== ==============================================================================
+v9.0.1.0  2015-06-14 Tidied up the 'smps-buck-converter' calculator. Added more information to the descriptions and renamed the variables slightly. Added diagram for buck converter. Removed descriptions of individual calculators from this README as I decided they were not needed.
 v9.0.0.0  2015-06-14 Added 'smps-buck-converter' calculator. Removed validator function object from calculator variable construction in all calculators.
 v8.2.0.0  2015-03-19 Reconfigured code to access all external dependencies through the folder '/lib', closes #76. Updated README accordingly.
 v8.1.0.0  2014-11-24 Added 'readmore.js' library module and collapsale infomation to the PCB track size calculator, closes #72.
