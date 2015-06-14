@@ -3,7 +3,7 @@
 // @author 				Geoffrey Hunter <gbmhunter@gmail.com> (www.mbedded.ninja)
 // @edited 				n/a
 // @created				2014-11-19
-// @last-modified		2014-11-20
+// @last-modified		2015-06-14
 // @brief 				
 // @details
 //		See the README in the root dir for more info.
@@ -28,7 +28,6 @@ function pcbTrackWidth()
 		name: 'current',		// Debugging name
 		app: this,
 		eqFn: function() { return; },	// Is input so don't need an equation function
-		validatorFn: function() { return true; },
 		units: [
 			new cc.unit('uA', 0.000001),
 			new cc.unit('mA', 0.001),
@@ -61,7 +60,6 @@ function pcbTrackWidth()
 		name: 'tempRise',
 		app: this,
 		eqFn: function() { return; },	
-		validatorFn: function() { return true; },
 		units: [
 			new cc.unit('\xB0C', 1.0)
 		],
@@ -103,8 +101,7 @@ function pcbTrackWidth()
 	this.copperThickness = new cc.variable({
 		name: 'copperThickness',
 		app: this,
-		eqFn: function() { return; },	
-		validatorFn: function() { return true; },
+		eqFn: function() { return; },
 		units: [
 			new cc.unit('um', 0.000001),
 			new cc.unit('oz', 0.0000350012)
@@ -195,7 +192,6 @@ function pcbTrackWidth()
 			//return (current*Math.pow(10, 2));
 			
 		},
-		validatorFn: function() { return true; },
 		units: [
 			new cc.unit('um', 0.000001),
 			new cc.unit('mm', 0.001)

@@ -3,7 +3,7 @@
 //! @author 		Geoffrey Hunter <gbmhunter@gmail.com> (www.mbedded.ninja)
 //! @edited 		n/a
 //! @date 			2013-11-23
-//! @last-modified	2014-11-08
+//! @last-modified	2015-06-14
 //! @brief 			Ohms law calculator.
 //! @details
 //!		See the README in the repo's root dir for more info.
@@ -19,7 +19,6 @@ function ohmsLaw()
 			Log('Calculating voltage...');
 			return this.current.val()*this.resistance.val();
 		},
-		validatorFn: function() { return true; },
 		units: [
 			new cc.unit('mV', 0.001),
 			new cc.unit('V', 1.0),
@@ -49,7 +48,6 @@ function ohmsLaw()
 			Log('Calculating current...');
 			return this.voltage.val()/this.resistance.val();
 		},
-		validatorFn: function() { return true; },
 		units: [
 			new cc.unit('mA', 0.001),
 			new cc.unit('A', 1.0),
@@ -75,7 +73,6 @@ function ohmsLaw()
 			Log('current.val() = ' + this.current.val());
 			return this.voltage.val()/this.current.val();
 		},
-		validatorFn: function() { return true; },
 		units: [
 			new cc.unit('m\u2126', 0.001),
 			new cc.unit('\u2126', 1.0),

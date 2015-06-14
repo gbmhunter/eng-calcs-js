@@ -3,7 +3,7 @@
 // @author 				Geoffrey Hunter <gbmhunter@gmail.com> (www.mbedded.ninja)
 // @edited 				n/a
 // @created				2013-09-17
-// @last-modified		2014-11-09
+// @last-modified		2015-06-14
 // @brief 				Given an input resistance, finds the closest resistance in a specified series.
 // @details
 //		See the README in the root dir for more info.
@@ -31,7 +31,6 @@ function standardResistanceFinder()
 		name: 'desiredRes',
 		app: this,
 		eqFn: function() { return; },
-		validatorFn: function() { return true; },
 		units: resistanceUnits,
 		selUnitNum: 1,
 		roundTo: 2,
@@ -107,7 +106,6 @@ function standardResistanceFinder()
 			return (closestMatch.val*Math.pow(10, order));
 			
 		},
-		validatorFn: function() { return true; },
 		units: resistanceUnits,
 		selUnitNum: 1,
 		roundTo: 2,
@@ -130,7 +128,6 @@ function standardResistanceFinder()
 			Log('Returning...');
 			return (this.actualRes.val() - this.desiredRes.val())/this.actualRes.val();
 		},
-		validatorFn: function(){ return true; },
 		units: [
 			new cc.unit('%', 0.01)
 		],

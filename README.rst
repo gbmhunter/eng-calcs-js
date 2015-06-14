@@ -4,8 +4,8 @@ Engineering Calculators Written In Javascript
 
 - Author: gbmhunter <gbmhunter@gmail.com> (www.mbedded.ninja)
 - Created: 2013-06-06
-- Last Modified: 2015-03-19
-- Version: v8.2.0.0
+- Last Modified: 2015-06-14
+- Version: v9.0.0.0
 - Company: mbedded.ninja
 - Project: n/a
 - Language: HTML/JS/PHP
@@ -77,6 +77,7 @@ Changelog
 ========= ========== ==============================================================================
 Version   Date       Comment
 ========= ========== ==============================================================================
+v9.0.0.0  2015-06-14 Added 'smps-buck-converter' calculator. Removed validator function object from calculator variable construction in all calculators.
 v8.2.0.0  2015-03-19 Reconfigured code to access all external dependencies through the folder '/lib', closes #76. Updated README accordingly.
 v8.1.0.0  2014-11-24 Added 'readmore.js' library module and collapsale infomation to the PCB track size calculator, closes #72.
 v8.0.0.0  2014-11-20 Added PCB track size calculator, closes #73.

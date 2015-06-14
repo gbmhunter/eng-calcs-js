@@ -3,7 +3,7 @@
 //! @author 		Geoffrey Hunter <gbmhunter@gmail.com> (www.mbedded.ninja)
 //! @edited 		n/a
 //! @date 			2013-11-23
-//! @last-modified	2014-11-08
+//! @last-modified	2015-06-14
 //! @brief 			Given an input resistance, finds the closest resistance in a specified series.
 //! @details
 //!		See the README in the root dir for more info.
@@ -17,7 +17,6 @@ function capacitorCharge()
 		eqFn: function(){
 			return this.capacitance.val()*this.voltage.val();
 		},
-		validatorFn: function() { return true; },
 		units: [
 			new cc.unit('pC', 0.000000000001),
 			new cc.unit('nC', 0.000000001),
@@ -45,7 +44,6 @@ function capacitorCharge()
 		{
 			return this.charge.val()/this.voltage.val();
 		},
-		validatorFn: function() { return true; },
 		units: [
 			new cc.unit('pF', 0.000000000001),
 			new cc.unit('nF', 0.000000001),
@@ -67,7 +65,6 @@ function capacitorCharge()
 		eqFn: function(){
 			return this.charge.val()/this.capacitance.val();
 		},
-		validatorFn: function() { return true; },
 		units: [
 			new cc.unit('mV', 0.001),
 			new cc.unit('V', 1.0),
