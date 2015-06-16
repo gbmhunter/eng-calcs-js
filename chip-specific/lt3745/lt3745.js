@@ -3,25 +3,33 @@
 //! @author 		Geoffrey Hunter <gbmhunter@gmail.com> (www.cladlabs.com)
 //! @edited 		n/a
 //! @date 			2013-11-01
-//! @last-modified	2014-11-08
+//! @last-modified	2015-06-16
 //! @brief 			Binding/calculating code for the LT3745 calculator. PHP/HTML code is in lt3745.php.
 //! @details
 //!		See the README in the root dir for more info.
 
 // Adding the lt3745 "namespace" for LT3745 calculator, so that multiple calculators can work
 // on the same page. Use the data-bind="with: lt3745" command within the HTML to access the child variables.
-this.lt3745 = function()
+function lt3745()
 {
 
-	//============= Vcc ============//
+	//==============================================================================//
+	//================================== Vcc =======================================//
+	//==============================================================================//
 	
-	this.supplyVoltage = new cc.input(
-		this,
-		function() { return true; },
-		[ new cc.unit('V', 1.0) ],
-		0
-	);
-			
+	this.supplyVoltage = new cc.variable({
+		name: 'supplyVoltage',		// Debugging name
+		app: this,
+		eqFn: function() { return; },	// Is input so don't need an equation function
+		units: [						
+			new cc.unit('V',  1.0),
+		],
+		selUnitNum: 0,
+		roundTo: 2,
+		stateFn: function() { return cc.stateEnum.input; }	// Always an input
+	});
+
+	// Add validator(s)
 	this.supplyVoltage.AddValidator(cc.validatorEnum.IS_NUMBER, cc.severityEnum.error);
 	
 	// Add validator
@@ -29,44 +37,46 @@ this.lt3745 = function()
 		this,
 		'Supply voltage must be between 3.0 and 5.5V.',
 		function(app){
-			if(app.supplyVoltage.val() < 3.0 || app.supplyVoltage.val() > 5.5)
-				return false;
-			return true;
+			return (app.supplyVoltage.val() >= 3.0 && app.supplyVoltage.val() <= 5.5)
 		},
 		cc.severityEnum.error
 	);
 
-	//============= Vload ============//
+	//==============================================================================//
+	//================================ Vload (input) ===============================//
+	//==============================================================================//
 	
-	this.loadVoltage = new cc.input(
-		this,
-		function() { return true; },
-		[ new cc.unit('V', 1.0) ],
-		0
-	);
-			
-	this.loadVoltage.AddValidator(cc.validatorEnum.IS_NUMBER, cc.severityEnum.error);
-	
-	// Add validator
-	this.loadVoltage.AddCustomValidator(
-		this,
-		'Voltage cannot be less than 0.',
-		function(app){
-			if(app.loadVoltage.val() < 0)
-				return false;
-			return true;
-		},
-		cc.severityEnum.error
-	);
-	
-	//============== vOutMax ===========//
+	this.loadVoltage = new cc.variable({
+		name: 'loadVoltage',		// Debugging name
+		app: this,
+		eqFn: function() { return; },	// Is input so don't need an equation function
+		units: [						
+			new cc.unit('V',  1.0),
+		],
+		selUnitNum: 0,
+		roundTo: 2,
+		stateFn: function() { return cc.stateEnum.input; }	// Always an input
+	});
 		
-	this.vOutMax = new cc.input(
-		this,
-		function() { return true; },
-		[ new cc.unit('V', 1.0) ],
-		0
-	);
+	// Add validator(s)	
+	this.loadVoltage.AddValidator(cc.validatorEnum.IS_NUMBER, cc.severityEnum.error);
+	this.loadVoltage.AddValidator(cc.validatorEnum.IS_POSITIVE_OR_ZERO, cc.severityEnum.error);
+	
+	//==============================================================================//
+	//================================= vOutMax (input) ============================//
+	//==============================================================================//
+
+	this.vOutMax = new cc.variable({
+		name: 'vOutMax',		// Debugging name
+		app: this,
+		eqFn: function() { return; },	// Is input so don't need an equation function
+		units: [						
+			new cc.unit('V',  1.0),
+		],
+		selUnitNum: 0,
+		roundTo: 2,
+		stateFn: function() { return cc.stateEnum.input; }	// Always an input
+	});
 	
 	// Make sure it is a number
 	this.vOutMax.AddValidator(cc.validatorEnum.IS_NUMBER, cc.severityEnum.error);
@@ -83,12 +93,16 @@ this.lt3745 = function()
 		cc.severityEnum.warning
 	);
 	
-	//=============== Vin(min) ===============//
-		
-	this.vInMin = new cc.output(
-		this,
-		function() 
-		{
+	//==============================================================================//
+	//============================ Vin(min) (output) ===============================//
+	//==============================================================================//
+
+	this.vInMin = new cc.variable({
+		name: 'vInMin',
+		app: this,
+		eqFn: function() 
+		{		
+			
 			var tempVal = this.vOutMax.val() + 2.1;
 			
 			// Vin(min) cannot be less than 6.0V
@@ -96,25 +110,33 @@ this.lt3745 = function()
 				return 6.0;
 				
 			return tempVal;
-		}, 
-		function()
-		{
-			return true;
+			
 		},
-		[ new cc.unit('V', 1.0) ],
-		0);
-	
-	//================= Vin(max) ================//
+		units: [
+			new cc.unit('V', 1.0)			
+		],
+		selUnitNum: 0,
+		roundTo: 2,
+		stateFn: function() { return cc.stateEnum.output; }		// Always an output
+	});	
 
-	this.vInMax = new cc.input(
-		this,
-		function()
-		{
-			return true;
-		},
-		[ new cc.unit('V', 1.0) ],
-		0);
+	//==============================================================================//
+	//============================ Vin(max) (input) ================================//
+	//==============================================================================//
+
+	this.vInMax = new cc.variable({
+		name: 'vInMax',		// Debugging name
+		app: this,
+		eqFn: function() { return; },	// Is input so don't need an equation function
+		units: [						
+			new cc.unit('V',  1.0),
+		],
+		selUnitNum: 0,
+		roundTo: 2,
+		stateFn: function() { return cc.stateEnum.input; }	// Always an input
+	});
 	
+	// Make sure it is a number
 	this.vInMax.AddValidator(cc.validatorEnum.IS_NUMBER, cc.severityEnum.error);
 	
 	// Add max voltage validator
@@ -122,36 +144,37 @@ this.lt3745 = function()
 		this,
 		'Voltage cannot be greater than 55V.',
 		function(app){
-			if(app.vInMax.val() > 55)
-				return false;
-			return true;
+			return (app.vInMax.val() <= 55);
 		},
 		cc.severityEnum.error
 	);
-	
+
 	// Make sure Vin(max) is not less than Vin(min)
 	this.vInMax.AddCustomValidator(
 		this,
 		'Vin(max) must be greater or equal to Vin(min).',
 		function(app){
-			if(app.vInMax.val() < app.vInMin.val())
-				return false;
-			return true;
+			return (app.vInMax.val() >= app.vInMin.val());
 		},
 		cc.severityEnum.error
 	);
-	
-	//========== Rfb1 =============//
-	
-	this.rfb1 = new cc.input(
-		this,
-		function() { return true; },
-		[ 
+
+	//==============================================================================//
+	//================================ Rfb1 (input) ================================//
+	//==============================================================================//
+
+	this.rfb1 = new cc.variable({
+		name: 'rfb1',		// Debugging name
+		app: this,
+		eqFn: function() { return; },	// Is input so don't need an equation function
+		units: [						
 			new cc.unit('\u2126', 1.0),
 			new cc.unit('k\u2126', 1000.0) 
 		],
-		1
-	);
+		selUnitNum: 1,
+		roundTo: 2,
+		stateFn: function() { return cc.stateEnum.input; }	// Always an input
+	});
 	
 	this.rfb1.AddValidator(cc.validatorEnum.IS_NUMBER, cc.severityEnum.error);
 	
@@ -160,93 +183,110 @@ this.lt3745 = function()
 		this,
 		'Rfb1 is recommended to be 10kR.',
 		function(app){
-			if(app.rfb1.val() != 10000.0)
-				return false;
-			return true;
+			return (app.rfb1.val() == 10000.0)						
 		},
 		cc.severityEnum.warning
 	);
 	
-	//============== Rfb2 ==============//
-		
-	this.rfb2 = new cc.output(
-		this,
-		function() 
-		{
-			return (this.rfb1.val()*(this.vOutMax.val()/1.205 - 1));
+	//==============================================================================//
+	//============================== Rfb2 (output) =================================//
+	//==============================================================================//
+
+	this.rfb2 = new cc.variable({
+		name: 'rfb2',
+		app: this,
+		eqFn: function() 
+		{					
+			return (this.rfb1.val()*(this.vOutMax.val()/1.205 - 1));			
 		},
-		function()
-		{
-			return true;
-		},
-		[ 
+		units: [
 			new cc.unit('\u2126', 1.0), 
-			new cc.unit('k\u2126', 1000.0)
+			new cc.unit('k\u2126', 1000.0)			
 		],
-		1);
-		
-	//=============== Iout(max) =================//
+		selUnitNum: 1,
+		roundTo: 2,
+		stateFn: function() { return cc.stateEnum.output; }		// Always an output
+	});	
 	
-	this.iOutMax = new cc.input(
-		this,
-		function() { return true; },
-		[
+	//==============================================================================//	
+	//============================= Iout(max) (input) ==============================//
+	//==============================================================================//
+
+	this.iOutMax = new cc.variable({
+		name: 'iOutMax',				// Debugging name
+		app: this,
+		eqFn: function() { return; },	// Is input so don't need an equation function
+		units: [						
 			new cc.unit('mA', 0.001),
 			new cc.unit('A', 1.0)
 		],
-		0
-	);
+		selUnitNum: 0,
+		roundTo: 2,
+		stateFn: function() { return cc.stateEnum.input; }	// Always an input
+	});
 	
 	this.iOutMax.AddValidator(cc.validatorEnum.IS_NUMBER, cc.severityEnum.error);
 	
-	//=========== Rsense ============//
-	
-	// Rsense = 35mV/Iout(max)
-	this.rSense = new cc.output(
-		this,
-		function() 
-		{	
-			return (0.035/this.iOutMax.val());
-		}, 
-		function() { return true; },
-		[
+	//==============================================================================//
+	//============================ Rsense (output) =================================//
+	//==============================================================================//
+
+	this.rSense = new cc.variable({
+		name: 'rSense',
+		app: this,
+		eqFn: function() 
+		{					
+			return (0.035/this.iOutMax.val());		
+		},
+		units: [
 			new cc.unit('m\u2126', 0.001),
-			new cc.unit('\u2126', 1.0)
+			new cc.unit('\u2126', 1.0)		
 		],
-		0
-	);
+		selUnitNum: 0,
+		roundTo: 2,
+		stateFn: function() { return cc.stateEnum.output; }		// Always an output
+	});	
 		
-	//======= Prsense =========//
+	//==============================================================================//	
+	//============================ Prsense (output) ================================//
+	//==============================================================================//
 	
 	// Prsense = Iout(max)^2*Rsense
-	this.prsense = new cc.output(
-		this,
-		function() 
-		{			
+	this.prsense = new cc.variable({
+		name: 'prsense',
+		app: this,
+		eqFn: function() 
+		{					
 			var iOutMax = this.iOutMax.val();
 			var rSense = this.rSense.val();
 			
-			return (Math.pow(iOutMax, 2)*rSense);
+			return (Math.pow(iOutMax, 2)*rSense);	
 		},
-		function() { return this; },
-		[
+		units: [
 			new cc.unit('mW', 0.001),
-			new cc.unit('W', 1)
+			new cc.unit('W', 1)	
 		],
-		0
-	);
+		selUnitNum: 0,
+		roundTo: 2,
+		stateFn: function() { return cc.stateEnum.output; }		// Always an output
+	});	
 		
-	//================ iLedPinNom ================//
-		
-	this.iLedPinNom = new cc.input(
-		this,
-		function() { return true; },
-		[
+	//==============================================================================//
+	//============================= iLedPinNom (input) =============================//
+	//==============================================================================//
+
+	this.iLedPinNom = new cc.variable({
+		name: 'iLedPinNom',				// Debugging name
+		app: this,
+		eqFn: function() { return; },	// Is input so don't need an equation function
+		units: [						
 			new cc.unit('mA', 0.001),
-			new cc.unit('A', 1.0),
+			new cc.unit('A', 1.0)
 		],
-		0
-	);
+		selUnitNum: 0,
+		roundTo: 2,
+		stateFn: function() { return cc.stateEnum.input; }	// Always an input
+	});
 	
 	// Make sure it is a number
 	this.iLedPinNom.AddValidator(cc.validatorEnum.IS_NUMBER, cc.severityEnum.error);
@@ -256,95 +296,115 @@ this.lt3745 = function()
 		this,
 		'iLedPin(nom) must be between 10-50mA.',
 		function(app){
-			if(app.iLedPinNom.val() < 0.01 || app.iLedPinNom.val() > 0.05)
-				return false;
-			return true;
+			return (app.iLedPinNom.val() >= 0.01 && app.iLedPinNom.val() <= 0.05)
 		},
 		cc.severityEnum.error
 	);
 	
-	//======= Riset =========//
+	//==============================================================================//
+	//================================= Riset (output) =============================//
+	//==============================================================================//
 
 	// Riset = 2500*(1.205/Iled-pin(nom))
-	this.riSet = new cc.output(
-		this,
-		function() 
-		{
+	this.riSet = new cc.variable({
+		name: 'riSet',
+		app: this,
+		eqFn: function() 
+		{					
 			var iLedPinNom = this.iLedPinNom.val();
 			
-			return (2500*(1.205/iLedPinNom));
+			return (2500*(1.205/iLedPinNom));	
 		},
-		function() { return true; },
-		[
+		units: [
 			new cc.unit('\u2126', 1.0),
 			new cc.unit('k\u2126', 1000.0)
 		],
-		1
-	);
-		
-	//============= Vd,f =============//
-		
-	this.vdf = new cc.input(
-		this,
-		function() { return true; },
-		[
+		selUnitNum: 1,
+		roundTo: 2,
+		stateFn: function() { return cc.stateEnum.output; }		// Always an output
+	});	
+	
+	//==============================================================================//	
+	//================================= Vd,f (input) ===============================//
+	//==============================================================================//		
+
+	this.vdf = new cc.variable({
+		name: 'vdf',					// Debugging name
+		app: this,
+		eqFn: function() { return; },	// Is input so don't need an equation function
+		units: [						
 			new cc.unit('V', 1.0)
 		],
-		0
-	);
+		selUnitNum: 0,
+		roundTo: 2,
+		stateFn: function() { return cc.stateEnum.input; }	// Always an input
+	});
 	
 	this.vdf.AddValidator(cc.validatorEnum.IS_NUMBER, cc.severityEnum.error);
 	
-	//======= Dmin =========//
+	//==============================================================================//
+	//============================== Dmin (output) =================================//
+	//==============================================================================//
 	
 	// Dmin = (vOutMax(max) + Vd,f) / (Vin(max) + Vd,f)
-	this.dMin = new cc.output(
-		this,
-		function() 
-		{		
+	this.dMin = new cc.variable({
+		name: 'dMin',
+		app: this,
+		eqFn: function() 
+		{					
 			var vOutMax = this.vOutMax.val();
 			var vdf = this.vdf.val();
 			var vInMax = this.vInMax.val();
 			
 			return ((vOutMax + vdf) / (vInMax + vdf));
-		}, 
-		function() { return true; },
-		[
-			new cc.unit('%', 0.01),
+		},
+		units: [
+			new cc.unit('%', 0.01)
 		],
-		0
-	);
+		selUnitNum: 0,
+		roundTo: 2,
+		stateFn: function() { return cc.stateEnum.output; }		// Always an output
+	});	
 		
-	//======= Dmax =========//
+	//==============================================================================//
+	//=============================== Dmax (output) ================================//
+	//==============================================================================//
 	
 	// Dmax = (vOutMax(max) + Vd,f) / (Vin(min) + Vd,f)
-	this.dMax = new cc.output(
-		this,
-		function() 
-		{			
+	this.dMax = new cc.variable({
+		name: 'dMax',
+		app: this,
+		eqFn: function() 
+		{					
 			var vOutMax = this.vOutMax.val();
 			var vdf = this.vdf.val();
 			var vInMin = this.vInMin.val();
 			
 			return ((vOutMax + vdf) / (vInMin + vdf));
-		}, 
-		function() { return true; },
-		[
+		},
+		units: [
 			new cc.unit('%', 0.01)
 		],
-		0
-	);
+		selUnitNum: 0,
+		roundTo: 2,
+		stateFn: function() { return cc.stateEnum.output; }		// Always an output
+	});	
 	
-	//================ ton(min)==============//
-	
-	this.tOnMin = new cc.input(
-		this,
-		function() { return true; },
-		[
-			new cc.unit('ns', 0.000000001)
+	//==============================================================================//
+	//============================== ton(min) (input) ==============================//
+	//==============================================================================//
+
+	this.tOnMin = new cc.variable({
+		name: 'tOnMin',					// Debugging name
+		app: this,
+		eqFn: function() { return; },	// Is input so don't need an equation function
+		units: [						
+			new cc.unit('ns', 1e-9)
 		],
-		0
-	);
+		selUnitNum: 0,
+		roundTo: 2,
+		stateFn: function() { return cc.stateEnum.input; }	// Always an input
+	});
 	
 	this.tOnMin.AddValidator(cc.validatorEnum.IS_NUMBER, cc.severityEnum.error);
 	
@@ -353,23 +413,26 @@ this.lt3745 = function()
 		this,
 		'ton(min) should be between 1-500ns.',
 		function(app){
-			if(app.tOnMin.val() < 0.000000001 || app.tOnMin.val() > 0.0000005)
-				return false;
-			return true;
+			return (app.tOnMin.val() >= 1e-9 && app.tOnMin.val() <= 500e-9);
 		},
 		cc.severityEnum.warning
 	);
 	
-	//================ toff(min) ============//
-	
-	this.tOffMin = new cc.input(
-		this,
-		function () { return true; },
-		[
-			new cc.unit('ns', 0.000000001)
+	//==============================================================================//
+	//================================ toff(min) (input) ===========================//
+	//==============================================================================//
+
+	this.tOffMin = new cc.variable({
+		name: 'tOffMin',					// Debugging name
+		app: this,
+		eqFn: function() { return; },		// Is input so don't need an equation function
+		units: [						
+			new cc.unit('ns', 1e-9)
 		],
-		0
-	);
+		selUnitNum: 0,
+		roundTo: 2,
+		stateFn: function() { return cc.stateEnum.input; }	// Always an input
+	});
 	
 	this.tOffMin.AddValidator(cc.validatorEnum.IS_NUMBER, cc.severityEnum.error);
 	
@@ -378,43 +441,51 @@ this.lt3745 = function()
 		this,
 		'toff(min) should be between 1-500ns.',
 		function(app){
-			if(app.tOffMin.val() < 0.000000001 || app.tOffMin.val() > 0.0000005)
-				return false;
-			return true;
+			return (app.tOnMin.val() >= 1e-9 && app.tOnMin.val() <= 500e-9);
 		},
 		cc.severityEnum.warning
 	);
 	
-	//================ fsw(max) ==============//
+	//==============================================================================//
+	//============================== fsw(max) (output) =============================//
+	//==============================================================================//
 	
 	// fsw(max) = min( Dmin/ton(min) , (1 - Dmax)/toff(min) )
-	this.fSwMax = new cc.output(
-		this,
-		function() 
-		{			
+	this.fSwMax = new cc.variable({
+		name: 'fSwMax',
+		app: this,
+		eqFn: function() 
+		{					
 			var dMin = this.dMin.val();
 			var tOnMin = this.tOnMin.val();
 			var dMax = this.dMax.val();
 			var tOffMin = this.tOffMin.val();
 			
 			return (Math.min(dMin/tOnMin, (1.0 - dMax)/tOffMin));
-		}, 
-		function() { return true; },
-		[
-			new cc.unit('kHz', 1000.0),
-		],
-		0
-	);
-	
-	//================ fsw(act) ============//
-	
-	this.fSwAct = new cc.input(
-		this,
-		function(){
-			return true;
 		},
-		[ new cc.unit('kHz', 1000.0) ],
-		0);
+		units: [
+			new cc.unit('kHz', 1000.0)
+		],
+		selUnitNum: 0,
+		roundTo: 2,
+		stateFn: function() { return cc.stateEnum.output; }		// Always an output
+	});	
+	
+	//==============================================================================//
+	//============================ fsw(act) (input) ================================//
+	//==============================================================================//
+	
+	this.fSwAct = new cc.variable({
+		name: 'fSwAct',					// Debugging name
+		app: this,
+		eqFn: function() { return; },		// Is input so don't need an equation function
+		units: [						
+			new cc.unit('kHz', 1000.0)
+		],
+		selUnitNum: 0,
+		roundTo: 2,
+		stateFn: function() { return cc.stateEnum.input; }	// Always an input
+	});
 	
 	this.fSwAct.AddValidator(cc.validatorEnum.IS_NUMBER, cc.severityEnum.error);
 	
@@ -423,9 +494,7 @@ this.lt3745 = function()
 		this,
 		'fsw(act) has to be between 100kHz-1MHz.',
 		function(app){
-			if(app.fSwAct.val() < 100000 || app.fSwAct.val() > 1000000)
-				return false;
-			return true;
+			return (app.fSwAct.val() >= 100e3 && app.fSwAct.val() <= 1e6);
 		},
 		cc.severityEnum.error
 	);
@@ -433,59 +502,71 @@ this.lt3745 = function()
 	// Has to be less than fsw(max)
 	this.fSwAct.AddCustomValidator(
 		this,
-		'fsw(act) has to be less than fsw(max).',
+		'fsw(act) has to be less than or equal to fsw(max).',
 		function(app){
-			if(app.fSwAct.val() > app.fSwMax.val())
-				return false;
-			return true;
+			return(app.fSwAct.val() <= app.fSwMax.val());
 		},
 		cc.severityEnum.error
 	);
 	
-	//================ fugf ==============//
+	//==============================================================================//
+	//================================= fugf (output) ==============================//
+	//==============================================================================//
 	
 	// fugf = fsw(act)/10
-	this.fugf = new cc.output(
-		this,
-		function() 
-		{			
+	this.fugf = new cc.variable({
+		name: 'fugf',
+		app: this,
+		eqFn: function() 
+		{					
 			var fSwAct = this.fSwAct.val();
 			return (fSwAct/10.0);
-		}, 
-		function() { return true; },
-		[
+		},
+		units: [
 			new cc.unit('kHz', 1000.0)
 		],
-		0
-	);
+		selUnitNum: 0,
+		roundTo: 2,
+		stateFn: function() { return cc.stateEnum.output; }		// Always an output
+	});	
 	
-	//================ Rt ==============//
+	//==============================================================================//
+	//================================= Rt (output) ================================//
+	//==============================================================================//
 	
 	// Rt = 2.25167*10^11 / fSwAct^1.114
-	this.rt = new cc.output(
-		this,
-		function() 
-		{			
+	this.rt = new cc.variable({
+		name: 'rt',
+		app: this,
+		eqFn: function() 
+		{					
 			var fSwAct = this.fSwAct.val();
 			return ((2.25167*Math.pow(10, 11))/(Math.pow(fSwAct, 1.114)));
-		}, 
-		function() { return true; },
-		[
+		},
+		units: [
 			new cc.unit('\u2126', 1.0),
 			new cc.unit('k\u2126', 1000.0)
 		],
-		1
-	);
+		selUnitNum: 1,
+		roundTo: 2,
+		stateFn: function() { return cc.stateEnum.output; }		// Always an output
+	});	
 	
-	//================ tj(max) ============//
-	
-	this.tjMax = new cc.input(
-		this,
-		function(){
-			return true;
-		},
-		[ new cc.unit('\xB0C', 1.0) ],
-		0);
+	//==============================================================================//
+	//================================ tj(max) (input) =============================//
+	//==============================================================================//
+
+	this.tjMax = new cc.variable({
+		name: 'tjMax',					// Debugging name
+		app: this,
+		eqFn: function() { return; },		// Is input so don't need an equation function
+		units: [						
+			new cc.unit('\xB0C', 1.0)
+		],
+		selUnitNum: 0,
+		roundTo: 2,
+		stateFn: function() { return cc.stateEnum.input; }	// Always an input
+	});
 	
 	this.tjMax.AddValidator(cc.validatorEnum.IS_NUMBER, cc.severityEnum.error);
 		
@@ -494,9 +575,7 @@ this.lt3745 = function()
 		this,
 		'tjMax should really be higher than standard room temperature.',
 		function(app){
-			if(app.tjMax.val() < 25.0)
-				return false;
-			return true;
+			return (app.tjMax.val() <= 25.0);
 		},
 		cc.severityEnum.warning
 	);
@@ -506,62 +585,73 @@ this.lt3745 = function()
 		this,
 		'tjMax cannot be higher than the internally set maximum temperature.',
 		function(app){
-			if(app.tjMax.val() > 165.0)
-				return false;
-			return true;
+			return (app.tjMax.val() <= 165.0);
 		},
 		cc.severityEnum.error
 	);
 		
-	//================ Rtset ==============//
-	
-	this.rtSet = new cc.output(
-		this,
-		function() 
-		{			
+	//==============================================================================//
+	//================================= Rtset (output) =============================//
+	//==============================================================================//
+
+	this.rtSet = new cc.variable({
+		name: 'rtSet',
+		app: this,
+		eqFn: function() 
+		{					
 			var riSet = this.riSet.val();
 			var tjMax = this.tjMax.val();
 			
 			return (0.00172*(tjMax + 273.15)*riSet)/1.205;
-		}, 
-		function() { return true; },
-		[
+		},
+		units: [
 			new cc.unit('\u2126', 1.0),
 			new cc.unit('k\u2126', 1000.0)
 		],
-		1
-	);
+		selUnitNum: 1,
+		roundTo: 2,
+		stateFn: function() { return cc.stateEnum.output; }		// Always an output
+	});	
 		
-	//================ Cout(min) ==============//
+	//==============================================================================//
+	//============================== Cout(min) (output) ============================//
+	//==============================================================================//
 	
 	// Cout(min) = max( 0.25/(Rsense*fugf) , 1.5/(Rsense*Vbuck,out*fugf) )
-	this.cOutMin = new cc.output(
-		this,
-		function() 
-		{
+	this.cOutMin = new cc.variable({
+		name: 'cOutMin',
+		app: this,
+		eqFn: function() 
+		{					
 			var rSense = this.rSense.val();
 			var fugf = this.fugf.val();
 			var vOutMax = this.vOutMax.val();
 			
 			return (Math.max( 0.25/(rSense*fugf), 1.5/(vOutMax*rSense*fugf)));
-		}, 
-		function() { return true; },
-		[
-			new cc.unit('uF', 0.000001),
+		},
+		units: [
+			new cc.unit('uF', 1e-6)
 		],
-		0
-	);
+		selUnitNum: 0,
+		roundTo: 2,
+		stateFn: function() { return cc.stateEnum.output; }		// Always an output
+	});	
 	
-	//================ Il(delta) ============//
-	
-	this.iLDelta = new cc.input(
-		this,
-		function() { return true; },
-		[
+	//==============================================================================//
+	//================================== Il(delta) =================================//
+	//==============================================================================//
+
+	this.iLDelta = new cc.variable({
+		name: 'iLDelta',					// Debugging name
+		app: this,
+		eqFn: function() { return; },		// Is input so don't need an equation function
+		units: [						
 			new cc.unit('%', 0.01)
 		],
-		0
-	);
+		selUnitNum: 0,
+		roundTo: 2,
+		stateFn: function() { return cc.stateEnum.input; }	// Always an input
+	});
 	
 	// Make sure it is a number
 	this.iLDelta.AddValidator(cc.validatorEnum.IS_NUMBER, cc.severityEnum.error);
@@ -571,20 +661,21 @@ this.lt3745 = function()
 		this,
 		'iLDelta should be between 10-50%.',
 		function(app){
-			if(app.iLDelta.val() < 0.1 || app.iLDelta.val() > 0.5)
-				return false;
-			return true;
+			return (app.iLDelta.val() >= 0.1 && app.iLDelta.val() <= 0.5);
 		},
 		cc.severityEnum.warning
 	);
 	
-	//================ L(min) ==============//
+	//==============================================================================//
+	//================================ L(min) (output) =============================//
+	//==============================================================================//
 	
 	// Lmin = [ (Vbuck,out + Vd,f) / (Vin(max) + Vd,f) ] * [ (Vin(max) - Vbuck,out) / (fsw(act)*Il(delta)) ]
-	this.lMin = new cc.output(
-		this,
-		function() 
-		{
+	this.lMin = new cc.variable({
+		name: 'lMin',
+		app: this,
+		eqFn: function() 
+		{					
 			var vOutMax = this.vOutMax.val();
 			var vdf = this.vdf.val();
 			var vInMax = this.vInMax.val();
@@ -592,24 +683,30 @@ this.lt3745 = function()
 			var iLDelta = this.iLDelta.val();
 			
 			return ( ((vOutMax + vdf)/(vInMax + vdf))*((vInMax - vOutMax)/(fSwAct*iLDelta)));
-		}, 
-		function() { return true; },
-		[
-			new cc.unit('uH', 0.000001),
+		},
+		units: [
+			new cc.unit('uH', 1e-6),
 		],
-		0
-	);	
+		selUnitNum: 0,
+		roundTo: 2,
+		stateFn: function() { return cc.stateEnum.output; }		// Always an output
+	});	
 		
-	//================ Vin(ripple) ============//
-	
-	this.vInRipple = new cc.input(
-		this,
-		function() { return true; },
-		[
-			new cc.unit('mV', 0.001)
+	//==============================================================================//
+	//=============================== Vin(ripple) (input) ==========================//
+	//==============================================================================//
+
+	this.vInRipple = new cc.variable({
+		name: 'vInRipple',					// Debugging name
+		app: this,
+		eqFn: function() { return; },		// Is input so don't need an equation function
+		units: [						
+			new cc.unit('mV', 1e-3)
 		],
-		0
-	);
+		selUnitNum: 0,
+		roundTo: 2,
+		stateFn: function() { return cc.stateEnum.input; }	// Always an input
+	});
 	
 	this.vInRipple.AddValidator(cc.validatorEnum.IS_NUMBER, cc.severityEnum.error);
 	
@@ -618,33 +715,35 @@ this.lt3745 = function()
 		this,
 		'vInRipple should be between 20mV-2.0V.',
 		function(app){
-			if(app.vInRipple.val() < 0.020 || app.vInRipple.val() > 2.0)
-				return false;
-			return true;
+			return (app.vInRipple.val() >= 0.020 && app.vInRipple.val() <= 2.0);
 		},
 		cc.severityEnum.warning
 	);
 	
-	//================ Cin(min) ==============//
+	//==============================================================================//
+	//================================ Cin(min) (output) ===========================//
+	//==============================================================================//
 	
 	// Cin(min) = (Dmax*Iout(max)) / (Vin,ripple*fsw(act))
-	this.cInMin = new cc.output(
-		this,
-		function() 
-		{
+	this.cInMin = new cc.variable({
+		name: 'cInMin',
+		app: this,
+		eqFn: function() 
+		{					
 			var dMax = this.dMax.val();
 			var iOutMax = this.iOutMax.val();
 			var vInRipple = this.vInRipple.val();
 			var fSwAct = this.fSwAct.val();
 			
 			return ( (dMax*iOutMax)/(vInRipple*fSwAct) );
-		}, 
-		function() { return true; },
-		[
-			new cc.unit('uF', 0.000001),
+		},
+		units: [
+			new cc.unit('uF', 1e-6),
 		],
-		0
-	);
+		selUnitNum: 0,
+		roundTo: 2,
+		stateFn: function() { return cc.stateEnum.output; }		// Always an output
+	});	
 }
 
 // Register the calculator

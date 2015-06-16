@@ -45,7 +45,7 @@
 			<td><input class="input" data-bind="calcVar: loadVoltage, valueUpdate: 'afterkeydown'" size="16"></input></td>
 			<td class="units"><select data-bind="options: loadVoltage.units, optionsText: 'name', value: loadVoltage.selUnit"></select></td>	
 			<td class="equation">n/a</td>
-			<td class="comment">This is the maximum voltage that the load will ever see. If driving LEDs, this is equal to the forward voltage of the LED at the maximum current to plan to drive them at. If driving multiple is series, sum the forward voltages. If driving different colours, this is equal to the LED with the highest forward voltage.</td>
+			<td class="comment">This is the maximum voltage that the load will ever see. If driving LEDs, this is equal to the forward voltage of the LED at the maximum current to plan to drive them at. If driving multiple LEDs series, sum the forward voltages. If driving different colours, this is equal to the LED with the highest forward voltage.</td>
 		</tr>		
 		<tr>
 			<td class="name">Output Voltage</td>
@@ -263,10 +263,8 @@
 		</tr>
 	</tbody>
 </table>
-<!-- Include Javascript file for calculator. Path is built from this scripts path, using __FILE__ variable. -->
-<?php
-	echo '<script type="text/javascript" src="/lib/eng-calcs-js/chip-specific/lt3745/lt3745.js"></script>';
-?>
+
+<script type="text/javascript" src="/lib/eng-calcs-js/chip-specific/lt3745/lt3745.js"></script>
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 

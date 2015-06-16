@@ -5,7 +5,7 @@ Engineering Calculators Written In Javascript
 - Author: gbmhunter <gbmhunter@gmail.com> (www.mbedded.ninja)
 - Created: 2013-06-06
 - Last Modified: 2015-06-16
-- Version: v9.0.4.0
+- Version: v9.0.5.0
 - Company: mbedded.ninja
 - Project: n/a
 - Language: HTML/JS/PHP
@@ -57,6 +57,7 @@ Changelog
 ========= ========== ==============================================================================
 Version   Date       Comment
 ========= ========== ==============================================================================
+v9.0.5.0  2015-06-16 LT3745 calculator now uses 'cc.variable' rather than the deprecated 'cc.input' and 'cc.output'. No calculators use these deprecated objects anymore. Fixed "If driving multiple is in series" In LT3745 calculator, should be LEDs, closes #63.
 v9.0.4.0  2015-06-16 Moved readmore.js library into repository and updated links accordingly.
 v9.0.3.0  2015-06-15 Added more validators to the 'smps-buck-converter' calculator.
 v9.0.2.0  2015-06-14 Made changes to the 'smps-buck-converter', and 'capacitor-energy' calculator image paths.
