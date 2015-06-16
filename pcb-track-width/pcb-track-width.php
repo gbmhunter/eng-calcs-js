@@ -3,7 +3,7 @@
 // @author 			Geoffrey Hunter <gbmhunter@gmail.com> (www.mbedded.ninja)
 // @edited 			n/a
 // @date 			2014-11-19
-// @last-modified	2015-03-18
+// @last-modified	2015-06-16
 // @brief 			This calculator can find the minimum PCB track width (external or internal layer) given the track current, the allowed temperatur rise, and copper layer thickness. Calculated in accordance with IPC-2221A.
 // @details
 //		See the README in the root dir for more info.
@@ -19,7 +19,7 @@
 <link type="text/css" rel="stylesheet" href="/lib/candy-calc/css/candy-calc.css" />
 
 <!-- readmore.js Library -->
-<script type="text/javascript" src="/lib/readmore.js/readmore.js" ></script>
+<script type="text/javascript" src="/lib/eng-calcs-js/lib/readmore.js/readmore.js" ></script>
 
 <article>
 

@@ -4,8 +4,8 @@ Engineering Calculators Written In Javascript
 
 - Author: gbmhunter <gbmhunter@gmail.com> (www.mbedded.ninja)
 - Created: 2013-06-06
-- Last Modified: 2015-06-14
-- Version: v9.0.2.0
+- Last Modified: 2015-06-16
+- Version: v9.0.4.0
 - Company: mbedded.ninja
 - Project: n/a
 - Language: HTML/JS/PHP
@@ -57,6 +57,8 @@ Changelog
 ========= ========== ==============================================================================
 Version   Date       Comment
 ========= ========== ==============================================================================
+v9.0.4.0  2015-06-16 Moved readmore.js library into repository and updated links accordingly.
+v9.0.3.0  2015-06-15 Added more validators to the 'smps-buck-converter' calculator.
 v9.0.2.0  2015-06-14 Made changes to the 'smps-buck-converter', and 'capacitor-energy' calculator image paths.
 v9.0.1.0  2015-06-14 Tidied up the 'smps-buck-converter' calculator. Added more information to the descriptions and renamed the variables slightly. Added diagram for buck converter. Removed descriptions of individual calculators from this README as I decided they were not needed.
 v9.0.0.0  2015-06-14 Added 'smps-buck-converter' calculator. Removed validator function object from calculator variable construction in all calculators.

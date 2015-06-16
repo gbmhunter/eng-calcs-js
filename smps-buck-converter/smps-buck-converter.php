@@ -3,7 +3,7 @@
 // @author 			Geoffrey Hunter <gbmhunter@gmail.com> (www.mbedded.ninja)
 // @edited 			n/a
 // @date 			2015-06-13
-// @last-modified	2015-06-13
+// @last-modified	2015-06-16
 // @brief 			
 // @details
 //		See the README in the root dir for more info.
@@ -19,7 +19,7 @@
 <link type="text/css" rel="stylesheet" href="/lib/candy-calc/css/candy-calc.css" />
 
 <!-- readmore.js Library -->
-<script type="text/javascript" src="/lib/readmore.js/readmore.js" ></script>
+<script type="text/javascript" src="/lib/eng-calcs-js/lib/readmore.js/readmore.js" ></script>
 
 <article>
 
