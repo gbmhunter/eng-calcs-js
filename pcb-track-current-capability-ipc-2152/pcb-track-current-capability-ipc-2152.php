@@ -33,6 +33,10 @@
 
 	<div style="text-align: center;"><img src="/lib/eng-calcs-js/pcb-track-current-capability-ipc-2152/ipc-2152-copper-thickness-modifier-graph-with-trendlines.png" /></div>
 
+	<p>The co-efficients of the above trend lines were then plotted against copper weight (aka. track thickness). The graph below is co-efficient C5 (the co-efficient infront of x^5) against copper weight. These had their own trend lines fitted. Note that there are only four data points, AND the fitted trend-line is a third-degree polynomial, which is guaranteed to fit the data perfectly. This is probably the most dangerous part of the "discrete graphed data sets to continuous equations" conversion.</p>
+
+	<div style="text-align: center;"><img src="/lib/eng-calcs-js/pcb-track-current-capability-ipc-2152/ipc-2152-copper-thickness-modifier-copper-weight-versus-c5-graph.png" /></div>
+
 	<p>The current in assumed to be constant (DC). However, you can use the RMS value for a pulsed current as long as the pulses are fast enough.</p>
 
 	<p>The temperature of the PCB material should NEVER exceed the relative thermal index (RTI) of the material. This is defined in UL746B as the temperature at which 50% of the materials properties are retained after 100,000 hours.</p>
