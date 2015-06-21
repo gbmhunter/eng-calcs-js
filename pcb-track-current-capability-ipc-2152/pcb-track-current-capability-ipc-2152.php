@@ -50,7 +50,7 @@
 </style>
 
 
-<table id="pcbTrackCurrentCapabilityIpc2152" class="candy-calc" border="4" style="width: 800px;">
+<table id="pcbTrackCurrentCapabilityIpc2152" class="candy-calc" border="4" style="width: 1000px;">
 	<tbody>
 		<tr><td colspan="5" style="text-align: center;"><input type='checkbox' data-bind="checked: showExtraVariables">Show intermediate calculations</input></td></tr>
 		<tr>
