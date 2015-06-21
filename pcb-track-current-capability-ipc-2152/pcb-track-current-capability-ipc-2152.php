@@ -41,6 +41,14 @@
 
 </article>
 
+<style media="screen" type="text/css">
+
+.hide {
+  display: none;
+}
+
+</style>
+
 
 <table id="pcbTrackCurrentCapabilityIpc2152" class="candy-calc" border="4" style="width: 800px;">
 	<tbody>
@@ -77,7 +85,7 @@
 				<select data-bind="options: tempRise.units, optionsText: 'name', value: tempRise.selUnit"></select>
 			</td>		
 			<td class="comment">
-				<div>The temperature rise (above the ambient temperature of the PCB) of the track that you are o.k. with. Normally between 20-40C.</div>
+				The temperature rise (above the ambient temperature of the PCB) of the track that you are o.k. with. <span class="read-more">Normally between 20-40C.</span>
 			</td>	
 		</tr>
 
@@ -91,7 +99,7 @@
 				<select data-bind="options: unadjustedTrackCrosssectionalArea.units, optionsText: 'name', value: unadjustedTrackCrosssectionalArea.selUnit"></select>
 			</td>
 			<td class="comment">
-				<div>The un-adjusted track cross-sectional area, as calculated from the "Universal Graph" in IPC-2152, before any modifiers have been applied.</div>
+				The un-adjusted track cross-sectional area, as calculated from the "Universal Graph" in IPC-2152, before any modifiers have been applied.
 			</td>
 		</tr>	
 
@@ -105,7 +113,7 @@
 				<select data-bind="options: trackThickness.units, optionsText: 'name', value: trackThickness.selUnit"></select>
 			</td>
 			<td class="comment">
-				<div>The thickness of the track under inspection. This is the same as the thickness or "weight" of the copper layer that the track belongs to.</div>
+				The thickness of the track under inspection. <span class="read-more">This is the same as the thickness or "weight" of the copper layer that the track belongs to.</span>
 			</td>			
 		</tr>
 
@@ -133,7 +141,7 @@
 				<select data-bind="options: boardThickness.units, optionsText: 'name', value: boardThickness.selUnit"></select>
 			</td>
 			<td class="comment">
-				<div>The thickness of the board under inspection. This is the same as the thickness or "weight" of the copper layer that the board belongs to.</div>
+				The thickness of the board under inspection. <span class="read-more">The most common PCB board thickness is 1.6mm.</span>
 			</td>			
 		</tr>
 
@@ -161,7 +169,7 @@
 				<select data-bind="options: planeProximity.units, optionsText: 'name', value: planeProximity.selUnit"></select>
 			</td>
 			<td class="comment">
-				<div>The distance from the track to the closest copper plane. If the track is internal and equi-distance from two planes, just use the distance to one of them. For a basic 2-layer, 1.6mm thick PCB, the distance is normally equal to 1.6mm (assuming copper pours are placed on both layers).</div>
+				The distance from the track to the closest copper plane. <span class="read-more">If the track is internal and equi-distance from two planes, just use the distance to one of them. For a basic 2-layer, 1.6mm thick PCB, the distance is normally equal to 1.6mm (assuming copper pours are placed on both layers).</span>
 			</td>			
 		</tr>
 
@@ -217,11 +225,12 @@
 				<select data-bind="options: adjustedTrackCrosssectionalArea.units, optionsText: 'name', value: adjustedTrackCrosssectionalArea.selUnit"></select>
 			</td>
 			<td class="comment">
-				<div>
-					<p>The adjusted track cross-sectional area. This uses the un-adjusted track cross-sectional area, then takes into account the track thickness modifier, the board thickness modifier, the plane proximity modifier, and the thermal conductivity modifier.<br></p>
-					<p>The equation is given by:</p>
-					<p>$$ A_{adjusted} = A_{un-adjusted} * k_{track-thickness} * k_{board-thickness} * \\ k_{plane-proximity} * k_{thermal-conductivity} $$</p>
-				</div>
+				The adjusted track cross-sectional area.
+				<span class="read-more">
+					This uses the un-adjusted track cross-sectional area, then takes into account the track thickness modifier, the board thickness modifier, the plane proximity modifier, and the thermal conductivity modifier.<br><br>
+					The equation is given by:<br><br>
+					$$ A_{adjusted} = A_{un-adjusted} * k_{track-thickness} * k_{board-thickness} * \\ k_{plane-proximity} * k_{thermal-conductivity} $$
+				</span>
 			</td>
 		</tr>
 
@@ -248,12 +257,30 @@
 jQuery(document).ready(
 	function()
 	{	
-	// Apply readmore.js to selected HTML objects
-    //jQuery('article').readmore({collapsedHeight: 100, speed: 200});
-    //jQuery('.comment').delay(5000).children("div").readmore({collapsedHeight: 40, speed: 200);
-});
+		// Hide the extra content initially, using JS so that if JS is disabled, no problemo:
+		jQuery('.read-more').addClass('hide')
 
+		// Set up a link to expand the hidden content:
+		.before('<a class="read-more-show" href="#">Read More</a>')
+		  
+		// Set up a link to hide the expanded content.
+		.append(' <a class="read-more-hide" href="#">Read Less</a>');
+
+		// Set up the toggle effect:
+		jQuery('.read-more-show').on('click', function(e) {
+		  jQuery(this).next('.read-more').removeClass('hide');
+		  jQuery(this).addClass('hide');
+		  e.preventDefault();
+		});
+
+		jQuery('.read-more-hide').on('click', function(e) {
+		  jQuery(this).parent('.read-more').addClass('hide').parent().children('.read-more-show').removeClass('hide');
+		  e.preventDefault();
+		});
+	});
 </script>
+
+
 
 <!-- Finally, include backend for this calculator -->
 <script type="text/javascript" src="/lib/eng-calcs-js/pcb-track-current-capability-ipc-2152/pcb-track-current-capability-ipc-2152.js"></script>
