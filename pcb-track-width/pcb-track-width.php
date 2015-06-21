@@ -53,7 +53,7 @@
 <script type="text/javascript">
 jQuery(function($) {
 
-        $('article').readmore({maxHeight: 100, speed: 200}); // This function applies good for the first tab, but when navigated to the next tab, the text is not trimmed..
+        $('article').readmore({collapsedHeight: 100, speed: 200}); // This function applies good for the first tab, but when navigated to the next tab, the text is not trimmed..
 
         });
 </script>

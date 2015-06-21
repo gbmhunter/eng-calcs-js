@@ -102,6 +102,11 @@ function pcbTrackCurrentCapabilityIpc2152()
 	var THERMAL_CONDUCTIVITY_TREND_LINE_COEF_M = -1.4210148167e+00;
 	var THERMAL_CONDUCTIVITY_TREND_LINE_COEF_C = 1.1958174134e+00;
 
+	// Variable for hiding extra calculator variables
+	this.extraInfo = new ko.observable(false);
+
+	this.showExtraVariables = new ko.observable(false);
+
 	//========================================================================================================//
 	//============================================== CURRENT (input) =========================================//
 	//========================================================================================================//

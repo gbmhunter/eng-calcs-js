@@ -3,7 +3,7 @@
 // @author 			Geoffrey Hunter <gbmhunter@gmail.com> (www.mbedded.ninja)
 // @edited 			n/a
 // @date 			2015-06-13
-// @last-modified	2015-06-16
+// @last-modified	2015-06-20
 // @brief 			
 // @details
 //		See the README in the root dir for more info.
@@ -40,7 +40,7 @@
 <script type="text/javascript">
 	jQuery(function($) {
 
-    	$('article').readmore({maxHeight: 100, speed: 200, startOpen: true, lessLink: '<a href="#">Read less...</a>'}); // This function applies good for the first tab, but when navigated to the next tab, the text is not trimmed..
+    	$('article').readmore({collapsedHeight: 100, speed: 200, startOpen: true, lessLink: '<a href="#">Read less...</a>'}); // This function applies good for the first tab, but when navigated to the next tab, the text is not trimmed..
 
     	});
 </script>
