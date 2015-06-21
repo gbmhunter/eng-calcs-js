@@ -13,8 +13,6 @@
 	window.jQuery || document.write('<script src="http://code.jquery.com/jquery-latest.min.js"><\/script>')
 </script>
 
-
-
 <!-- candy-calc logic -->
 <script type="text/javascript" src="/lib/candy-calc/js/candy-calc.js" ></script>
 <!-- candy-calc CSS file -->
@@ -27,6 +25,14 @@
 
 	<p>This calculator can find the minimum allowed PCB track width for a given continuous current. Takes into account the allowed temperature rise, copper track thickness, proximity to planes, total thickness of the PCB, and PCB material in accordance with IPC-2152.</p>
 
+	<p>The calculator uses equations built from the data provided in the IPC-2152 graphs. Data points were extracted from the graphs using <a href="http://arohatgi.info/WebPlotDigitizer/">WebPlotDigitizer</a> (a great program by-the-way). Suitable trend lines were then fitted. In the case of the three variable graphs, trend lines were fitted to the coefficients of the first set of trend lines.</p>
+
+	<p>I believe the accuracy of the calculator (w.r.t. the IPC-2152 graphs) to be quite high, within the range of data provided by these graphs. Outside of this, extrapolation could become inaccurate quickly, due to the use of 5th order polynomial's being used to model some of the data (this was the best choice). Other graph were modelled with power equations of the form y=Ax^B, and are likely to be more accurate that the polynomial during extrapolation.</p>
+
+	<p>Below is an example of the trend-line fitting process. This image shows the "Copper Thickness Modifier" data from IPC-2152, along with 5th order polynomials being fitted to each data set. The data for the 3oz. copper weight is a horizontal line at y=1 by definition.</p>
+
+	<div style="text-align: center;"><img src="lib/eng-calcs-js/pcb-track-current-capability-ipc-2152/ipc-2152-copper-thickness-modifier-graph-with-trendlines.png" /></div>
+
 	<p>The current in assumed to be constant (DC). However, you can use the RMS value for a pulsed current as long as the pulses are fast enough.</p>
 
 	<p>The temperature of the PCB material should NEVER exceed the relative thermal index (RTI) of the material. This is defined in UL746B as the temperature at which 50% of the materials properties are retained after 100,000 hours.</p>
@@ -34,7 +40,6 @@
 	<p>Remember this calculator does not take into account other nearby heat sources.</p>
 
 </article>
-
 
 
 <table id="pcbTrackCurrentCapabilityIpc2152" class="candy-calc" border="4" style="width: 800px;">
@@ -57,8 +62,8 @@
 			<td class="units">
 				<select data-bind="options: current.units, optionsText: 'name', value: current.selUnit"></select>
 			</td>	
-			<td>
-				<div class="comment">The is the maximum continuous current that the track will ever carry.</div>
+			<td class="comment">
+				<div>The is the maximum continuous current that the track will ever carry.</div>
 			</td>		
 		</tr>
 
@@ -71,8 +76,8 @@
 			<td class="units">
 				<select data-bind="options: tempRise.units, optionsText: 'name', value: tempRise.selUnit"></select>
 			</td>		
-			<td>
-				<div class="comment">The temperature rise (above the ambient temperature of the PCB) of the track that you are o.k. with. Normally between 20-40C.</div>
+			<td class="comment">
+				<div>The temperature rise (above the ambient temperature of the PCB) of the track that you are o.k. with. Normally between 20-40C.</div>
 			</td>	
 		</tr>
 
@@ -85,8 +90,8 @@
 			<td class="units">
 				<select data-bind="options: unadjustedTrackCrosssectionalArea.units, optionsText: 'name', value: unadjustedTrackCrosssectionalArea.selUnit"></select>
 			</td>
-			<td>
-				<div class="comment">The un-adjusted track cross-sectional area, as calculated from the "Universal Graph" in IPC-2152, before any modifiers have been applied.</div>
+			<td class="comment">
+				<div>The un-adjusted track cross-sectional area, as calculated from the "Universal Graph" in IPC-2152, before any modifiers have been applied.</div>
 			</td>
 		</tr>	
 
@@ -99,8 +104,8 @@
 			<td class="units">
 				<select data-bind="options: trackThickness.units, optionsText: 'name', value: trackThickness.selUnit"></select>
 			</td>
-			<td>
-				<div class="comment">The thickness of the track under inspection. This is the same as the thickness or "weight" of the copper layer that the track belongs to.</div>
+			<td class="comment">
+				<div>The thickness of the track under inspection. This is the same as the thickness or "weight" of the copper layer that the track belongs to.</div>
 			</td>			
 		</tr>
 
@@ -113,8 +118,8 @@
 			<td class="units">
 				<select data-bind="options: trackThicknessModifier.units, optionsText: 'name', value: trackThicknessModifier.selUnit"></select>
 			</td>
-			<td>
-				<div class="comment">The amount the un-adjusted track cross-sectional area should be modified due to the track thickness.</div>
+			<td class="comment">
+				<div>The amount the un-adjusted track cross-sectional area should be modified due to the track thickness.</div>
 			</td>
 		</tr>
 
@@ -127,8 +132,8 @@
 			<td class="units">
 				<select data-bind="options: boardThickness.units, optionsText: 'name', value: boardThickness.selUnit"></select>
 			</td>
-			<td>
-				<div class="comment">The thickness of the board under inspection. This is the same as the thickness or "weight" of the copper layer that the board belongs to.</div>
+			<td class="comment">
+				<div>The thickness of the board under inspection. This is the same as the thickness or "weight" of the copper layer that the board belongs to.</div>
 			</td>			
 		</tr>
 
@@ -141,8 +146,8 @@
 			<td class="units">
 				<select data-bind="options: boardThicknessModifier.units, optionsText: 'name', value: boardThicknessModifier.selUnit"></select>
 			</td>
-			<td>
-				<div class="comment">The amount the un-adjusted board cross-sectional area should be modified due to the board thickness.</div>
+			<td class="comment">
+				<div>The amount the un-adjusted board cross-sectional area should be modified due to the board thickness.</div>
 			</td>
 		</tr>
 
@@ -155,8 +160,8 @@
 			<td class="units">
 				<select data-bind="options: planeProximity.units, optionsText: 'name', value: planeProximity.selUnit"></select>
 			</td>
-			<td>
-				<div class="comment">The distance from the track to the closest copper plane. If the track is internal and equi-distance from two planes, just use the distance to one of them. For a basic 2-layer, 1.6mm thick PCB, the distance is normally equal to 1.6mm (assuming copper pours are placed on both layers).</div>
+			<td class="comment">
+				<div>The distance from the track to the closest copper plane. If the track is internal and equi-distance from two planes, just use the distance to one of them. For a basic 2-layer, 1.6mm thick PCB, the distance is normally equal to 1.6mm (assuming copper pours are placed on both layers).</div>
 			</td>			
 		</tr>
 
@@ -169,8 +174,8 @@
 			<td class="units">
 				<select data-bind="options: planeProximityModifier.units, optionsText: 'name', value: planeProximityModifier.selUnit"></select>
 			</td>
-			<td>
-				<div class="comment">The amount the un-adjusted board cross-sectional area should be modified due to the proximity of a solid copper plane.</div>
+			<td class="comment">
+				<div>The amount the un-adjusted board cross-sectional area should be modified due to the proximity of a solid copper plane.</div>
 			</td>
 		</tr>
 
@@ -183,8 +188,8 @@
 			<td class="units">
 				<select data-bind="options: thermalConductivity.units, optionsText: 'name', value: thermalConductivity.selUnit"></select>
 			</td>
-			<td>
-				<div class="comment">The thermal conductivity of the PCB.</div>
+			<td class="comment">
+				<div>The thermal conductivity of the PCB.</div>
 			</td>			
 		</tr>
 
@@ -197,8 +202,8 @@
 			<td class="units">
 				<select data-bind="options: thermalConductivityModifier.units, optionsText: 'name', value: thermalConductivityModifier.selUnit"></select>
 			</td>
-			<td>				
-				<div class="comment">The amount the un-adjusted board cross-sectional area should be modified due to the thermal conductivity of the PCB material.</div>
+			<td class="comment">				
+				<div>The amount the un-adjusted board cross-sectional area should be modified due to the thermal conductivity of the PCB material.</div>
 			</td>
 		</tr>
 
@@ -211,8 +216,8 @@
 			<td class="units">
 				<select data-bind="options: adjustedTrackCrosssectionalArea.units, optionsText: 'name', value: adjustedTrackCrosssectionalArea.selUnit"></select>
 			</td>
-			<td >
-				<div class="comment">
+			<td class="comment">
+				<div>
 					<p>The adjusted track cross-sectional area. This uses the un-adjusted track cross-sectional area, then takes into account the track thickness modifier, the board thickness modifier, the plane proximity modifier, and the thermal conductivity modifier.<br></p>
 					<p>The equation is given by:</p>
 					<p>$$ A_{adjusted} = A_{un-adjusted} * k_{track-thickness} * k_{board-thickness} * \\ k_{plane-proximity} * k_{thermal-conductivity} $$</p>
@@ -229,8 +234,8 @@
 			<td class="units">
 				<select data-bind="options: minimumTrackWidth.units, optionsText: 'name', value: minimumTrackWidth.selUnit"></select>
 			</td>
-			<td>
-				<div class="comment">
+			<td class="comment">
+				<div>
 					The minimum track width required to carry the specified current without exceeding the specified increase in temperature.
 				</div>
 			</td>
@@ -240,9 +245,14 @@
 </table>
 
 <script type="text/javascript">
+jQuery(document).ready(
+	function()
+	{	
 	// Apply readmore.js to selected HTML objects
     jQuery('article').readmore({collapsedHeight: 100, speed: 200});
-    jQuery('.comment').readmore({collapsedHeight: 40, speed: 200});
+    //jQuery('.comment').delay(5000).children("div").readmore({collapsedHeight: 40, speed: 200);
+});
+
 </script>
 
 <!-- Finally, include backend for this calculator -->
