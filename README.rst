@@ -5,7 +5,7 @@ Engineering Calculators Written In Javascript
 - Author: gbmhunter <gbmhunter@gmail.com> (www.mbedded.ninja)
 - Created: 2013-06-06
 - Last Modified: 2015-06-21
-- Version: v10.0.2.0
+- Version: v10.0.3.0
 - Company: mbedded.ninja
 - Project: n/a
 - Language: HTML/JS/PHP
@@ -57,6 +57,7 @@ Changelog
 ========= ========== ==============================================================================
 Version   Date       Comment
 ========= ========== ==============================================================================
+v10.0.3.0 2015-06-21 Fixed issue with image link in the 'pcb-track-current-capability-ipc-2152' calculator not being absolute.
 v10.0.2.0 2015-06-21 Modified jQuery selector for readmore.js comments to the comment class can be added to <td> object rather than the child <div>, closes #82. Added more notes to the 'pcb-track-current-capability-ipc-2152' calculator (including an image).
 v10.0.1.0 2015-06-21 Changed all incorrect 'maxHeight' readmore.js parameters to 'collapsedHeight', closes #80. Added 'read less' options for all of the variable comments in the 'pcb-track-current-capability-ipc-2152' calculator, closes #79. Added visibility toggle (hidden by default) for intermediate calculations in the 'pcb-track-current-capability-ipc-2152' calculator, closes #81.
 v10.0.0.0 2015-06-20 Added PCB track current capability calculator based on the IPC-2152 standard, closes #78.

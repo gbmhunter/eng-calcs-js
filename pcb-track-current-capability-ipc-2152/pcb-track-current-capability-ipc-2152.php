@@ -31,7 +31,7 @@
 
 	<p>Below is an example of the trend-line fitting process. This image shows the "Copper Thickness Modifier" data from IPC-2152, along with 5th order polynomials being fitted to each data set. The data for the 3oz. copper weight is a horizontal line at y=1 by definition.</p>
 
-	<div style="text-align: center;"><img src="lib/eng-calcs-js/pcb-track-current-capability-ipc-2152/ipc-2152-copper-thickness-modifier-graph-with-trendlines.png" /></div>
+	<div style="text-align: center;"><img src="/lib/eng-calcs-js/pcb-track-current-capability-ipc-2152/ipc-2152-copper-thickness-modifier-graph-with-trendlines.png" /></div>
 
 	<p>The current in assumed to be constant (DC). However, you can use the RMS value for a pulsed current as long as the pulses are fast enough.</p>
 
