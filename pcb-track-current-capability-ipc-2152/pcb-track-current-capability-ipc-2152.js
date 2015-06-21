@@ -3,7 +3,7 @@
 // @author 				Geoffrey Hunter <gbmhunter@gmail.com> (www.mbedded.ninja)
 // @edited 				n/a
 // @created				2015-06-20
-// @last-modified		2015-06-21
+// @last-modified		2015-06-22
 // @brief 				This calculator can find the minimum allowed PCB track width for a given continuous current. Takes into account the allowed temperature rise, copper track thickness, proximity to planes, total thickness of the PCB, and PCB material in accordance with IPC-2152.
 // @details
 //		See the README in the root dir for more info.
@@ -210,7 +210,7 @@ function pcbTrackCurrentCapabilityIpc2152()
 			new cc.unit('mils\xb2', UNIT_CONVERSION_M2_PER_MIL2),
 			new cc.unit('mm\xb2', 1e-6)
 		],
-		selUnitNum: 1,
+		selUnitNum: 0,
 		roundTo: 2,
 		stateFn: function() { return cc.stateEnum.output; }		// Always an output
 	});	
@@ -462,7 +462,7 @@ function pcbTrackCurrentCapabilityIpc2152()
 		app: this,
 		eqFn: function() { return; },
 		units: [
-			new cc.unit('W/(m*k)', 1),
+			new cc.unit('W/(m*K)', 1),
 			new cc.unit('BTU/(hour*ft*F)', UNIT_CONVERSION_THERMAL_CONDUCTIVITY_WATT_nMETER_nKELVIN_PER_BTU_nHOUR_nFT_nDEGF)
 		],
 		selUnitNum: 0,
@@ -550,7 +550,7 @@ function pcbTrackCurrentCapabilityIpc2152()
 			new cc.unit('mils\xb2', UNIT_CONVERSION_M2_PER_MIL2),
 			new cc.unit('mm\xb2', 1e-6)
 		],
-		selUnitNum: 1,
+		selUnitNum: 0,
 		roundTo: 2,
 		stateFn: function() { return cc.stateEnum.output; }		// Always an output
 	});	
@@ -581,19 +581,10 @@ function pcbTrackCurrentCapabilityIpc2152()
 			new cc.unit('mils', UNIT_CONVERSION_M_PER_MIL),
 			new cc.unit('mm', 1e-3)
 		],
-		selUnitNum: 1,
+		selUnitNum: 2,
 		roundTo: 2,
 		stateFn: function() { return cc.stateEnum.output; }		// Always an output
 	});	
-
-	
-	// Function calculates the base-10 log of the given input
-	function Log10(val)
-	{
-		// Use rule log10(x) = ln(x)/ln(10)
-		return Math.log(val) / Math.LN10;
-	}
-
 
 }
 

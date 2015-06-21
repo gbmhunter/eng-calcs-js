@@ -4,8 +4,8 @@ Engineering Calculators Written In Javascript
 
 - Author: gbmhunter <gbmhunter@gmail.com> (www.mbedded.ninja)
 - Created: 2013-06-06
-- Last Modified: 2015-06-21
-- Version: v10.0.8.0
+- Last Modified: 2015-06-22
+- Version: v10.0.9.0
 - Company: mbedded.ninja
 - Project: n/a
 - Language: HTML/JS/PHP
@@ -52,6 +52,7 @@ Changelog
 ========= ========== ==============================================================================
 Version   Date       Comment
 ========= ========== ==============================================================================
+v10.0.9.0 2015-06-22 Changed default units for the 'pcb-track-current-capabilty-ipc-2152' calculator to more appropriate values, closes #90. Units for thermal conductivity variable in the 'pcb-track-current-capability-ipc-2152' calculator need capital K not small k, closes #89.
 v10.0.8.0 2015-06-21 Converted the 2 to the 'squared' symbol for the adjusted track cross-sectional area variable units in the 'pcb-track-current-capabilty-ipc-2152' calculator, closes #87.
 v10.0.7.0 2015-06-21 Added another graph image to the 'pcb-track-current-capability-ipc-2152' calculator.
 v10.0.6.0 2015-06-21 Increased 'pcb-track-current-capability-ipc-2152' calculator width from 800px to 1000px.
