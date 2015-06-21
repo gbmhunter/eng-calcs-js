@@ -249,7 +249,7 @@ jQuery(document).ready(
 	function()
 	{	
 	// Apply readmore.js to selected HTML objects
-    jQuery('article').readmore({collapsedHeight: 100, speed: 200});
+    //jQuery('article').readmore({collapsedHeight: 100, speed: 200});
     //jQuery('.comment').delay(5000).children("div").readmore({collapsedHeight: 40, speed: 200);
 });
 

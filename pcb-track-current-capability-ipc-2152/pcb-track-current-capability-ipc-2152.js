@@ -134,14 +134,13 @@ function pcbTrackCurrentCapabilityIpc2152()
 	this.current.AddValidator(cc.validatorEnum.IS_POSITIVE_OR_ZERO, cc.severityEnum.error);
 	this.current.AddCustomValidator(
 		this.current,
-		'Value is above recommended maximum (35A). Equation will not be as accurate (extrapolation will occur).',
-		function(variable)
-		{
-			if(variable.val() <= 35)
-				return true;
-			else
-				return false;
-		},
+		'Current is below the minimum value (274mA) extracted from the universal graph in IPC-2152. Results might not be as accurate (extrapolation will occur).',
+		function(variable){ return (variable.val() >= 0.274) },
+		cc.severityEnum.warning);
+	this.current.AddCustomValidator(
+		this.current,
+		'Current is above the maximum value (26A) extracted from the universal graph in IPC-2152. Results might not be as accurate (extrapolation will occur).',
+		function(variable){ return (variable.val() <= 26) },
 		cc.severityEnum.warning);
 	
 	//========================================================================================================//
@@ -166,25 +165,13 @@ function pcbTrackCurrentCapabilityIpc2152()
 	this.tempRise.AddValidator(cc.validatorEnum.IS_POSITIVE_OR_ZERO, cc.severityEnum.error);
 	this.tempRise.AddCustomValidator(
 		this.tempRise,
-		'Value is below recommended minimum (10C). Equation will not be as accurate (extrapolation will occur)',
-		function(variable)
-		{
-			if(variable.val() >= 10)
-				return true;
-			else
-				return false;
-		},
+		"Temp. rise is below the minimum value (1\u00B0C) extracted from the universal graph in IPC-2152. Results might not be as accurate (extrapolation will occur).",
+		function(variable){ return (variable.val() >= 1) },
 		cc.severityEnum.warning);
 	this.tempRise.AddCustomValidator(
 		this.tempRise,
-		'Value is above recommended maximum (100C). Equation will not be as accurate (extrapolation will occur)',
-		function(variable)
-		{
-			if(variable.val() <= 100)
-				return true;
-			else
-				return false;
-		},
+		'Temp. rise is above the maximum value (100\u00B0C) extracted from the universal graph in IPC-2152. Results might not be as accurate (extrapolation will occur).',
+		function(variable){ return (variable.val() <= 100) },
 		cc.severityEnum.warning);
 	
 	//========================================================================================================//
@@ -226,9 +213,9 @@ function pcbTrackCurrentCapabilityIpc2152()
 			
 		},
 		units: [
-			new cc.unit('um^2', 1e-12),
-			new cc.unit('mils^2', UNIT_CONVERSION_M2_PER_MIL2),
-			new cc.unit('mm^2', 1e-6)
+			new cc.unit('um\xb2', 1e-12),
+			new cc.unit('mils\xb2', UNIT_CONVERSION_M2_PER_MIL2),
+			new cc.unit('mm\xb2', 1e-6)
 		],
 		selUnitNum: 1,
 		roundTo: 2,
@@ -247,37 +234,25 @@ function pcbTrackCurrentCapabilityIpc2152()
 		units: [
 			new cc.unit('um', 1e-6),
 			new cc.unit('oz', UNIT_CONVERSION_COPPER_THICKNESS_M_PER_OZ),
-			new cc.unit('Mm', 1e-3)
+			new cc.unit('mm', 1e-3)
 		],
 		selUnitNum: 0,
 		roundTo: 2,
 		stateFn: function() { return cc.stateEnum.input; }	// Always an input
 	});
 
-	// Add validator
+	// Add validator(s)
 	this.trackThickness.AddValidator(cc.validatorEnum.IS_NUMBER, cc.severityEnum.error);
 	this.trackThickness.AddValidator(cc.validatorEnum.IS_POSITIVE_OR_ZERO, cc.severityEnum.error);
 	this.trackThickness.AddCustomValidator(
 		this.trackThickness,
-		'Value is below recommended minimum (17.5um ot 0.5oz). Equation will not be as accurate (extrapolation will occur)',
-		function(variable)
-		{
-			if(variable.val() >= 0.0000175)
-				return true;
-			else
-				return false;
-		},
+		'Track thickness is below the minimum value (17.5um) extracted from the track thickness modififer graph in IPC-2152. Results might not be as accurate (extrapolation will occur).',
+		function(variable){ return (variable.val() >= 17.5e-6) },
 		cc.severityEnum.warning);
 	this.trackThickness.AddCustomValidator(
 		this.trackThickness,
-		'Value is above recommended maximum (105um, or 3oz). Equation will not be as accurate (extrapolation will occur)',
-		function(variable)
-		{
-			if(variable.val() <= 0.0001050036)
-				return true;
-			else
-				return false;
-		},
+		'Track thickness is above the maximum value (105um) extracted from the track thickness modififer graph in IPC-2152. Results might not be as accurate (extrapolation will occur).',
+		function(variable){ return (variable.val() <= 105) },
 		cc.severityEnum.warning);
 
 	//========================================================================================================//
@@ -374,25 +349,13 @@ function pcbTrackCurrentCapabilityIpc2152()
 	this.boardThickness.AddValidator(cc.validatorEnum.IS_POSITIVE_OR_ZERO, cc.severityEnum.error);
 	this.boardThickness.AddCustomValidator(
 		this.boardThickness,
-		'Value is below recommended minimum (17.5um ot 0.5oz). Equation will not be as accurate (extrapolation will occur)',
-		function(variable)
-		{
-			if(variable.val() >= 0.0000175)
-				return true;
-			else
-				return false;
-		},
+		'Board thickness is below the minimum value (0.72mm) extracted from the board thickness modififer graph in IPC-2152. Results might not be as accurate (extrapolation will occur).',
+		function(variable){ return (variable.val() >= 0.72e-3) },
 		cc.severityEnum.warning);
 	this.boardThickness.AddCustomValidator(
 		this.boardThickness,
-		'Value is above recommended maximum (105um, or 3oz). Equation will not be as accurate (extrapolation will occur)',
-		function(variable)
-		{
-			if(variable.val() <= 0.0001050036)
-				return true;
-			else
-				return false;
-		},
+		'Board thickness is above the maximum value (2.36mm) extracted from the board thickness modififer graph in IPC-2152. Results might not be as accurate (extrapolation will occur).',
+		function(variable){ return (variable.val() <= 2.36e-3) },
 		cc.severityEnum.warning);
 
 	//========================================================================================================//
@@ -443,7 +406,7 @@ function pcbTrackCurrentCapabilityIpc2152()
 			new cc.unit('mils', UNIT_CONVERSION_M_PER_MIL),
 			new cc.unit('mm', 1e-3),
 		],
-		selUnitNum: 0,
+		selUnitNum: 2,
 		roundTo: 2,
 		stateFn: function() { return cc.stateEnum.input; }	// Always an input
 	});
@@ -453,25 +416,13 @@ function pcbTrackCurrentCapabilityIpc2152()
 	this.planeProximity.AddValidator(cc.validatorEnum.IS_POSITIVE_OR_ZERO, cc.severityEnum.error);
 	this.planeProximity.AddCustomValidator(
 		this.planeProximity,
-		'Value is below recommended minimum (17.5um ot 0.5oz). Equation will not be as accurate (extrapolation will occur)',
-		function(variable)
-		{
-			if(variable.val() >= 0.0000175)
-				return true;
-			else
-				return false;
-		},
+		'Plane proximity is below the minimum value (0.144mm) extracted from the plane proximity modififer graph in IPC-2152. Results might not be as accurate (extrapolation will occur).',
+		function(variable){ return (variable.val() >= 144e-6) },
 		cc.severityEnum.warning);
 	this.planeProximity.AddCustomValidator(
 		this.planeProximity,
-		'Value is above recommended maximum (105um, or 3oz). Equation will not be as accurate (extrapolation will occur)',
-		function(variable)
-		{
-			if(variable.val() <= 0.0001050036)
-				return true;
-			else
-				return false;
-		},
+		'Plane proximity is above the maximum value (2.40mm) extracted from the plane proximity modififer graph in IPC-2152. Results might not be as accurate (extrapolation will occur).',
+		function(variable){ return (variable.val() <= 2.40e-3) },
 		cc.severityEnum.warning);
 
 	//========================================================================================================//
@@ -531,25 +482,13 @@ function pcbTrackCurrentCapabilityIpc2152()
 	this.thermalConductivity.AddValidator(cc.validatorEnum.IS_POSITIVE_OR_ZERO, cc.severityEnum.error);
 	this.thermalConductivity.AddCustomValidator(
 		this.thermalConductivity,
-		'Value is below recommended minimum (17.5um ot 0.5oz). Equation will not be as accurate (extrapolation will occur)',
-		function(variable)
-		{
-			if(variable.val() >= 0.0000175)
-				return true;
-			else
-				return false;
-		},
+		'Thermal conductivity is below the minimum value (0.18W/m*C) extracted from the thermal conductivity modififer graph in IPC-2152. Results might not be as accurate (extrapolation will occur).',
+		function(variable){ return (variable.val() >= 0.18) },
 		cc.severityEnum.warning);
 	this.thermalConductivity.AddCustomValidator(
 		this.thermalConductivity,
-		'Value is above recommended maximum (105um, or 3oz). Equation will not be as accurate (extrapolation will occur)',
-		function(variable)
-		{
-			if(variable.val() <= 0.0001050036)
-				return true;
-			else
-				return false;
-		},
+		'Thermal conductivity is above the maximum value (0.34W/m*C) extracted from the thermal conductivity modififer graph in IPC-2152. Results might not be as accurate (extrapolation will occur).',
+		function(variable){ return (variable.val() <= 0.34) },
 		cc.severityEnum.warning);
 
 	//========================================================================================================//
