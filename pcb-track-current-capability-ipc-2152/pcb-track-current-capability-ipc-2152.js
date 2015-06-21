@@ -1,10 +1,10 @@
 //
-// @file 				pcb-track-current-capability-ipc-2152.js
+// @file 				pcb-track-current-capabilty-ipc-2152.js
 // @author 				Geoffrey Hunter <gbmhunter@gmail.com> (www.mbedded.ninja)
 // @edited 				n/a
 // @created				2015-06-20
-// @last-modified		2015-06-20
-// @brief 				
+// @last-modified		2015-06-21
+// @brief 				This calculator can find the minimum allowed PCB track width for a given continuous current. Takes into account the allowed temperature rise, copper track thickness, proximity to planes, total thickness of the PCB, and PCB material in accordance with IPC-2152.
 // @details
 //		See the README in the root dir for more info.
 	
@@ -13,13 +13,6 @@
 // on the same page. Use the data-bind="with: pcbTrackWidth" command within the HTML to access the child variables.
 function pcbTrackCurrentCapabilityIpc2152()
 {
-
-	//! @brief		Units for resistance
-	var resistanceUnits = [
-		new cc.unit('m\u2126', 0.001),
-		new cc.unit('\u2126', 1.0),
-		new cc.unit('k\u2126', 1000.0)
-	];
 
 	var NUM_MILS_PER_MM = 1000/25.4;
 	var UNIT_CONVERSION_COPPER_THICKNESS_M_PER_OZ = 0.0000350012;
@@ -553,9 +546,9 @@ function pcbTrackCurrentCapabilityIpc2152()
 			return adjustedTrackCrosssectionalAreaM2;
 		},
 		units: [
-			new cc.unit('um2', 1e-12),
-			new cc.unit('mils2', UNIT_CONVERSION_M2_PER_MIL2),
-			new cc.unit('mm2', 1e-6)
+			new cc.unit('um\xb2', 1e-12),
+			new cc.unit('mils\xb2', UNIT_CONVERSION_M2_PER_MIL2),
+			new cc.unit('mm\xb2', 1e-6)
 		],
 		selUnitNum: 1,
 		roundTo: 2,
