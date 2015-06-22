@@ -5,7 +5,7 @@ Engineering Calculators Written In Javascript
 - Author: gbmhunter <gbmhunter@gmail.com> (www.mbedded.ninja)
 - Created: 2013-06-06
 - Last Modified: 2015-06-22
-- Version: v10.0.11.0
+- Version: v10.0.12.0
 - Company: mbedded.ninja
 - Project: n/a
 - Language: HTML/JS/PHP
@@ -52,6 +52,7 @@ Changelog
 ========== ========== ==============================================================================
 Version    Date       Comment
 ========== ========== ==============================================================================
+v10.0.12.0 2015-06-22 Added the '.value' class to to the value row in the 'pcb-track-current-capabilty-ipc-2152' calculator.
 v10.0.11.0 2015-06-22 Added a more specific CSS selector in the 'pcb-track-current-capabilty-ipc-2152' calculator. 
 v10.0.10.0 2015-06-22 Changed table padding on the 'pcb-track-current-capabilty-ipc-2152' calculator.
 v10.0.9.0  2015-06-22 Changed default units for the 'pcb-track-current-capabilty-ipc-2152' calculator to more appropriate values, closes #90. Units for thermal conductivity variable in the 'pcb-track-current-capability-ipc-2152' calculator need capital K not small k, closes #89.

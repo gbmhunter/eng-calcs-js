@@ -65,7 +65,7 @@ table.candy-calc tbody tr td {
 		<tr>
 			<td class="name"><b>Variable Name</b></td>
 			<td class="symbol"><b>Symbol</b></td>
-			<td><b>Value</b></td>
+			<td class="value"><b>Value</b></td>
 			<td class="units"><b>Units</b></td>
 			<td><b>Comments</b></td>	
 		</tr>
@@ -73,7 +73,7 @@ table.candy-calc tbody tr td {
 		<tr>
 			<td class="name">Track Current</td>
 			<td class="symbol">\( I \)</td>
-			<td>
+			<td class="value">
 				<input class="input" data-bind="calcVar: current, valueUpdate: 'afterkeydown'" size="16" ></input>
 			</td>
 			<td class="units">
@@ -87,7 +87,7 @@ table.candy-calc tbody tr td {
 		<tr>
 			<td class="name">Temp Rise</td>
 			<td class="symbol">\( \Delta T \)</td>
-			<td>
+			<td class="value">
 				<input class="input" data-bind="calcVar: tempRise, valueUpdate: 'afterkeydown'" size="16" ></input>
 			</td>
 			<td class="units">
@@ -101,7 +101,7 @@ table.candy-calc tbody tr td {
 		<tr data-bind="fadeVisible: showExtraVariables() == true">
 			<td class="name">Unadjusted Track Cross-sectional Area</td>
 			<td class="symbol">\( A_{un-adjusted} \)</td>
-			<td>
+			<td class="value">
 				<input class="output" data-bind="calcVar: unadjustedTrackCrosssectionalArea, valueUpdate: 'afterkeydown'" type="text" size="16" />
 			</td>
 			<td class="units">
@@ -115,7 +115,7 @@ table.candy-calc tbody tr td {
 		<tr>
 			<td class="name">Track Thickness</td>
 			<td class="symbol">\( t_{track} \)</td>
-			<td>
+			<td class="value">
 				<input class="input" data-bind="calcVar: trackThickness, valueUpdate: 'afterkeydown'" size="16" ></input>
 			</td>
 			<td class="units">
@@ -129,7 +129,7 @@ table.candy-calc tbody tr td {
 		<tr data-bind="fadeVisible: showExtraVariables() == true">
 			<td class="name">Track Thickness Modifier</td>
 			<td class="symbol">\( k_{track-thickness} \)</td>
-			<td>
+			<td class="value">
 				<input class="output" data-bind="calcVar: trackThicknessModifier, valueUpdate: 'afterkeydown'" type="text" size="16" />
 			</td>
 			<td class="units">
@@ -143,7 +143,7 @@ table.candy-calc tbody tr td {
 		<tr>
 			<td class="name">Board Thickness</td>
 			<td class="symbol">\( t_{board} \)</td>
-			<td>
+			<td class="value">
 				<input class="input" data-bind="calcVar: boardThickness, valueUpdate: 'afterkeydown'" size="16" ></input>
 			</td>
 			<td class="units">
@@ -157,7 +157,7 @@ table.candy-calc tbody tr td {
 		<tr data-bind="fadeVisible: showExtraVariables() == true">
 			<td class="name">Board Thickness Modifier</td>
 			<td class="symbol">\( k_{board-thickness} \)</td>
-			<td>
+			<td class="value">
 				<input class="output" data-bind="calcVar: boardThicknessModifier, valueUpdate: 'afterkeydown'" type="text" size="16" />
 			</td>
 			<td class="units">
@@ -171,7 +171,7 @@ table.candy-calc tbody tr td {
 		<tr>
 			<td class="name">Plane Proximity</td>
 			<td class="symbol">\( d_{plane} \)</td>
-			<td>
+			<td class="value">
 				<input class="input" data-bind="calcVar: planeProximity, valueUpdate: 'afterkeydown'" size="16" ></input>
 			</td>
 			<td class="units">
@@ -185,7 +185,7 @@ table.candy-calc tbody tr td {
 		<tr data-bind="fadeVisible: showExtraVariables() == true">
 			<td class="name">Plane Proximity Modifier</td>
 			<td class="symbol">\( k_{plane-proximity} \)</td>
-			<td>
+			<td class="value">
 				<input class="output" data-bind="calcVar: planeProximityModifier, valueUpdate: 'afterkeydown'" type="text" size="16" />
 			</td>
 			<td class="units">
@@ -199,7 +199,7 @@ table.candy-calc tbody tr td {
 		<tr>
 			<td class="name">Thermal Conductivity</td>
 			<td class="symbol">\( \kappa \)</td>
-			<td>
+			<td class="value">
 				<input class="input" data-bind="calcVar: thermalConductivity, valueUpdate: 'afterkeydown'" size="16" ></input>
 			</td>
 			<td class="units">
@@ -213,7 +213,7 @@ table.candy-calc tbody tr td {
 		<tr data-bind="fadeVisible: showExtraVariables() == true">
 			<td class="name">Thermal Conductivity Modifier</td>
 			<td class="symbol">\( k_{thermal-conductivity} \)</td>
-			<td>
+			<td class="value">
 				<input class="output" data-bind="calcVar: thermalConductivityModifier, valueUpdate: 'afterkeydown'" type="text" size="16" />
 			</td>
 			<td class="units">
@@ -227,7 +227,7 @@ table.candy-calc tbody tr td {
 		<tr data-bind="fadeVisible: showExtraVariables() == true">
 			<td class="name">Adjusted Track Cross-sectional Area</td>
 			<td class="symbol">\( A_{adjusted} \)</td>
-			<td>
+			<td class="value">
 				<input class="output" data-bind="calcVar: adjustedTrackCrosssectionalArea, valueUpdate: 'afterkeydown'" type="text" size="16" />
 			</td>
 			<td class="units">
@@ -246,7 +246,7 @@ table.candy-calc tbody tr td {
 		<tr>
 			<td class="name">Minimum Track Width</td>
 			<td class="symbol">\( w_{min} \)</td>
-			<td>
+			<td class="value">
 				<input class="output" data-bind="calcVar: minimumTrackWidth, valueUpdate: 'afterkeydown'" type="text" size="16" />
 			</td>
 			<td class="units">
