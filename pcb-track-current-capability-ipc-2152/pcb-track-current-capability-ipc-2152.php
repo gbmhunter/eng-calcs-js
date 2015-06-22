@@ -262,6 +262,8 @@ table.candy-calc tbody tr td {
 	</tbody>
 </table>
 
+Powered by <a href="https://github.com/mbedded-ninja/candy-calc" target="_blank">candy-calc</a>.
+
 <script type="text/javascript">
 jQuery(document).ready(
 	function()

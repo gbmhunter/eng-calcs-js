@@ -5,7 +5,7 @@ Engineering Calculators Written In Javascript
 - Author: gbmhunter <gbmhunter@gmail.com> (www.mbedded.ninja)
 - Created: 2013-06-06
 - Last Modified: 2015-06-22
-- Version: v10.0.12.0
+- Version: v10.0.13.0
 - Company: mbedded.ninja
 - Project: n/a
 - Language: HTML/JS/PHP
@@ -52,6 +52,7 @@ Changelog
 ========== ========== ==============================================================================
 Version    Date       Comment
 ========== ========== ==============================================================================
+v10.0.13.0 2015-06-22 Added 'Powered by candy-calc' text to 'pcb-track-current-capabilty-ipc-2152' calculator.
 v10.0.12.0 2015-06-22 Added the '.value' class to to the value row in the 'pcb-track-current-capabilty-ipc-2152' calculator.
 v10.0.11.0 2015-06-22 Added a more specific CSS selector in the 'pcb-track-current-capabilty-ipc-2152' calculator. 
 v10.0.10.0 2015-06-22 Changed table padding on the 'pcb-track-current-capabilty-ipc-2152' calculator.
