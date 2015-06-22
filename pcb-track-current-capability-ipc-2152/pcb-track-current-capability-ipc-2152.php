@@ -3,7 +3,7 @@
 // @author 			Geoffrey Hunter <gbmhunter@gmail.com> (www.mbedded.ninja)
 // @edited 			n/a
 // @date 			2015-06-20
-// @last-modified	2015-06-21
+// @last-modified	2015-06-22
 // @brief 			This calculator can find the minimum allowed PCB track width for a given continuous current. Takes into account the allowed temperature rise, copper track thickness, proximity to planes, total thickness of the PCB, and PCB material in accordance with IPC-2152.
 // @details
 //		See the README in the root dir for more info.
@@ -21,9 +21,10 @@
 <!-- readmore.js Library -->
 <script type="text/javascript" src="/lib/eng-calcs-js/lib/readmore.js/readmore.js" ></script>
 
-<article>
 
-	<p>This calculator can find the minimum allowed PCB track width for a given continuous current. Takes into account the allowed temperature rise, copper track thickness, proximity to planes, total thickness of the PCB, and PCB material in accordance with IPC-2152.</p>
+<p>This calculator can find the minimum allowed PCB track width for a given continuous current. Takes into account the allowed temperature rise, copper track thickness, proximity to planes, total thickness of the PCB, and PCB material in accordance with IPC-2152.</p>
+
+<div class="read-more">
 
 	<p>The calculator uses equations built from the data provided in the IPC-2152 graphs. Data points were extracted from the graphs using <a href="http://arohatgi.info/WebPlotDigitizer/">WebPlotDigitizer</a> (a great program by-the-way). Suitable trend lines were then fitted. In the case of the three variable graphs, trend lines were fitted to the coefficients of the first set of trend lines.</p>
 
@@ -43,12 +44,19 @@
 
 	<p>Remember this calculator does not take into account other nearby heat sources.</p>
 
-</article>
+</div>
 
 <style media="screen" type="text/css">
 
 .hide {
   display: none;
+}
+
+.candy-calc td {
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-right: 2px;  
+  padding-left: 2px; 
 }
 
 </style>
