@@ -3,7 +3,7 @@
 // @author 				Geoffrey Hunter <gbmhunter@gmail.com> (www.mbedded.ninja)
 // @edited 				n/a
 // @created				2015-06-20
-// @last-modified		2015-06-22
+// @last-modified		2015-06-23
 // @brief 				This calculator can find the minimum allowed PCB track width for a given continuous current. Takes into account the allowed temperature rise, copper track thickness, proximity to planes, total thickness of the PCB, and PCB material in accordance with IPC-2152.
 // @details
 //		See the README in the root dir for more info.
@@ -218,8 +218,7 @@ function pcbTrackCurrentCapabilityIpc2152()
 	//========================================================================================================//
 	//========================================== TRACK THICKNESS (input) ====================================//
 	//========================================================================================================//
-
-	//! @brief		
+	
 	this.trackThickness = new cc.variable({
 		name: 'trackThickness',
 		app: this,
@@ -245,7 +244,7 @@ function pcbTrackCurrentCapabilityIpc2152()
 	this.trackThickness.AddCustomValidator(
 		this.trackThickness,
 		'Track thickness is above the maximum value (105um) extracted from the track thickness modififer graph in IPC-2152. Results might not be as accurate (extrapolation will occur).',
-		function(variable){ return (variable.val() <= 105) },
+		function(variable){ return (variable.val() <= 105e-6) },
 		cc.severityEnum.warning);
 
 	//========================================================================================================//
@@ -389,7 +388,6 @@ function pcbTrackCurrentCapabilityIpc2152()
 	//=========================================== PLANE PROXIMITY (input) ====================================//
 	//========================================================================================================//
 
-	//! @brief		
 	this.planeProximity = new cc.variable({
 		name: 'planeProximity',
 		app: this,
@@ -417,6 +415,11 @@ function pcbTrackCurrentCapabilityIpc2152()
 		'Plane proximity is above the maximum value (2.40mm) extracted from the plane proximity modififer graph in IPC-2152. Results might not be as accurate (extrapolation will occur).',
 		function(variable){ return (variable.val() <= 2.40e-3) },
 		cc.severityEnum.warning);
+	this.planeProximity.AddCustomValidator(
+		this,
+		'Plane proximity cannot be larger than total board thickness (this just does not make sense!).',
+		function(app){ return (app.planeProximity.val() <= app.boardThickness.val()) },
+		cc.severityEnum.error);
 
 	//========================================================================================================//
 	//==================================== PLANE PROXIMITY MODIFIER (output) =================================//
@@ -456,7 +459,6 @@ function pcbTrackCurrentCapabilityIpc2152()
 	//========================================= THERMAL CONDUCTIVITY (input) =================================//
 	//========================================================================================================//
 
-	//! @brief		
 	this.thermalConductivity = new cc.variable({
 		name: 'thermalConductivity',
 		app: this,
@@ -585,6 +587,12 @@ function pcbTrackCurrentCapabilityIpc2152()
 		roundTo: 2,
 		stateFn: function() { return cc.stateEnum.output; }		// Always an output
 	});	
+
+	this.minimumTrackWidth.AddCustomValidator(
+		this,
+		'Ohoh, one of the input variables is too far away from the data obtained from the IPC-2152 graphs, and the equations have produced a negative track width. Try and make sure input variables are green (or if orange, not too far away from being green).',
+		function(app){ return (app.minimumTrackWidth.val() > 0) },
+		cc.severityEnum.error);
 
 }
 
