@@ -3,7 +3,7 @@
 // @author 			Geoffrey Hunter <gbmhunter@gmail.com> (www.mbedded.ninja)
 // @edited 			n/a
 // @date 			2015-06-20
-// @last-modified	2015-06-22
+// @last-modified	2015-06-27
 // @brief 			This calculator can find the minimum allowed PCB track width for a given continuous current. Takes into account the allowed temperature rise, copper track thickness, proximity to planes, total thickness of the PCB, and PCB material in accordance with IPC-2152.
 // @details
 //		See the README in the root dir for more info.
@@ -20,6 +20,8 @@
 
 <!-- readmore.js Library -->
 <script type="text/javascript" src="/lib/eng-calcs-js/lib/readmore.js/readmore.js" ></script>
+
+
 
 
 <p>This calculator can find the minimum allowed PCB track width for a given continuous current. Takes into account the allowed temperature rise, copper track thickness, proximity to planes, total thickness of the PCB, and PCB material in accordance with IPC-2152.</p>
@@ -61,13 +63,18 @@ table.candy-calc tbody tr td {
 
 <table id="pcbTrackCurrentCapabilityIpc2152" class="candy-calc" border="4" style="width: 1000px;">
 	<tbody>
-		<tr><td colspan="5" style="text-align: center;"><input type='checkbox' data-bind="checked: showExtraVariables">Show intermediate calculations</input></td></tr>
+		<tr>
+			<td colspan="5" style="text-align: center;">
+				<input type='checkbox' data-bind="checked: showExtraVariables">Show intermediate calculations</input>
+			</td>
+		</tr>
 		<tr>
 			<td class="name"><b>Variable Name</b></td>
 			<td class="symbol"><b>Symbol</b></td>
 			<td class="value"><b>Value</b></td>
 			<td class="units"><b>Units</b></td>
 			<td><b>Comments</b></td>	
+			<td class="diagram" rowspan="8"><div class="diagram"></div></td>
 		</tr>
 
 		<tr>
@@ -168,7 +175,13 @@ table.candy-calc tbody tr td {
 			</td>
 		</tr>
 
-		<tr>
+        <tr>
+			<td colspan="5" style="text-align: center;">
+				<input type='checkbox' data-bind="checked: isPlanePresent">Is plane present?</input>
+			</td>
+		</tr>
+
+		<tr data-bind="fadeVisible: isPlanePresent() == true">
 			<td class="name">Plane Proximity</td>
 			<td class="symbol">\( d_{plane} \)</td>
 			<td class="value">
@@ -182,7 +195,8 @@ table.candy-calc tbody tr td {
 			</td>			
 		</tr>
 
-		<tr data-bind="fadeVisible: showExtraVariables() == true">
+		<!-- This next row is a special case, only show if two variables are set correctly -->
+		<tr data-bind="fadeVisible: showExtraVariables() == true && isPlanePresent() == true">
 			<td class="name">Plane Proximity Modifier</td>
 			<td class="symbol">\( k_{plane-proximity} \)</td>
 			<td class="value">
@@ -293,6 +307,8 @@ jQuery(document).ready(
 
 
 
-<!-- Finally, include backend for this calculator -->
-<script type="text/javascript" src="/lib/eng-calcs-js/pcb-track-current-capability-ipc-2152/pcb-track-current-capability-ipc-2152.js"></script>
+<!-- Finally, include javascript for this calculator -->
+<script type="text/javascript" src="/lib/eng-calcs-js/pcb-track-current-capability-ipc-2152/3d-model.js"></script>
+<script type="text/javascript" src="/lib/eng-calcs-js/pcb-track-current-capability-ipc-2152/calculator.js"></script>
+
 

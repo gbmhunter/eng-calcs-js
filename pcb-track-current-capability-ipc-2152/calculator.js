@@ -1,9 +1,9 @@
 //
-// @file 				pcb-track-current-capabilty-ipc-2152.js
+// @file 				calculator.js
 // @author 				Geoffrey Hunter <gbmhunter@gmail.com> (www.mbedded.ninja)
 // @edited 				n/a
 // @created				2015-06-20
-// @last-modified		2015-06-23
+// @last-modified		2015-06-27
 // @brief 				This calculator can find the minimum allowed PCB track width for a given continuous current. Takes into account the allowed temperature rise, copper track thickness, proximity to planes, total thickness of the PCB, and PCB material in accordance with IPC-2152.
 // @details
 //		See the README in the root dir for more info.
@@ -11,7 +11,7 @@
 
 // Adding the pcbTrackWidth "namespace" for the calculator, so that multiple calculators can work
 // on the same page. Use the data-bind="with: pcbTrackWidth" command within the HTML to access the child variables.
-function pcbTrackCurrentCapabilityIpc2152()
+function pcbTrackCurrentCapabilityIpc2152Calculator()
 {
 
 	var NUM_MILS_PER_MM = 1000/25.4;
@@ -263,7 +263,9 @@ function pcbTrackCurrentCapabilityIpc2152()
 				//Log('this.desiredRes.selUnit() has not been defined, returning...');
 				return;
 			}
-			
+
+		
+
 			// Get desired resistance  
 			var currentA = this.current.val();
 			var trackThicknessM = this.trackThickness.val();
@@ -366,6 +368,22 @@ function pcbTrackCurrentCapabilityIpc2152()
 				//Log('this.desiredRes.selUnit() has not been defined, returning...');
 				return;
 			}
+            
+            /*console.log(pcbTrackDiagram);
+			if(!(pcbTrackDiagram.pcbMesh === undefined))
+			{
+				console.log("not undefined!");
+				pcbTrackDiagram.pcbMesh.scale.x = 1;
+				//pcbTrackDiagram.pcbMesh.position.x = 2000;
+				pcbTrackDiagram.render();
+			}
+			else
+			{
+				console.log("undefined");
+			}*/
+            
+            // Set the board thickness
+            //pcbTrack3DModelVar.SetBoardThickness(this.boardThickness.val());
 			
 			var boardThicknessM = this.boardThickness.val();
 
@@ -383,6 +401,14 @@ function pcbTrackCurrentCapabilityIpc2152()
 		roundTo: 2,
 		stateFn: function() { return cc.stateEnum.output; }		// Always an output
 	});	
+
+	//========================================================================================================//
+	//====================================== IS PLANE PRESENT (checkbox) =====================================//
+	//========================================================================================================//
+
+	//! @brief 		Variable holds state of whether copper plane is present or not.
+	//! @details	
+	this.isPlanePresent = new ko.observable(true);
 	
 	//========================================================================================================//
 	//=========================================== PLANE PROXIMITY (input) ====================================//
@@ -437,7 +463,19 @@ function pcbTrackCurrentCapabilityIpc2152()
 				//Log('this.desiredRes.selUnit() has not been defined, returning...');
 				return;
 			}
+
+			if(this.isPlanePresent() == false)
+			{
+				pcbTrack3DModelVar.EnableCopperPlane(false);
+				// Lets not modify the cross-sectional area by anything if no plane is present
+				// (multiply by 1)
+				return 1;
+			}
+
+			pcbTrack3DModelVar.EnableCopperPlane(true);
 			
+			// Plane must be present at this point
+
 			var planeProximityM = this.planeProximity.val();
 
 			// Convert to "mils" units, as this is what is used in IPC-2152 graphs
@@ -597,5 +635,5 @@ function pcbTrackCurrentCapabilityIpc2152()
 }
 
 // Register the calculator
-cc.registerCalc(pcbTrackCurrentCapabilityIpc2152, 'pcbTrackCurrentCapabilityIpc2152');
+cc.registerCalc(pcbTrackCurrentCapabilityIpc2152Calculator, 'pcbTrackCurrentCapabilityIpc2152Calculator');
 

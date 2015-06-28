@@ -4,8 +4,8 @@ Engineering Calculators Written In Javascript
 
 - Author: gbmhunter <gbmhunter@gmail.com> (www.mbedded.ninja)
 - Created: 2013-06-06
-- Last Modified: 2015-06-23
-- Version: v10.0.14.0
+- Last Modified: 2015-06-28
+- Version: v10.1.0.0
 - Company: mbedded.ninja
 - Project: n/a
 - Language: HTML/JS/PHP
@@ -52,6 +52,7 @@ Changelog
 ========== ========== ==============================================================================
 Version    Date       Comment
 ========== ========== ==============================================================================
+v10.1.0.0  2015-06-28 Added 3D track/PCB model for the 'pcb-track-current-capability-ipc-2152' calculator, closes #95.
 v10.0.14.0 2015-06-23 Fixed bug where track thickness in the 'pcb-track-current-capability-ipc-2152' calculator can go up to 1000mm without any warning, closes #92. Made sure plane proximity distance can't be set to anything larger than total board thickness in the 'pcb-track-current-capability-ipc-2152' calculator, #94. Fixed bug where minimum track width can go negative in the 'pcb-track-current-capability-ipc-2152' calculator (e.g. make track thickness 1000mm)., closes #93.
 v10.0.13.0 2015-06-22 Added 'Powered by candy-calc' text to 'pcb-track-current-capabilty-ipc-2152' calculator.
 v10.0.12.0 2015-06-22 Added the '.value' class to to the value row in the 'pcb-track-current-capabilty-ipc-2152' calculator.
