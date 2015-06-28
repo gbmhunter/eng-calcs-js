@@ -15,6 +15,8 @@ document.write('<script type="text/javascript" src="http://threejs.org/examples/
 document.write('<script type="text/javascript" src="http://threejs.org/examples/js/libs/stats.min.js"></script>');
 document.write('<script type="text/javascript" src="/lib/eng-calcs-js/lib/OrbitControls.js"></script>');
 
+
+
 var pcbTrack3DModelVar;
 
 jQuery( document ).ready(function()
@@ -30,6 +32,20 @@ jQuery( document ).ready(function()
 
 	}
 });
+
+//! @brief      Use to determine if WebGL is available in user's browser.
+function WebGLAvailable()
+{
+    try {
+        var canvas = document.createElement( 'canvas' );
+        return !!( window.WebGLRenderingContext && (
+            canvas.getContext( 'webgl' ) ||
+            canvas.getContext( 'experimental-webgl' ) )
+        );
+    } catch ( e ) {
+        return false;
+    }
+}
 
 //! @brief      Class for 3D model.
 function pcbTrack3DModel()
@@ -291,7 +307,13 @@ function pcbTrack3DModel()
         //=================================== RENDERER =====================================// 
         //==================================================================================//
 
-        renderer = new THREE.CanvasRenderer();
+        if ( WebGLAvailable() ) {
+            renderer = new THREE.WebGLRenderer();
+        } else {
+            renderer = new THREE.CanvasRenderer();
+        }
+
+        //renderer = new THREE.CanvasRenderer();
         renderer.setClearColor( 0xf0f0f0 );
         renderer.setPixelRatio( window.devicePixelRatio );
         //renderer.setSize( window.innerWidth, window.innerHeight );
