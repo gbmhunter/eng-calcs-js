@@ -60,8 +60,7 @@ table.candy-calc tbody tr td {
 
 </style>
 
-
-<table id="pcbTrackCurrentCapabilityIpc2152" class="candy-calc" border="4" style="width: 1000px;">
+<table id="pcbTrackCurrentCapabilityIpc2152" class="candy-calc" border="4" style="width: 100%; max-width: 1000px;">
 	<tbody>
 		<tr>
 			<td colspan="5" style="text-align: center;">
@@ -74,7 +73,7 @@ table.candy-calc tbody tr td {
 			<td class="value"><b>Value</b></td>
 			<td class="units"><b>Units</b></td>
 			<td><b>Comments</b></td>	
-			<td class="diagram" rowspan="8"><div class="diagram"></div></td>
+			<!--<td class="diagram" rowspan="8"><div class="diagram"></div></td>-->
 		</tr>
 
 		<tr>
@@ -272,6 +271,10 @@ table.candy-calc tbody tr td {
 				</div>
 			</td>
 		</tr>	
+
+		<tr>
+			<td class="diagram" colspan="8" style="text-align: center;"><div class="diagram"></div></td>
+		</tr>
 
 	</tbody>
 </table>
