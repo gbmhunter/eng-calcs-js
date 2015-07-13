@@ -5,7 +5,7 @@ Engineering Calculators Written In Javascript
 - Author: gbmhunter <gbmhunter@gmail.com> (www.mbedded.ninja)
 - Created: 2013-06-06
 - Last Modified: 2015-07-13
-- Version: v10.1.3.0
+- Version: v10.1.4.0
 - Company: mbedded.ninja
 - Project: n/a
 - Language: HTML/JS/PHP
@@ -52,6 +52,7 @@ Changelog
 ========== ========== ==============================================================================
 Version    Date       Comment
 ========== ========== ==============================================================================
+v10.1.4.0  2015-07-13 Improved the styling of the 'lt3745' calculator.
 v10.1.3.0  2015-07-13 Improved the stying of the 'pcb-track-current-capability-ipc-2152' calculator. 
 v10.1.2.0  2015-07-12 Moved the 'pcb-track-current-capability-ipc-2152' calculator rendered image to the bottom of it's table, to allow the calculator to work on the Wordpress twentyfifteen theme in the main content (approx. 620px wide on standard computer screen).
 v10.1.1.0  2015-06-28 Added a WebGL renderer for 3D models, falling back to a canvas renderer if not available, closes #96.
