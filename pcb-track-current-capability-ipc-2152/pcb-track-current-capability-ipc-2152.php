@@ -48,31 +48,39 @@
 
 </div>
 
+<br>
+
 <style media="all" type="text/css">
 
 .hide {
   display: none;
 }
 
-table.candy-calc tbody tr td {
-  padding: 3px;
-}
-
 </style>
 
+<!--<div style="width: 620px; background-color: grey;">-->
 <table id="pcbTrackCurrentCapabilityIpc2152" class="candy-calc" border="4" style="width: 100%; max-width: 1000px;">
 	<tbody>
+		<!-- This is a dummy row to set the column width's correctly (when table-layout: fixed), this row
+		is hidden -->
+		<tr style="visibility: hidden;">
+			<td class="name"></td>
+			<td class="symbol"></td>
+			<td class="value"></td>
+			<td class="units"></td>
+			<td class="comments"></td>
+		</tr>
 		<tr>
 			<td colspan="5" style="text-align: center;">
 				<input type='checkbox' data-bind="checked: showExtraVariables">Show intermediate calculations</input>
 			</td>
 		</tr>
 		<tr>
-			<td class="name"><b>Variable Name</b></td>
-			<td class="symbol"><b>Symbol</b></td>
-			<td class="value"><b>Value</b></td>
-			<td class="units"><b>Units</b></td>
-			<td><b>Comments</b></td>	
+			<td class="heading name">Variable Name</td>
+			<td class="heading symbol"><b>Symbol</b></td>
+			<td class="heading value"><b>Value</b></td>
+			<td class="heading units"><b>Units</b></td>
+			<td class="heading comments"><b>Comments</b></td>	
 			<!--<td class="diagram" rowspan="8"><div class="diagram"></div></td>-->
 		</tr>
 
@@ -85,7 +93,7 @@ table.candy-calc tbody tr td {
 			<td class="units">
 				<select data-bind="options: current.units, optionsText: 'name', value: current.selUnit"></select>
 			</td>	
-			<td class="comment">
+			<td class="comments">
 				<div>The is the maximum continuous current that the track will ever carry.</div>
 			</td>		
 		</tr>
@@ -99,7 +107,7 @@ table.candy-calc tbody tr td {
 			<td class="units">
 				<select data-bind="options: tempRise.units, optionsText: 'name', value: tempRise.selUnit"></select>
 			</td>		
-			<td class="comment">
+			<td class="comments">
 				The temperature rise (above the ambient temperature of the PCB) of the track that you are o.k. with. <span class="read-more">Normally between 20-40C.</span>
 			</td>	
 		</tr>
@@ -113,7 +121,7 @@ table.candy-calc tbody tr td {
 			<td class="units">
 				<select data-bind="options: unadjustedTrackCrosssectionalArea.units, optionsText: 'name', value: unadjustedTrackCrosssectionalArea.selUnit"></select>
 			</td>
-			<td class="comment">
+			<td class="comments">
 				The un-adjusted track cross-sectional area, as calculated from the "Universal Graph" in IPC-2152, before any modifiers have been applied.
 			</td>
 		</tr>	
@@ -127,7 +135,7 @@ table.candy-calc tbody tr td {
 			<td class="units">
 				<select data-bind="options: trackThickness.units, optionsText: 'name', value: trackThickness.selUnit"></select>
 			</td>
-			<td class="comment">
+			<td class="comments">
 				The thickness of the track under inspection. <span class="read-more">This is the same as the thickness or "weight" of the copper layer that the track belongs to.</span>
 			</td>			
 		</tr>
@@ -141,7 +149,7 @@ table.candy-calc tbody tr td {
 			<td class="units">
 				<select data-bind="options: trackThicknessModifier.units, optionsText: 'name', value: trackThicknessModifier.selUnit"></select>
 			</td>
-			<td class="comment">
+			<td class="comments">
 				<div>The amount the un-adjusted track cross-sectional area should be modified due to the track thickness.</div>
 			</td>
 		</tr>
@@ -155,7 +163,7 @@ table.candy-calc tbody tr td {
 			<td class="units">
 				<select data-bind="options: boardThickness.units, optionsText: 'name', value: boardThickness.selUnit"></select>
 			</td>
-			<td class="comment">
+			<td class="comments">
 				The thickness of the board under inspection. <span class="read-more">The most common PCB board thickness is 1.6mm.</span>
 			</td>			
 		</tr>
@@ -169,7 +177,7 @@ table.candy-calc tbody tr td {
 			<td class="units">
 				<select data-bind="options: boardThicknessModifier.units, optionsText: 'name', value: boardThicknessModifier.selUnit"></select>
 			</td>
-			<td class="comment">
+			<td class="comments">
 				<div>The amount the un-adjusted board cross-sectional area should be modified due to the board thickness.</div>
 			</td>
 		</tr>
@@ -189,7 +197,7 @@ table.candy-calc tbody tr td {
 			<td class="units">
 				<select data-bind="options: planeProximity.units, optionsText: 'name', value: planeProximity.selUnit"></select>
 			</td>
-			<td class="comment">
+			<td class="comments">
 				The distance from the track to the closest copper plane. <span class="read-more">If the track is internal and equi-distance from two planes, just use the distance to one of them. For a basic 2-layer, 1.6mm thick PCB, the distance is normally equal to 1.6mm (assuming copper pours are placed on both layers).</span>
 			</td>			
 		</tr>
@@ -204,7 +212,7 @@ table.candy-calc tbody tr td {
 			<td class="units">
 				<select data-bind="options: planeProximityModifier.units, optionsText: 'name', value: planeProximityModifier.selUnit"></select>
 			</td>
-			<td class="comment">
+			<td class="comments">
 				<div>The amount the un-adjusted board cross-sectional area should be modified due to the proximity of a solid copper plane.</div>
 			</td>
 		</tr>
@@ -218,7 +226,7 @@ table.candy-calc tbody tr td {
 			<td class="units">
 				<select data-bind="options: thermalConductivity.units, optionsText: 'name', value: thermalConductivity.selUnit"></select>
 			</td>
-			<td class="comment">
+			<td class="comments">
 				<div>The thermal conductivity of the PCB.</div>
 			</td>			
 		</tr>
@@ -232,7 +240,7 @@ table.candy-calc tbody tr td {
 			<td class="units">
 				<select data-bind="options: thermalConductivityModifier.units, optionsText: 'name', value: thermalConductivityModifier.selUnit"></select>
 			</td>
-			<td class="comment">				
+			<td class="comments">				
 				<div>The amount the un-adjusted board cross-sectional area should be modified due to the thermal conductivity of the PCB material.</div>
 			</td>
 		</tr>
@@ -246,7 +254,7 @@ table.candy-calc tbody tr td {
 			<td class="units">
 				<select data-bind="options: adjustedTrackCrosssectionalArea.units, optionsText: 'name', value: adjustedTrackCrosssectionalArea.selUnit"></select>
 			</td>
-			<td class="comment">
+			<td class="comments">
 				The adjusted track cross-sectional area.
 				<span class="read-more">
 					This uses the un-adjusted track cross-sectional area, then takes into account the track thickness modifier, the board thickness modifier, the plane proximity modifier, and the thermal conductivity modifier.<br><br>
@@ -265,7 +273,7 @@ table.candy-calc tbody tr td {
 			<td class="units">
 				<select data-bind="options: minimumTrackWidth.units, optionsText: 'name', value: minimumTrackWidth.selUnit"></select>
 			</td>
-			<td class="comment">
+			<td class="comments">
 				<div>
 					The minimum track width required to carry the specified current without exceeding the specified increase in temperature.
 				</div>
